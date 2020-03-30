@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5aa2231-41fa-40e4-937f-75c7961852c6" name="Default Changelist" comment="" />
+    <list default="true" id="e5aa2231-41fa-40e4-937f-75c7961852c6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/library01.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="library01" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -13,6 +19,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ZqXaMWeAsE5TVZtkqo1b7Sb2sS" />
   <component name="ProjectViewState">
@@ -22,14 +31,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.AcceptanceTest">
     <configuration name="AcceptanceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="library01" />
       <extension name="coverage">
@@ -45,8 +55,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="acceptance_tests in library01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="library01" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="acceptance_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="acceptance_tests" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.acceptance_tests in library01" />
         <item itemvalue="JUnit.AcceptanceTest" />
       </list>
     </recent_temporary>
@@ -69,6 +94,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="342" y="125" width="800" height="675" key="#Project_Structure" timestamp="1585579356387">
+      <screen x="55" y="27" width="1385" height="873" />
+    </state>
+    <state x="342" y="125" width="800" height="675" key="#Project_Structure/55.27.1385.873@55.27.1385.873" timestamp="1585579356387" />
     <state x="511" y="429" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1585567835240">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -85,10 +114,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="627" y="205" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585568851407" />
-    <state x="848" y="198" key="FileChooserDialogImpl" timestamp="1585568774059">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="612" y="193" width="818" height="511" key="FileChooserDialogImpl" timestamp="1585579294786">
+      <screen x="55" y="27" width="1385" height="873" />
     </state>
     <state x="848" y="198" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585568774059" />
+    <state x="612" y="193" width="818" height="511" key="FileChooserDialogImpl/55.27.1385.873@55.27.1385.873" timestamp="1585579294786" />
     <state width="1865" height="267" key="GridCell.Tab.0.bottom" timestamp="1585568976906">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -105,10 +135,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1865" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585568976906" />
-    <state x="581" y="0" key="SettingsEditor" timestamp="1585567979533">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="406" y="27" width="1024" height="843" key="SettingsEditor" timestamp="1585579307646">
+      <screen x="55" y="27" width="1385" height="873" />
     </state>
     <state x="581" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585567979533" />
+    <state x="406" y="27" width="1024" height="843" key="SettingsEditor/55.27.1385.873@55.27.1385.873" timestamp="1585579307646" />
+    <state x="490" y="383" width="505" height="158" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585579415035">
+      <screen x="55" y="27" width="1385" height="873" />
+    </state>
+    <state x="490" y="383" width="505" height="158" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/55.27.1385.873@55.27.1385.873" timestamp="1585579415035" />
     <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog" timestamp="1585568137888">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
