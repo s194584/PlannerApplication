@@ -27,6 +27,11 @@
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: io.cucumber:cucumber-picocontainer:5.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.picocontainer:picocontainer:2.15" level="project" />
+<<<<<<< HEAD
     <orderEntry type="library" name="JAVAFX11" level="project" />
+=======
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="lib1" level="project" />
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
   </component>
 </module>

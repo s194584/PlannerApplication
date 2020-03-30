@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5aa2231-41fa-40e4-937f-75c7961852c6" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/libraries/JAVAFX11.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/planner/Main.java" afterDir="false" />
@@ -11,12 +12,17 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/library01.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/acceptance_tests/AcceptanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/acceptance_tests/AcceptanceTest.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/library01.iml" afterDir="false" />
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="CoverageViewManager">
     <option name="myFlattenPackages" value="true" />
     <option name="myElementSize" value="308" />
@@ -24,6 +30,10 @@
   <component name="ExportToHTMLSettings">
     <option name="OPEN_IN_BROWSER" value="true" />
     <option name="OUTPUT_DIRECTORY" value="C:\Users\Jahar\Documents\DTULearnGit\PlannerApplication" />
+=======
+  <component name="FavoritesManager">
+    <favorites_list name="library01" />
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -36,6 +46,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -43,6 +54,8 @@
       </MavenImportingSettings>
     </option>
   </component>
+=======
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
   <component name="ProjectId" id="1ZqXaMWeAsE5TVZtkqo1b7Sb2sS" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -54,15 +67,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../projekt-dam" />
     <property name="project.structure.last.edited" value="Libraries" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="project.structure.last.edited" value="Project" />
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="planner.Main" />
+=======
+  <component name="RunManager" selected="JUnit.AcceptanceTest">
+    <configuration name="AcceptanceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
       <module name="library01" />
       <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX11} --add-modules=javafx.controls,javafx.fxml" />
       <extension name="coverage">
@@ -93,6 +116,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.AcceptanceTest" />
@@ -100,6 +124,25 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+=======
+    <configuration name="acceptance_tests in library01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="library01" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="acceptance_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="acceptance_tests" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.acceptance_tests in library01" />
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
         <item itemvalue="JUnit.AcceptanceTest" />
       </list>
     </recent_temporary>
@@ -123,6 +166,7 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="485" y="110" key="#AcceptanceTest" timestamp="1585576139089">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -131,6 +175,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585579837632" />
+=======
+    <state x="342" y="125" width="800" height="675" key="#Project_Structure" timestamp="1585579356387">
+      <screen x="55" y="27" width="1385" height="873" />
+    </state>
+    <state x="342" y="125" width="800" height="675" key="#Project_Structure/55.27.1385.873@55.27.1385.873" timestamp="1585579356387" />
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
     <state x="511" y="429" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1585567835240">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -150,12 +200,22 @@
     <state x="438" y="40" key="CommitChangelistDialog2" timestamp="1585581153998">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+<<<<<<< HEAD
     <state x="438" y="40" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585581153998" />
     <state x="848" y="198" key="FileChooserDialogImpl" timestamp="1585579943660">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="848" y="198" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585579943660" />
     <state width="1865" height="267" key="GridCell.Tab.0.bottom" timestamp="1585581139029">
+=======
+    <state x="627" y="205" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585568851407" />
+    <state x="612" y="193" width="818" height="511" key="FileChooserDialogImpl" timestamp="1585579294786">
+      <screen x="55" y="27" width="1385" height="873" />
+    </state>
+    <state x="848" y="198" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585568774059" />
+    <state x="612" y="193" width="818" height="511" key="FileChooserDialogImpl/55.27.1385.873@55.27.1385.873" timestamp="1585579294786" />
+    <state width="1865" height="267" key="GridCell.Tab.0.bottom" timestamp="1585568976906">
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1865" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585581139029" />
@@ -170,6 +230,7 @@
     <state width="1865" height="267" key="GridCell.Tab.0.right" timestamp="1585581139029">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+<<<<<<< HEAD
     <state width="1865" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585581139029" />
     <state x="581" y="0" key="SettingsEditor" timestamp="1585579907073">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -179,6 +240,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="230" y="29" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1585577553638" />
+=======
+    <state width="1865" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585568976906" />
+    <state x="406" y="27" width="1024" height="843" key="SettingsEditor" timestamp="1585579307646">
+      <screen x="55" y="27" width="1385" height="873" />
+    </state>
+    <state x="581" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585567979533" />
+    <state x="406" y="27" width="1024" height="843" key="SettingsEditor/55.27.1385.873@55.27.1385.873" timestamp="1585579307646" />
+    <state x="490" y="383" width="505" height="158" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585579415035">
+      <screen x="55" y="27" width="1385" height="873" />
+    </state>
+    <state x="490" y="383" width="505" height="158" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/55.27.1385.873@55.27.1385.873" timestamp="1585579415035" />
+>>>>>>> 6d5ab337e6127a16c900fb146496075cbd491be4
     <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog" timestamp="1585568137888">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
