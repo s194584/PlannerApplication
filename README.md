@@ -1,8 +1,8 @@
 # PlannerApplication
 Sofware Engeneering I
 
-##Priority
-###Planning
+## Priority
+### Planning
 * Login-page with initials
 * Create _admin role_
 * Create _projects_
@@ -12,3 +12,5 @@ Sofware Engeneering I
     * Start/end date
     * 
 * Create _employee-activitis_
+
+
