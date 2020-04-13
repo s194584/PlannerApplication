@@ -4,6 +4,7 @@ Feature: Admin login
 
   Scenario: Admin can login
     Given the admin is not logged in
+    When "000"
     Then the admin login succeeds
     And the admin is logged in
 

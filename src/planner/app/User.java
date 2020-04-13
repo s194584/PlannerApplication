@@ -13,7 +13,6 @@ public abstract class User {
         return initials;
     }
 
-
     public void login(boolean b) {
         loginStatus = b;
     }

@@ -4,4 +4,6 @@ Feature: Planner startup
 
   Scenario: A new Planner application is initialized
     Given a planner application exists
-    Then a admin "000" exists
+    Then a user list "users" exists
+    And a admin "000" exists
+    And users contains admin "000"
