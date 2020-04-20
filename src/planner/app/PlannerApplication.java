@@ -11,12 +11,14 @@ public class PlannerApplication {
         users.add(admin);
     }
 
-    public void login(String arg0) {
+    public boolean login(String arg0) {
         for (User u:users) {
             if(u.getInitials().equals(arg0)){
                 u.login(true);
+                return true;
             }
         }
+        return false;
     }
 
     public User getAdmin() {
@@ -36,7 +38,34 @@ public class PlannerApplication {
         return users;
     }
 
-    public void addUser(User user) {
+    public void addUser(User user) throws Exception {
+        if (user.getInitials().length() != 3)
+            throw new Exception("User must have 3 initials");
+
+        if (hasUser(user)) {
+            throw new Exception("User already exists");
+        }
         users.add(user);
+    }
+
+    public boolean hasUser(String initials) {
+        return users.stream().anyMatch(user -> user.getInitials().equals(initials));
+    }
+
+    public boolean hasUser(User user) {
+        return users.stream().anyMatch(u -> u.getInitials().equals(user.getInitials()));
+    }
+
+    public void removeUser(User user) throws Exception {
+        if (user.getInitials().equals(admin.getInitials()))
+            throw new Exception("Admin cannot remove admin");
+
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getInitials().equals(user.getInitials())) {
+                users.remove(i);
+                return;
+            }
+        }
+        throw new Exception("User does not exist");
     }
 }

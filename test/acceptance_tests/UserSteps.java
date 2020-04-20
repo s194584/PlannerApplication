@@ -19,7 +19,7 @@ public class UserSteps {
     }
 
     @Given("an employee {string} exists in the planner")
-    public void anUserExistsInThePlanner(String arg0) {
+    public void anUserExistsInThePlanner(String arg0) throws Exception {
         userHelper.setUser(new Employee(arg0));
         plannerApplication.addUser(userHelper.getUser());
     }
