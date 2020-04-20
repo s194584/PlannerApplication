@@ -6,6 +6,7 @@ import java.util.List;
 public class PlannerApplication {
     private User admin = new Admin("000");
     private List<User> users = new ArrayList<>();
+    private List<Project> projects = new ArrayList<>();
 
     public PlannerApplication(){
         users.add(admin);

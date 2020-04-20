@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5aa2231-41fa-40e4-937f-75c7961852c6" name="Default Changelist" comment="More scenarios and some GUI">
-      <change afterPath="$PROJECT_DIR$/test/acceptance_tests/ErrorMessageHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/use_cases/AddRemoveEmployee.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/JAVAFX11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/JAVAFX11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/planner/app/Activity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/planner/app/Information.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/planner/app/Project.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/acceptance_tests/ProjectSteps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/use_cases/AddRemoveProject.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/library01.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/planner/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/planner/app/PlannerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/app/PlannerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/planner/app/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/app/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/planner/presentation/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/presentation/LoginScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/planner/presentation/MainScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/presentation/AdminScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/planner/resources/fxml/mainAdminScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/resources/fxml/mainAdminScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/acceptance_tests/AdminSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/acceptance_tests/AdminSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/acceptance_tests/UserSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/acceptance_tests/UserSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/use_cases/addEmployee.feature" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +53,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PATH_TO_FX11$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/planner/resources/acceptance_tests" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2862069" />
@@ -68,14 +61,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="planner.app" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test/acceptance_tests" />
       <recent name="C:\Users\Jahar\Documents\DTUGit\PlannerApplication\src\planner\resources\fxml" />
       <recent name="C:\Users\Jahar\Documents\DTUGit\PlannerApplication\src\planner" />
       <recent name="C:\Users\Jahar\Documents\DTULearnGit\PlannerApplication\src\planner\resources\fxml" />
       <recent name="C:\Users\Jahar\Documents\DTULearnGit\PlannerApplication\src\planner\resources" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="planner.app" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -207,11 +201,11 @@
     </state>
     <state x="438" y="40" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585581670599" />
     <state x="1034" y="309" width="798" height="803" key="CommitChangelistDialog2/0.40.2560.1400@0.40.2560.1400" timestamp="1587391720057" />
-    <state x="1131" y="307" width="610" height="510" key="FileChooserDialogImpl" timestamp="1587381366263">
+    <state x="1131" y="307" width="610" height="510" key="FileChooserDialogImpl" timestamp="1587392990092">
       <screen x="0" y="40" width="2560" height="1400" />
     </state>
     <state x="848" y="198" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585579943660" />
-    <state x="1131" y="307" width="610" height="510" key="FileChooserDialogImpl/0.40.2560.1400@0.40.2560.1400" timestamp="1587381366263" />
+    <state x="1131" y="307" width="610" height="510" key="FileChooserDialogImpl/0.40.2560.1400@0.40.2560.1400" timestamp="1587392990092" />
     <state x="848" y="198" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586776714155" />
     <state width="2514" height="394" key="GridCell.Tab.0.bottom" timestamp="1587391577828">
       <screen x="0" y="40" width="2560" height="1400" />
@@ -260,14 +254,19 @@
       <screen x="0" y="40" width="2560" height="1400" />
     </state>
     <state x="1429" y="454" width="524" height="495" key="extract.method.dialog/0.40.2560.1400@0.40.2560.1400" timestamp="1587382880344" />
+    <state x="966" y="343" width="628" height="792" key="find.popup" timestamp="1587393020175">
+      <screen x="0" y="40" width="2560" height="1400" />
+    </state>
+    <state x="966" y="343" width="628" height="792" key="find.popup/0.40.2560.1400@0.40.2560.1400" timestamp="1587393020175" />
     <state x="230" y="29" key="new project wizard" timestamp="1585577553638">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="230" y="29" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1585577553638" />
-    <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog" timestamp="1586787748541">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="945" y="611" width="479" height="149" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog" timestamp="1587393265384">
+      <screen x="0" y="40" width="2560" height="1400" />
     </state>
     <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585568137888" />
+    <state x="945" y="611" width="479" height="149" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog/0.40.2560.1400@0.40.2560.1400" timestamp="1587393265384" />
     <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586787748541" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
