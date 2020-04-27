@@ -23,7 +23,7 @@ public class LoginScreenController {
     PlannerApplication plannerApplication = new PlannerApplication();
 
 
-    public void login() throws IOException {
+    public void login() throws Exception {
         User user = plannerApplication.getUser(loginField.getText());
         if (user != null) {
             System.out.println(user.getLoginStatus());

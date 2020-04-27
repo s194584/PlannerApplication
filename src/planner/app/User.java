@@ -16,7 +16,7 @@ public abstract class User {
         return initials;
     }
 
-    public void login(boolean b) {
+    public void setLoginStatus(boolean b) {
         loginStatus = b;
     }
 

@@ -15,7 +15,7 @@ public class PlannerApplication {
     public boolean login(String arg0) {
         for (User u:users) {
             if(u.getInitials().equals(arg0)){
-                u.login(true);
+                u.setLoginStatus(true);
                 return true;
             }
         }
@@ -26,13 +26,13 @@ public class PlannerApplication {
         return admin;
     }
 
-    public User getUser(String in){
-        for (User u:users) {
-            if(u.getInitials().equals(in)){
-                return u;
-            }
+    public User getUser(String in) throws Exception {
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getInitials().equals(in))
+                return user;
         }
-        return null;
+        throw new Exception("User does not exist");
     }
 
     public List<User> getUsers(){
@@ -50,11 +50,16 @@ public class PlannerApplication {
     }
 
     public boolean hasUser(String initials) {
-        return users.stream().anyMatch(user -> user.getInitials().equals(initials));
+        try {
+            getUser(initials);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean hasUser(User user) {
-        return users.stream().anyMatch(u -> u.getInitials().equals(user.getInitials()));
+        return hasUser(user.getInitials());
     }
 
     public void removeUser(User user) throws Exception {
@@ -68,5 +73,54 @@ public class PlannerApplication {
             }
         }
         throw new Exception("User does not exist");
+    }
+
+    public void addProject(Project project) throws Exception {
+        if (admin.getLoginStatus())
+            projects.add(project);
+        else
+            throw new Exception("Not authorized to add/remove project");
+    }
+
+    public boolean hasProject(Project project) {
+        try {
+            getProject(project.getID());
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public void removeProject(Project project) throws Exception {
+        removeProject(project.getID());
+    }
+
+    public void removeProject(int id) throws Exception {
+        if (!admin.getLoginStatus())
+            throw new Exception("Not authorized to add/remove project");
+
+        for (int i = 0; i < projects.size(); i++) {
+            if (projects.get(i).getID() == id) {
+                projects.remove(i);
+                return;
+            }
+        }
+        throw new Exception("Project does not exist");
+    }
+
+    public void assignProjManToProject(String initials, int projectID) throws Exception {
+            User u = getUser(initials);
+            ProjectManager pm = new ProjectManager(u);
+            Project project = getProject(projectID);
+            project.setProjectManager(pm);
+    }
+
+    public Project getProject(int projectID) throws Exception {
+        for (int i = 0; i < projects.size(); i++) {
+            Project p = projects.get(i);
+            if (p.getID() == projectID)
+                return p;
+        }
+        throw new Exception("Project does not exist");
     }
 }
