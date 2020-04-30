@@ -22,6 +22,7 @@ public class Project {
     public Project(String projectName, ProjectManager projectManager) {
         projectID = projectIDgen++;
         this.projectManager = projectManager;
+        information = new Information(projectName, "","","");
     }
 
     public Project(Information info) {

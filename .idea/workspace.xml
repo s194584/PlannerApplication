@@ -2,7 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5aa2231-41fa-40e4-937f-75c7961852c6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test/acceptance_tests/ActivityHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/acceptance_tests/ActivitySteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/library01.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/planner/app/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/app/Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/planner/app/PlannerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/app/PlannerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/planner/app/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/planner/app/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/acceptance_tests/UserSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/acceptance_tests/UserSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_cases/ActivityInProject.feature" beforeDir="false" afterPath="$PROJECT_DIR$/use_cases/ActivityInProject.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_cases/AddRemoveProject.feature" beforeDir="false" afterPath="$PROJECT_DIR$/use_cases/AddRemoveProject.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_cases/ModifyInformationInProject.feature" beforeDir="false" afterPath="$PROJECT_DIR$/use_cases/ModifyInformationInProject.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_cases/cancelProject.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_cases/createProject.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_cases/login.feature" beforeDir="false" afterPath="$PROJECT_DIR$/use_cases/login.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_cases/removeEmployee.feature" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,7 +27,7 @@
   </component>
   <component name="CoverageViewManager">
     <option name="myFlattenPackages" value="true" />
-    <option name="myElementSize" value="308" />
+    <option name="myElementSize" value="129" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -51,6 +67,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1ZqXaMWeAsE5TVZtkqo1b7Sb2sS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -65,19 +84,21 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="acceptance_tests" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Jahar\Documents\DTULearnGit\PlannerApplication\src\planner\resources\fxml" />
       <recent name="C:\Users\Jahar\Documents\DTULearnGit\PlannerApplication\src\planner\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.AcceptanceTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="planner.Main" />
       <module name="library01" />
-      <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX11} --add-modules=javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="planner.*" />
@@ -90,9 +111,14 @@
     </configuration>
     <configuration name="AcceptanceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="library01" />
+      <useClassPathOnly />
       <extension name="coverage" track_test_folders="true">
         <pattern>
           <option name="PATTERN" value="acceptance_tests.*" />
+          <option name="ENABLED" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="planner.app.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -112,8 +138,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.AcceptanceTest" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -150,24 +176,28 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merged?" />
-<<<<<<< HEAD
-    <option name="LAST_COMMIT_MESSAGE" value="Merged?" />
-=======
     <MESSAGE value="More scenarios and some GUI" />
     <MESSAGE value="Creating scenarios for Project" />
     <MESSAGE value="Tests for project manager, project, and more GUI" />
     <option name="LAST_COMMIT_MESSAGE" value="Tests for project manager, project, and more GUI" />
->>>>>>> f0584f75e74e997c1cb0c968eb6e730990866cb9
   </component>
   <component name="WindowStateProjectService">
     <state x="485" y="110" key="#AcceptanceTest" timestamp="1585576139089">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="485" y="110" key="#AcceptanceTest/0.0.1920.1040@0.0.1920.1040" timestamp="1585576139089" />
-    <state x="414" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585935610012">
+    <state x="414" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588253763048">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585935610012" />
+    <state x="414" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588253763048" />
+    <state x="690" y="287" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1588253757962">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="287" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588253757962" />
+    <state x="689" y="295" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1588253752570">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="295" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588253752570" />
     <state x="511" y="429" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1585567835240">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -188,34 +218,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="438" y="40" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585581670599" />
-    <state x="848" y="198" key="FileChooserDialogImpl" timestamp="1585579943660">
+    <state x="848" y="198" key="FileChooserDialogImpl" timestamp="1588254818477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="848" y="198" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585579943660" />
-    <state width="1865" height="267" key="GridCell.Tab.0.bottom" timestamp="1587989429918">
+    <state x="848" y="198" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1588254818477" />
+    <state width="1877" height="310" key="GridCell.Tab.0.bottom" timestamp="1588259806593">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587989429918" />
-    <state width="1865" height="267" key="GridCell.Tab.0.center" timestamp="1587989429918">
+    <state width="1877" height="310" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588259806593" />
+    <state width="1877" height="310" key="GridCell.Tab.0.center" timestamp="1588259806593">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587989429918" />
-    <state width="1865" height="267" key="GridCell.Tab.0.left" timestamp="1587989429918">
+    <state width="1877" height="310" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588259806593" />
+    <state width="1877" height="310" key="GridCell.Tab.0.left" timestamp="1588259806593">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587989429918" />
-    <state width="1865" height="267" key="GridCell.Tab.0.right" timestamp="1587989429918">
+    <state width="1877" height="310" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588259806593" />
+    <state width="1877" height="310" key="GridCell.Tab.0.right" timestamp="1588259806593">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587989429918" />
+    <state width="1877" height="310" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588259806593" />
     <state x="600" y="163" key="MultipleFileMergeDialog" timestamp="1587368276487">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="600" y="163" key="MultipleFileMergeDialog/0.1080.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1587368276487" />
-    <state x="2501" y="338" key="SettingsEditor" timestamp="1588238921144">
-      <screen x="1920" y="338" width="1920" height="1040" />
+    <state x="545" y="29" key="SettingsEditor" timestamp="1588255573832">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="581" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585935397473" />
+    <state x="545" y="29" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1588255573832" />
     <state x="2501" y="338" key="SettingsEditor/1920.338.1920.1040/0.0.1920.1040@1920.338.1920.1040" timestamp="1588238921144" />
     <state x="2636" y="754" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588238648106">
       <screen x="1920" y="338" width="1920" height="1040" />
@@ -228,17 +258,21 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="230" y="29" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1585577553638" />
-    <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog" timestamp="1585568137888">
+    <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog" timestamp="1588255004063">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585568137888" />
+    <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588255004063" />
+    <state x="702" y="139" key="refactoring.ChangeSignatureDialog" timestamp="1588256418204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="702" y="139" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588256418204" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/library01$Main.ic" NAME="Main Coverage Results" MODIFIED="1587989263273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>planner.*</FILTER>
+    <SUITE FILE_PATH="coverage/library01$AcceptanceTest.ic" NAME="AcceptanceTest Coverage Results" MODIFIED="1588259806577" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>planner.app.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/library01$AcceptanceTest.ic" NAME="AcceptanceTest Coverage Results" MODIFIED="1587989288155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>acceptance_tests.*</FILTER>
+    <SUITE FILE_PATH="coverage/library01$Main.ic" NAME="Main Coverage Results" MODIFIED="1588253659857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>planner.*</FILTER>
     </SUITE>
   </component>
 </project>
