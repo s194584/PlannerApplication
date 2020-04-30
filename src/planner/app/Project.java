@@ -21,8 +21,11 @@ public class Project {
 
     public Project(String projectName, ProjectManager projectManager) {
         projectID = projectIDgen++;
-        this.projectName = projectName;
         this.projectManager = projectManager;
+    }
+
+    public Project(Information info) {
+        information = info;
     }
 
     public int getID() {
@@ -30,11 +33,11 @@ public class Project {
     }
 
     public String getProjectName() {
-        return projectName;
+        return information.getName();
     }
 
     public void setProjectName(String projectName) {
-        this.projectName = projectName;
+        information.setName(projectName);
     }
 
     public ProjectManager getProjectManager() {
@@ -47,5 +50,25 @@ public class Project {
 
     public boolean hasProjectManager() {
         return projectManager != null;
+    }
+
+    public Information getInformation() {
+        return information;
+    }
+
+    public void setInformation(Information information) {
+        this.information = information;
+    }
+
+    public void setDescription(String description) {
+        information.setDescription(description);
+    }
+
+    public void setStartDate(String startDate) {
+        information.setStartDate(startDate);
+    }
+
+    public void setEndDate(String endDate) {
+        information.setEndDate(endDate);
     }
 }

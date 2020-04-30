@@ -150,7 +150,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merged?" />
+<<<<<<< HEAD
     <option name="LAST_COMMIT_MESSAGE" value="Merged?" />
+=======
+    <MESSAGE value="More scenarios and some GUI" />
+    <MESSAGE value="Creating scenarios for Project" />
+    <MESSAGE value="Tests for project manager, project, and more GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for project manager, project, and more GUI" />
+>>>>>>> f0584f75e74e997c1cb0c968eb6e730990866cb9
   </component>
   <component name="WindowStateProjectService">
     <state x="485" y="110" key="#AcceptanceTest" timestamp="1585576139089">
