@@ -28,5 +28,7 @@
     <orderEntry type="library" name="Maven: io.cucumber:cucumber-picocontainer:5.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.picocontainer:picocontainer:2.15" level="project" />
     <orderEntry type="library" name="lib" level="application" />
+    <orderEntry type="library" name="javafx-sdk-11.0" level="application" />
+    <orderEntry type="library" name="CucumberAndMisc" level="project" />
   </component>
 </module>

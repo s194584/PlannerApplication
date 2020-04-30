@@ -61,7 +61,7 @@ public class ProjectSteps {
     @Then("the project with name {string} and same ID is in the planner")
     public void theProjectWithNameAndSameIDIsInThePlanner(String projectName) throws Exception {
         //theProjectIsInThePlanner();
-        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         assertEquals(projectName, project.getProjectName());
     }
 
@@ -72,7 +72,7 @@ public class ProjectSteps {
 
     @Then("the name of the project in the planner is changed to {string}")
     public void theNameOfTheProjectInThePlannerIsChangedTo(String projectName) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         assertEquals(projectName, project.getProjectName());
     }
 }
