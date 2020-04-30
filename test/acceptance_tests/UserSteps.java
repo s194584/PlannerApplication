@@ -19,7 +19,7 @@ public class UserSteps {
     }
 
     @Given("an employee {string} exists in the planner")
-    public void anUserExistsInThePlanner(String arg0) {
+    public void anUserExistsInThePlanner(String arg0) throws Exception {
         userHelper.setUser(new Employee(arg0));
         plannerApplication.addUser(userHelper.getUser());
     }
@@ -30,7 +30,7 @@ public class UserSteps {
     }
 
     @Then("the user {string} is logged in")
-    public void theUserIsLoggedIn(String arg0) {
+    public void theUserIsLoggedIn(String arg0) throws Exception {
         User user = plannerApplication.getUser(arg0);
         assertTrue(user.getLoginStatus());
     }
@@ -41,19 +41,24 @@ public class UserSteps {
     }
 
     @Then("the user {string} is not logged in")
-    public void theUserIsNotLoggedIn(String arg0) {
+    public void theUserIsNotLoggedIn(String arg0) throws Exception {
         User u = plannerApplication.getUser(arg0);
         assertFalse(u.getLoginStatus());
     }
 
     @And("the user is not logged in")
     public void theUserIsNotLoggedIn() {
-        userHelper.getUser().login(false);
+        userHelper.getUser().setLoginStatus(false);
+    }
+
+    @Given("the admin is logged in")
+    public void theAdminIsLoggedIn() {
+        plannerApplication.getAdmin().setLoginStatus(true);
     }
 
     @Given("the admin is not logged in")
     public void theAdminIsNotLoggedIn() {
-        plannerApplication.getAdmin().login(false);
+        plannerApplication.getAdmin().setLoginStatus(false);
     }
 
     @And("the user is an {string} class")

@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 @CucumberOptions(features = "use_cases", 
 	plugin = { "html:target/cucumber/wikipedia.html"}, 
 	monochrome=true, 
-	snippets = SnippetType.CAMELCASE, 
+	snippets = SnippetType.CAMELCASE,
 	glue = {"acceptance_tests"},
 	strict = true)
 public class AcceptanceTest {

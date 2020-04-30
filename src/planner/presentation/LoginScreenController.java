@@ -2,9 +2,17 @@ package planner.presentation;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import planner.Main;
 import planner.app.PlannerApplication;
+import planner.app.User;
+
+import java.io.IOException;
 
 public class LoginScreenController {
     @FXML
@@ -15,9 +23,27 @@ public class LoginScreenController {
     PlannerApplication plannerApplication = new PlannerApplication();
 
 
-    public void login(){
-        System.out.println(plannerApplication.getUser(loginField.getText()).getLoginStatus());
-        plannerApplication.login(loginField.getText());
-        System.out.println(plannerApplication.getUser(loginField.getText()).getLoginStatus());
+    public void login() throws Exception {
+        User user = plannerApplication.getUser(loginField.getText());
+        if (user != null) {
+            System.out.println(user.getLoginStatus());
+        }
+
+        String enteredText = loginField.getText();
+        if (plannerApplication.login(enteredText)) {
+            Scene scene = loginButton.getScene();
+            Stage stage = (Stage) scene.getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainAdminScreen.fxml"));
+            Parent root2 = loader.load();
+
+            AdminScreenController admcontroller = loader.getController();
+            admcontroller.setPlannerApplication(plannerApplication);
+
+            stage.setScene(new Scene(root2));
+        }
+
+        if (user != null) {
+            System.out.println(user.getLoginStatus());
+        }
     }
 }
