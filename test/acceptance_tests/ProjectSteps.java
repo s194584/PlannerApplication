@@ -3,6 +3,7 @@ package acceptance_tests;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import planner.app.Information;
 import planner.app.PlannerApplication;
 import planner.app.Project;
 
@@ -74,5 +75,46 @@ public class ProjectSteps {
     public void theNameOfTheProjectInThePlannerIsChangedTo(String projectName) throws Exception {
         Project project = plannerApplication.getProject(projectHelper.getProject().getID());
         assertEquals(projectName, project.getProjectName());
+    }
+
+    @And("there is a project with name {string}, description {string}, start date {string}, end date {string}")
+    public void thereIsAProjectWithNameDescriptionStartDateEndDate(String name, String description, String startDate, String endDate) {
+        Information info = new Information(name, description, startDate, endDate);
+        Project project = new Project(info);
+        projectHelper.setProject(project);
+    }
+
+    @Then("there is a project with name {string}, description {string}, start date {string}, end date {string} in the planner")
+    public void thereIsAProjectWithNameDescriptionStartDateEndDateInThePlanner(String name, String description, String startDate, String endDate) throws Exception {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        Information info = project.getInformation();
+        assertEquals(info.getName(), name);
+        assertEquals(info.getDescription(), description);
+        assertEquals(info.getStartDate(), startDate);
+        assertEquals(info.getEndDate(), endDate);
+    }
+
+    @When("the admin changes the description of the project to {string}")
+    public void theAdminChangesTheDescriptionOfTheProjectTo(String description) throws Exception {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        project.setDescription(description);
+    }
+
+    @When("the admin changes the start date of the project to {string}")
+    public void theAdminChangesTheStartDateOfTheProjectTo(String startDate) throws Exception {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        project.setStartDate(startDate);
+    }
+
+    @When("the admin changes the end date of the project to {string}")
+    public void theAdminChangesTheEndDateOfTheProjectTo(String endDate) throws Exception {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        project.setEndDate(endDate);
+    }
+
+    @When("the admin changes the name of the project to {string}")
+    public void theAdminChangesTheNameOfTheProjectTo(String name) throws Exception {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        project.setProjectName(name);
     }
 }
