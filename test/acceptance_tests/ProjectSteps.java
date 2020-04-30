@@ -86,7 +86,7 @@ public class ProjectSteps {
 
     @Then("there is a project with name {string}, description {string}, start date {string}, end date {string} in the planner")
     public void thereIsAProjectWithNameDescriptionStartDateEndDateInThePlanner(String name, String description, String startDate, String endDate) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         Information info = project.getInformation();
         assertEquals(info.getName(), name);
         assertEquals(info.getDescription(), description);
@@ -96,25 +96,25 @@ public class ProjectSteps {
 
     @When("the admin changes the description of the project to {string}")
     public void theAdminChangesTheDescriptionOfTheProjectTo(String description) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         project.setDescription(description);
     }
 
     @When("the admin changes the start date of the project to {string}")
     public void theAdminChangesTheStartDateOfTheProjectTo(String startDate) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         project.setStartDate(startDate);
     }
 
     @When("the admin changes the end date of the project to {string}")
     public void theAdminChangesTheEndDateOfTheProjectTo(String endDate) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         project.setEndDate(endDate);
     }
 
     @When("the admin changes the name of the project to {string}")
     public void theAdminChangesTheNameOfTheProjectTo(String name) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         project.setProjectName(name);
     }
 }

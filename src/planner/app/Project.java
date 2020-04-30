@@ -8,7 +8,7 @@ public class Project {
     private static int projectIDgen = 0;
 
     private String projectName;
-    private String projectID;
+    private int projectID;
     private ProjectManager projectManager;
     private Information information;
     private List<Activity> activities = new ArrayList<Activity>();
@@ -22,22 +22,26 @@ public class Project {
     }
 
     public Project(String projectName, ProjectManager projectManager) {
-        projectID = "" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++;
+        projectID = Integer.parseInt("" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++);
         this.projectName = projectName;
         this.projectManager = projectManager;
         information = new Information(projectName, "","","");
     }
 
+    public Project(Information info) {
+        information = info;
+    }
+
     public int getProjectID() {
-        return Integer.parseInt(projectID);
+        return projectID;
     }
 
     public String getProjectName() {
-        return projectName;
+        return information.getName();
     }
 
     public void setProjectName(String projectName) {
-        this.projectName = projectName;
+        information.setName(projectName);
     }
 
     public ProjectManager getProjectManager() {
@@ -53,7 +57,26 @@ public class Project {
         return !projectManager.getInitials().equals("N/A");
     }
 
-    public int getNoAct() {
+    public Information getInformation() {
+        return information;
+    }
+
+    public int getNumberOfActivites() {
         return activities.size();
+    }
+
+    public void setInformation(Information information) {
+        this.information = information;
+    }
+    public void setDescription(String description) {
+        information.setDescription(description);
+    }
+
+    public void setStartDate(String startDate) {
+        information.setStartDate(startDate);
+    }
+
+    public void setEndDate(String endDate) {
+        information.setEndDate(endDate);
     }
 }
