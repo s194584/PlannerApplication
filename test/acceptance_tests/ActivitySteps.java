@@ -24,7 +24,7 @@ public class ActivitySteps {
         this.activityHelper = activityHelper;
     }
 
-    @Given("an project manager {string} exists in the planner")
+    @Given("a project manager {string} exists in the planner")
     public void anProjectManagerExistsInThePlanner(String arg0) throws Exception {
         userHelper.setUser(new ProjectManager(arg0));
         plannerApplication.addUser(userHelper.getUser());
@@ -41,7 +41,7 @@ public class ActivitySteps {
         activityHelper.setActivity(new Activity());
     }
 
-    @When("the activity is added to the planner by the current user")
+    @When("the activity is added to the planner")
     public void theActivityIsAddedToThePlanner() throws Exception {
         plannerApplication.addActivity(activityHelper.getActivity());
     }
@@ -50,7 +50,5 @@ public class ActivitySteps {
     public void theActivityIsInThePlanner() {
         assertTrue(plannerApplication.hasActivity(activityHelper.getActivity()));
     }
-
-
 
 }

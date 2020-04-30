@@ -14,9 +14,17 @@ public class PlannerApplication {
         users.add(admin);
     }
 
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
     public boolean login(String arg0) {
-        for (User u:users) {
-            if(u.getInitials().equals(arg0)){
+        for (User u : users) {
+            if (u.getInitials().equals(arg0)) {
                 u.setLoginStatus(true);
                 setCurrentUser(u);
                 return true;
@@ -26,8 +34,8 @@ public class PlannerApplication {
     }
 
     public boolean logout(String arg0) {
-        for (User u: users) {
-            if(u.getInitials().equals(arg0)) {
+        for (User u : users) {
+            if (u.getInitials().equals(arg0)) {
                 u.setLoginStatus(false);
                 setCurrentUser(null);
                 return true;
@@ -163,14 +171,5 @@ public class PlannerApplication {
             return false;
         }
     }
-
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
 
 }
