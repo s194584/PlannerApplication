@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5aa2231-41fa-40e4-937f-75c7961852c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/use_cases/assignProjectManager.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/use_cases/cancelProject.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/use_cases/createProject.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/use_cases/removeEmployee.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/use_cases/addEmployee.feature" beforeDir="false" afterPath="$PROJECT_DIR$/use_cases/addEmployee.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_cases/login.feature" beforeDir="false" afterPath="$PROJECT_DIR$/use_cases/login.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +74,7 @@
       <recent name="C:\Users\Jahar\Documents\DTULearnGit\PlannerApplication\src\planner\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.AcceptanceTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="planner.Main" />
       <module name="library01" />
@@ -137,6 +133,8 @@
       <workItem from="1585581643351" duration="483000" />
       <workItem from="1585933359675" duration="1723000" />
       <workItem from="1587368214522" duration="2066000" />
+      <workItem from="1587976591047" duration="2408000" />
+      <workItem from="1588236903813" duration="1203000" />
     </task>
     <task id="LOCAL-00001" summary="Merged?">
       <created>1585581671398</created>
@@ -188,22 +186,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="848" y="198" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585579943660" />
-    <state width="1865" height="267" key="GridCell.Tab.0.bottom" timestamp="1585936030029">
+    <state width="1865" height="267" key="GridCell.Tab.0.bottom" timestamp="1587989429918">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585936030029" />
-    <state width="1865" height="267" key="GridCell.Tab.0.center" timestamp="1585936030029">
+    <state width="1865" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587989429918" />
+    <state width="1865" height="267" key="GridCell.Tab.0.center" timestamp="1587989429918">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585936030029" />
-    <state width="1865" height="267" key="GridCell.Tab.0.left" timestamp="1585936030029">
+    <state width="1865" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587989429918" />
+    <state width="1865" height="267" key="GridCell.Tab.0.left" timestamp="1587989429918">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585936030029" />
-    <state width="1865" height="267" key="GridCell.Tab.0.right" timestamp="1585936030029">
+    <state width="1865" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587989429918" />
+    <state width="1865" height="267" key="GridCell.Tab.0.right" timestamp="1587989429918">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585936030029" />
+    <state width="1865" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587989429918" />
     <state x="600" y="163" key="MultipleFileMergeDialog" timestamp="1587368276487">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -212,11 +210,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="581" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585935397473" />
-    <state x="716" y="416" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587368251404">
+    <state x="716" y="416" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588238305874">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="716" y="416" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1585933670393" />
     <state x="716" y="416" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.1080.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1587368251404" />
+    <state x="716" y="416" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.338.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1588238305874" />
     <state x="230" y="29" key="new project wizard" timestamp="1585577553638">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -227,7 +226,10 @@
     <state x="709" y="424" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585568137888" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/library01$AcceptanceTest.ic" NAME="AcceptanceTest Coverage Results" MODIFIED="1585576160453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/library01$Main.ic" NAME="Main Coverage Results" MODIFIED="1587989263273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>planner.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/library01$AcceptanceTest.ic" NAME="AcceptanceTest Coverage Results" MODIFIED="1587989288155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>acceptance_tests.*</FILTER>
     </SUITE>
   </component>

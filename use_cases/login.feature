@@ -21,7 +21,7 @@ Feature: Login
     Then the user "000" is logged in
     And the user is an "Admin" class
 
-  Scenario: User fail login as admin
-    Given the admin is not logged in
-    When the login "HBL" is entered
-    Then the user "000" is not logged in
+#  Scenario: User fail login as admin
+#    Given the admin is not logged in
+#    When the login "HBL" is entered
+#    Then the user "000" is not logged in
