@@ -25,6 +25,7 @@ public class Project {
         projectID = "" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++;
         this.projectName = projectName;
         this.projectManager = projectManager;
+        information = new Information(projectName, "","","");
     }
 
     public int getProjectID() {

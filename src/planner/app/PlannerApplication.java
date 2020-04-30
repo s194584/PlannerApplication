@@ -5,8 +5,10 @@ import java.util.List;
 
 public class PlannerApplication {
     private User admin = new Admin("000");
+    private User currentUser;
     private List<User> users = new ArrayList<>();
     private List<Project> projects = new ArrayList<>();
+    private List<Activity> activities = new ArrayList<>();
 
     public PlannerApplication(){
         users.add(admin);
@@ -16,6 +18,18 @@ public class PlannerApplication {
         for (User u:users) {
             if(u.getInitials().equals(arg0)){
                 u.setLoginStatus(true);
+                setCurrentUser(u);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean logout(String arg0) {
+        for (User u: users) {
+            if(u.getInitials().equals(arg0)) {
+                u.setLoginStatus(false);
+                setCurrentUser(null);
                 return true;
             }
         }
@@ -123,4 +137,40 @@ public class PlannerApplication {
         }
         throw new Exception("Project does not exist");
     }
+
+    public void addActivity(Activity activity) throws Exception {
+        if (currentUser instanceof ProjectManager) {
+            activities.add(activity);
+        } else
+            throw new Exception("Not authorized to add/remove activity");
+    }
+
+    public Activity getActivity(int activityID) throws Exception {
+        for (int i = 0; i < activities.size(); i++) {
+            Activity a = activities.get(i);
+            if (a.getID() == activityID) {
+                return a;
+            }
+        }
+        throw new Exception("Activity does not exist");
+    }
+
+    public boolean hasActivity(Activity activity) {
+        try {
+            getActivity(activity.getID());
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+
 }

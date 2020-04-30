@@ -48,7 +48,7 @@ public class UserSteps {
 
     @And("the user is not logged in")
     public void theUserIsNotLoggedIn() {
-        userHelper.getUser().setLoginStatus(false);
+        assertFalse(userHelper.getUser().getLoginStatus());
     }
 
     @Given("the admin is logged in")
@@ -69,5 +69,15 @@ public class UserSteps {
     @Given("the user is the admin")
     public void theUserIsTheAdmin() {
         userHelper.setUser(plannerApplication.getAdmin());
+    }
+
+    @Given("the user is logged in")
+    public void theUserIsLoggedIn() {
+        plannerApplication.login(userHelper.getUser().getInitials());
+    }
+
+    @When("the user logs out")
+    public void theUserLogsOut() {
+        plannerApplication.logout(plannerApplication.getCurrentUser().getInitials());
     }
 }
