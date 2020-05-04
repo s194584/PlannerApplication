@@ -21,7 +21,14 @@ Feature: Login
     Then the user "000" is logged in
     And the user is an "Admin" class
 
-  Scenario: User fail login as admin
-    Given the admin is not logged in
-    When the login "HBL" is entered
-    Then the user "000" is not logged in
+  Scenario: Current user logs out
+    Given an employee "HBL" exists in the planner
+    And the user is logged in
+    When the user logs out
+    Then the user is not logged in
+
+
+#  Scenario: User fail login as admin
+#    Given the admin is not logged in
+#    When the login "HBL" is entered
+#    Then the user "000" is not logged in
