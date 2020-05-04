@@ -53,4 +53,8 @@ public class LoginScreenController {
             System.out.println(user.getLoginStatus());
         }
     }
+
+    public void setPlannerApplication(PlannerApplication plannerApplication) {
+        this.plannerApplication = plannerApplication;
+    }
 }

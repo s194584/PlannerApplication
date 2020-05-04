@@ -7,7 +7,6 @@ import java.util.List;
 public class Project {
     private static int projectIDgen = 0;
 
-    private String projectName;
     private int projectID;
     private ProjectManager projectManager;
     private Information information;
@@ -23,7 +22,6 @@ public class Project {
 
     public Project(String projectName, ProjectManager projectManager) {
         projectID = Integer.parseInt("" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++);
-        this.projectName = projectName;
         this.projectManager = projectManager;
         information = new Information(projectName, "","","");
     }
@@ -53,7 +51,6 @@ public class Project {
     }
 
     public boolean hasProjectManager() {
-
         return !projectManager.getInitials().equals("N/A");
     }
 

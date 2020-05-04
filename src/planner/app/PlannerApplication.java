@@ -146,6 +146,10 @@ public class PlannerApplication {
         throw new Exception("Project does not exist");
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
     public void addActivity(Activity activity) throws Exception {
         if (currentUser instanceof ProjectManager) {
             activities.add(activity);
