@@ -1,27 +1,39 @@
 package planner.presentation;
 
-import javafx.event.ActionEvent;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import planner.app.Employee;
 import planner.app.PlannerApplication;
 import planner.app.Project;
-import planner.app.User;
 
 public class AdminScreenController {
-    @FXML    private Button addEmployeeBtn;
-    @FXML    private TextField employeeField;
-    @FXML    private Button removeEmployeeBtn;
-    @FXML    private Button createProjectBtn;
-    @FXML    private TextField projectField;
-    @FXML    private Button cancelProjectBtn;
-    @FXML    private Button addProjectLeaderBtn;
-    @FXML    private TextField projEmployeeField;
-    @FXML    private TextField projProjectField;
+    @FXML private Button addEmployeeBtn;
+    @FXML private Button removeEmployeeBtn;
+    @FXML private Button createProjectBtn;
+    @FXML private TextField projectField;
+    @FXML private Button cancelProjectBtn;
+    @FXML private Button addProjectLeaderBtn;
+    @FXML private TextField projEmployeeField;
+    @FXML private TextField projProjectField;
+    @FXML private ListView employeeList;
+    @FXML private TableView projectTable;
+    @FXML private TableColumn projectNameCol;
+    @FXML private TableColumn projectIDCol;
+    @FXML private TableColumn<Project,String> projectActCol;
+    @FXML private TableColumn<Project,String> projectManCol;
 
     private PlannerApplication plannerApplication;
+
+    @FXML
+    public void initialize(){
+        projectNameCol.setCellValueFactory(new PropertyValueFactory("projectName"));
+        projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
+        projectManCol.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
+        projectActCol.setCellValueFactory((data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivites())));
+    }
 
     public void setPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
@@ -29,28 +41,26 @@ public class AdminScreenController {
 
     @FXML
     void assignProjectManager() {
-        String employee = projEmployeeField.getText();
-        int projectID = Integer.parseInt(projProjectField.getText());
-
         try {
-            plannerApplication.assignProjManToProject(employee, projectID);
-            System.out.println("Assigned " + employee + " as project manager to " + projectID);
+            String employee = employeeList.getSelectionModel().getSelectedItem().toString();
+            Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
+            plannerApplication.assignProjManToProject(employee, project.getProjectID());
+            System.out.println("Assigned " + employee + " as project manager to " + project.getProjectID());
+            projectTable.refresh();
         } catch (Exception ex) {
-            showAlertMessage(ex.getMessage());
+            showAlertMessage("Please select an employee and a project");
         }
-
-
     }
 
     @FXML
     void addEmployee() throws Exception {
-        String text = employeeField.getText();
+        TextInputDialog td = showInputBox("Enter the initials of the employee you wish to add.");
         try {
-            plannerApplication.addUser(new Employee(text)); }
+            plannerApplication.addUser(new Employee(td.getEditor().getText()));
+            employeeList.getItems().add(td.getEditor().getText());}
         catch (Exception e) {
             showAlertMessage(e.getMessage());
         }
-
 
         plannerApplication.getUsers().stream().forEach(u -> System.out.print(u.getInitials() + ", "));
         System.out.println();
@@ -58,26 +68,26 @@ public class AdminScreenController {
 
     @FXML
     void cancelProject() {
-        int projectID = Integer.parseInt(projectField.getText());
-
         try {
-            plannerApplication.removeProject(projectID);
-            System.out.println("Cancelled project with id " + projectID);
+            Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
+            plannerApplication.removeProject(project);
+            projectTable.getItems().remove(project);
+            System.out.println("Cancelled project with id " + project.getProjectID());
         }
         catch (Exception e) {
-            showAlertMessage(e.getMessage());
+            showAlertMessage("Please select the project you wish to cancel");
         }
-
     }
 
     @FXML
     void createProject() {
-        String projectName = projectField.getText();
+        TextInputDialog td = showInputBox("Enter the name of the project");
 
-        Project project = new Project(projectName);
         try {
+            Project project = new Project(td.getEditor().getText());
             plannerApplication.addProject(project);
-            System.out.println("Added project with name " + projectName + " and id " + project.getID());
+            projectTable.getItems().add(project);
+            System.out.println("Added project with name " + project.getProjectName() + " and id " + project.getProjectID());
         }
         catch (Exception e) {
             showAlertMessage(e.getMessage());
@@ -87,21 +97,29 @@ public class AdminScreenController {
 
     @FXML
     void removeEmployee() throws Exception {
-        String text = employeeField.getText();
         try {
-        plannerApplication.removeUser(new Employee(text)); }
+            String employee = employeeList.getSelectionModel().getSelectedItem().toString();
+            plannerApplication.removeUser(plannerApplication.getUser(employee));
+            employeeList.getItems().remove(employee);
+            plannerApplication.getUsers().stream().forEach(u -> System.out.print(u.getInitials() + ", "));
+            System.out.println();
+            projectTable.refresh();
+        }
         catch (Exception e) {
-            String msg = e.getMessage();
-            Alert alert = new Alert(Alert.AlertType.ERROR, msg);
-            alert.showAndWait();
+            showAlertMessage("Please select the user you wish to remove");
         }
 
-        plannerApplication.getUsers().stream().forEach(u -> System.out.print(u.getInitials() + ", "));
-        System.out.println();
     }
 
     public void showAlertMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
         alert.showAndWait();
+    }
+
+    public TextInputDialog showInputBox(String header){
+        TextInputDialog td = new TextInputDialog();
+        td.setHeaderText(header);
+        td.showAndWait();
+        return td;
     }
 }

@@ -32,7 +32,7 @@ public class ProjectManagerSteps {
     @When("the admin assigns the project manager to the project")
     public void theAdminAssignsTheProjectManagerToTheProject() {
         try {
-            plannerApplication.assignProjManToProject(userHelper.getUser().getInitials(), projectHelper.getProject().getID());
+            plannerApplication.assignProjManToProject(userHelper.getUser().getInitials(), projectHelper.getProject().getProjectID());
         } catch (Exception ex) {
             errorMessageHelper.setErrorMessage(ex.getMessage());
         }
@@ -50,7 +50,7 @@ public class ProjectManagerSteps {
 
     @When("the admin assigns the employee as project manager to the project")
     public void theAdminAssignsTheEmployeeAsProjectManagerToTheProject() throws Exception {
-        plannerApplication.assignProjManToProject(userHelper.getUser().getInitials(), projectHelper.getProject().getID());
+        plannerApplication.assignProjManToProject(userHelper.getUser().getInitials(), projectHelper.getProject().getProjectID());
 
     }
 

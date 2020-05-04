@@ -24,7 +24,14 @@ public class LoginScreenController {
 
 
     public void login() throws Exception {
-        User user = plannerApplication.getUser(loginField.getText());
+        User user = null;
+
+        try{
+             user = plannerApplication.getUser(loginField.getText());
+        }catch (Exception e){
+
+        }
+
         if (user != null) {
             System.out.println(user.getLoginStatus());
         }

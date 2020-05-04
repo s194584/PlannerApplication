@@ -62,8 +62,8 @@ public class PlannerApplication {
     }
 
     public void addUser(User user) throws Exception {
-        if (user.getInitials().length() != 3)
-            throw new Exception("User must have 3 initials");
+        if (user.getInitials().length() < 1 || user.getInitials().length() > 4)
+            throw new Exception("User must have at least 1 initial and maximum 4");
 
         if (hasUser(user)) {
             throw new Exception("User already exists");
@@ -106,7 +106,7 @@ public class PlannerApplication {
 
     public boolean hasProject(Project project) {
         try {
-            getProject(project.getID());
+            getProject(project.getProjectID());
             return true;
         } catch (Exception ex) {
             return false;
@@ -114,7 +114,7 @@ public class PlannerApplication {
     }
 
     public void removeProject(Project project) throws Exception {
-        removeProject(project.getID());
+        removeProject(project.getProjectID());
     }
 
     public void removeProject(int id) throws Exception {
@@ -122,7 +122,7 @@ public class PlannerApplication {
             throw new Exception("Not authorized to add/remove project");
 
         for (int i = 0; i < projects.size(); i++) {
-            if (projects.get(i).getID() == id) {
+            if (projects.get(i).getProjectID() == id) {
                 projects.remove(i);
                 return;
             }
@@ -140,7 +140,7 @@ public class PlannerApplication {
     public Project getProject(int projectID) throws Exception {
         for (int i = 0; i < projects.size(); i++) {
             Project p = projects.get(i);
-            if (p.getID() == projectID)
+            if (p.getProjectID() == projectID)
                 return p;
         }
         throw new Exception("Project does not exist");
@@ -171,5 +171,4 @@ public class PlannerApplication {
             return false;
         }
     }
-
 }
