@@ -21,7 +21,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginScreen.fxml"));
 
 
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Planner Application");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
