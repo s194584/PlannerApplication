@@ -52,7 +52,7 @@ Feature: Login
     Then the user is not logged in
 
 
-#  Scenario: User fail login as admin
-#    Given the admin is not logged in
-#    When the login "HBL" is entered
-#    Then the user "000" is not logged in
+  Scenario: Attempts to log out without being logged in
+    Given an employee "ABC" exists in the planner
+    And the user is not logged in
+    Then the user's attempt to log out fails

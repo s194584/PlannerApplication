@@ -99,4 +99,9 @@ public class UserSteps {
     public void theUserLogoutSucceeds() {
         assertTrue(plannerApplication.logout(userHelper.getUser().getInitials()));
     }
+
+    @Then("the user's attempt to log out fails")
+    public void theUserSAttemptToLogOutFails() {
+        assertFalse(plannerApplication.logout(userHelper.getUser().getInitials()));
+    }
 }

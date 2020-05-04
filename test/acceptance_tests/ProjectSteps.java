@@ -7,6 +7,8 @@ import planner.app.Information;
 import planner.app.PlannerApplication;
 import planner.app.Project;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 
 public class ProjectSteps {
@@ -117,4 +119,6 @@ public class ProjectSteps {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         project.setProjectName(name);
     }
+
+
 }
