@@ -171,4 +171,9 @@ public class PlannerApplication {
             return false;
         }
     }
+
+    public void addActivityToProject(Activity activity, int projectID) throws Exception {
+        Project project = getProject(projectID);
+        project.addActivity(activity);
+    }
 }

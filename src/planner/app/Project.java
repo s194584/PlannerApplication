@@ -55,7 +55,6 @@ public class Project {
     }
 
     public boolean hasProjectManager() {
-
         return !projectManager.getInitials().equals("N/A");
     }
 
@@ -81,5 +80,28 @@ public class Project {
 
     public void setEndDate(String endDate) {
         information.setEndDate(endDate);
+    }
+
+    public void addActivity(Activity activity) {
+        activities.add(activity);
+    }
+
+    public Activity getActivity(int activityID) throws Exception {
+        for (int i = 0; i < activities.size(); i++) {
+            Activity a = activities.get(i);
+            if (a.getID() == activityID) {
+                return a;
+            }
+        }
+        throw new Exception("Activity does not exist");
+    }
+
+    public boolean hasActivity(Activity activity) {
+        try {
+            getActivity(activity.getID());
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 }
