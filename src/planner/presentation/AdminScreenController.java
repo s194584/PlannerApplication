@@ -142,19 +142,6 @@ public class AdminScreenController {
     }
 
     @FXML
-    void logout() throws IOException {
-        Scene scene = logoutBtn.getScene();
-        Stage stage = (Stage) scene.getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/loginScreen.fxml"));
-        Parent root2 = loader.load();
-
-        LoginScreenController lsc = loader.getController();
-        lsc.setPlannerApplication(plannerApplication);
-
-        stage.setScene(new Scene(root2));
-    }
-
-    @FXML
     void editProject(MouseEvent event) throws IOException {
         if(event.getButton().equals(MouseButton.PRIMARY)) {
             if (event.getClickCount() == 2) {

@@ -62,12 +62,6 @@
             </VBox>
          </children>
       </HBox>
-      <VBox alignment="CENTER" spacing="10.0">
-         <children>
-            <Label text="You are logged in as admin" />
-            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefWidth="67.0" text="Log out" />
-         </children>
-      </VBox>
    </children>
    <opaqueInsets>
       <Insets />
