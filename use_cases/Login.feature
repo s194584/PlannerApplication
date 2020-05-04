@@ -2,6 +2,30 @@ Feature: Login
   Description:
   Actor: User
 
+  Scenario: Employee login succeeds
+    Given an employee "HBL" exists in the planner
+    And the user is not logged in
+    When the login "HBL" is entered and succeeds
+    Then the user "HBL" is logged in
+
+  Scenario: Employee logout succeeds
+    Given an employee "HBL" exists in the planner
+    And the user is logged in
+    When the user logout succeeds
+    Then the user is not logged in
+
+  Scenario: Admin login succeeds
+    Given an admin exists in the planner
+    And the user is not logged in
+    When the admin login succeeds
+    Then the user is logged in
+
+  Scenario: Admin logout succeeds
+    Given an admin exists in the planner
+    And the user is logged in
+    When the admin logout succeeds
+    Then the user is not logged in
+
   Scenario: User login as employee
     Given an employee "HBL" exists in the planner
     And the user is not logged in
@@ -24,7 +48,7 @@ Feature: Login
   Scenario: Current user logs out
     Given an employee "HBL" exists in the planner
     And the user is logged in
-    When the user logs out
+    When the user logout succeeds
     Then the user is not logged in
 
 

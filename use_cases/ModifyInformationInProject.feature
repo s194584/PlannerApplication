@@ -3,7 +3,7 @@ Feature: Modify project
   Actor: Admin
 
   Scenario: Change name of a project in the planner
-    Given the admin is logged in
+    Given the admin login succeeds
     And there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020"
     And the project is added to the planner
     And there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020" in the planner
@@ -11,7 +11,7 @@ Feature: Modify project
     Then there is a project with name "Lakseregisteret", description "A database for fish", start date "14-06-2020", end date "07-09-2020" in the planner
 
   Scenario: Change description of a project in the planner
-    Given the admin is logged in
+    Given the admin login succeeds
     And there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020"
     And the project is added to the planner
     And there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020" in the planner
@@ -19,7 +19,7 @@ Feature: Modify project
     Then there is a project with name "Fiskebasen", description "A fishy database", start date "14-06-2020", end date "07-09-2020" in the planner
 
   Scenario: Change start date of a project in the planner
-    Given the admin is logged in
+    Given the admin login succeeds
     And there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020"
     And the project is added to the planner
     And there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020" in the planner
@@ -27,7 +27,7 @@ Feature: Modify project
     Then there is a project with name "Fiskebasen", description "A database for fish", start date "23-06-2020", end date "07-09-2020" in the planner
 
   Scenario: Change end date of a project in the planner
-    Given the admin is logged in
+    Given the admin login succeeds
     And there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020"
     And the project is added to the planner
     And there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020" in the planner

@@ -4,10 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import planner.app.Activity;
-import planner.app.Employee;
-import planner.app.PlannerApplication;
-import planner.app.ProjectManager;
+import planner.app.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,11 +14,14 @@ public class ActivitySteps {
     PlannerApplication plannerApplication;
     UserHelper userHelper;
     ActivityHelper activityHelper;
+    ProjectHelper projectHelper;
 
-    public ActivitySteps(PlannerApplication plannerApplication, UserHelper userHelper, ActivityHelper activityHelper) {
+    public ActivitySteps(PlannerApplication plannerApplication, UserHelper userHelper,
+                         ActivityHelper activityHelper, ProjectHelper projectHelper) {
         this.plannerApplication = plannerApplication;
         this.userHelper = userHelper;
         this.activityHelper = activityHelper;
+        this.projectHelper = projectHelper;
     }
 
     @Given("a project manager {string} exists in the planner")
@@ -51,4 +51,14 @@ public class ActivitySteps {
         assertTrue(plannerApplication.hasActivity(activityHelper.getActivity()));
     }
 
+    @When("the project manager adds the activity to the project")
+    public void theProjectManagerAddsTheActivityToTheProject() throws Exception {
+        plannerApplication.addActivityToProject(activityHelper.getActivity(),
+                projectHelper.getProject().getProjectID());
+    }
+
+    @Then("the activity is added to the project in the planner")
+    public void theActivityIsAddedToTheProjectInThePlanner() throws Exception {
+        assertTrue(plannerApplication.getProject(projectHelper.getProject().getProjectID()).hasActivity(activityHelper.getActivity()));
+    }
 }
