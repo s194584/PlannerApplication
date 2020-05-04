@@ -8,11 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import planner.Main;
 import planner.app.PlannerApplication;
 import planner.app.User;
-
-import java.io.IOException;
 
 public class LoginScreenController {
     @FXML
@@ -40,17 +37,21 @@ public class LoginScreenController {
         if (plannerApplication.login(enteredText)) {
             Scene scene = loginButton.getScene();
             Stage stage = (Stage) scene.getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainAdminScreen.fxml"));
-            Parent root2 = loader.load();
 
-            AdminScreenController admcontroller = loader.getController();
-            admcontroller.setPlannerApplication(plannerApplication);
+            FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/fxml/mainScreen.fxml"));
+            Parent main = mainLoader.load();
+            MainScreenController msc= mainLoader.getController();
+            msc.loadPlannerApplication(plannerApplication);
 
-            stage.setScene(new Scene(root2));
+            stage.setScene(new Scene(main));
         }
 
         if (user != null) {
             System.out.println(user.getLoginStatus());
         }
+    }
+
+    public void setPlannerApplication(PlannerApplication plannerApplication) {
+        this.plannerApplication = plannerApplication;
     }
 }

@@ -151,6 +151,10 @@ public class PlannerApplication {
         throw new NoSuchElementException("Project does not exist");
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
     public void addActivity(Activity activity) throws IllegalAccessException {
         if (currentUser instanceof ProjectManager) {
             activities.add(activity);
