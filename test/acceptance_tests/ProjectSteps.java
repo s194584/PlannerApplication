@@ -62,7 +62,7 @@ public class ProjectSteps {
     @Then("the project with name {string} and same ID is in the planner")
     public void theProjectWithNameAndSameIDIsInThePlanner(String projectName) throws Exception {
         //theProjectIsInThePlanner();
-        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
         assertEquals(projectName, project.getProjectName());
     }
 
@@ -73,7 +73,7 @@ public class ProjectSteps {
 
     @Then("the name of the project in the planner is changed to {string}")
     public void theNameOfTheProjectInThePlannerIsChangedTo(String projectName) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
         assertEquals(projectName, project.getProjectName());
     }
 
@@ -86,7 +86,7 @@ public class ProjectSteps {
 
     @Then("there is a project with name {string}, description {string}, start date {string}, end date {string} in the planner")
     public void thereIsAProjectWithNameDescriptionStartDateEndDateInThePlanner(String name, String description, String startDate, String endDate) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
         Information info = project.getInformation();
         assertEquals(info.getName(), name);
         assertEquals(info.getDescription(), description);
@@ -96,25 +96,25 @@ public class ProjectSteps {
 
     @When("the admin changes the description of the project to {string}")
     public void theAdminChangesTheDescriptionOfTheProjectTo(String description) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
         project.setDescription(description);
     }
 
     @When("the admin changes the start date of the project to {string}")
     public void theAdminChangesTheStartDateOfTheProjectTo(String startDate) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
         project.setStartDate(startDate);
     }
 
     @When("the admin changes the end date of the project to {string}")
     public void theAdminChangesTheEndDateOfTheProjectTo(String endDate) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
         project.setEndDate(endDate);
     }
 
     @When("the admin changes the name of the project to {string}")
     public void theAdminChangesTheNameOfTheProjectTo(String name) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Project project = plannerApplication.getProject(projectHelper.getProject().getID());
         project.setProjectName(name);
     }
 }

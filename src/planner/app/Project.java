@@ -1,36 +1,34 @@
 package planner.app;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class Project {
     private static int projectIDgen = 0;
 
+    private String projectName;
     private int projectID;
     private ProjectManager projectManager;
     private Information information;
-    private List<Activity> activities = new ArrayList<Activity>();
+    private List<Activity> Activities;
 
     public Project() {
         this("");
     }
 
     public Project(String projectName) {
-        this(projectName, new ProjectManager("N/A"));
+        this(projectName, null);
     }
 
     public Project(String projectName, ProjectManager projectManager) {
-        projectID = Integer.parseInt("" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++);
+        projectID = projectIDgen++;
         this.projectManager = projectManager;
-        information = new Information(projectName, "","","");
     }
 
     public Project(Information info) {
         information = info;
     }
 
-    public int getProjectID() {
+    public int getID() {
         return projectID;
     }
 
@@ -51,20 +49,17 @@ public class Project {
     }
 
     public boolean hasProjectManager() {
-        return !projectManager.getInitials().equals("N/A");
+        return projectManager != null;
     }
 
     public Information getInformation() {
         return information;
     }
 
-    public int getNumberOfActivites() {
-        return activities.size();
-    }
-
     public void setInformation(Information information) {
         this.information = information;
     }
+
     public void setDescription(String description) {
         information.setDescription(description);
     }

@@ -14,17 +14,17 @@ Feature: Add and remove project
     When the project is added to the planner
     Then there is a project with name "Fiskebasen", description "A database for fish", start date "14-06-2020", end date "07-09-2020" in the planner
 
-  Scenario: Admin adds a project without information
-    Given the admin is logged in
-    And there is a project with a given ID
-    When the project is added to the planner
-    Then the project is in the planner
-
-  Scenario: Admin adds a project with name to planner
-    Given the admin is logged in
-    And there is a project with a given ID and "Kookle" as name
-    When the project is added to the planner
-    Then the project with name "Kookle" and same ID is in the planner
+#  Scenario: Admin adds a project without name to planner
+#    Given the admin is logged in
+#    And there is a project with a given ID
+#    When the project is added to the planner
+#    Then the project is in the planner
+#
+#  Scenario: Admin adds a project with name to planner
+#    Given the admin is logged in
+#    And there is a project with a given ID and "Kookle" as name
+#    When the project is added to the planner
+#    Then the project with name "Kookle" and same ID is in the planner
 
   Scenario: Admin removes a project to planner
     Given the admin is logged in
