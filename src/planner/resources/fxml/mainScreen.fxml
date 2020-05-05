@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="mainContainer" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.MainScreenController">
+<VBox fx:id="mainContainer" onKeyPressed="#debug" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.MainScreenController">
    <children>
       <VBox alignment="CENTER" spacing="10.0">
          <children>

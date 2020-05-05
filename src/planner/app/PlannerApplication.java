@@ -133,10 +133,13 @@ public class PlannerApplication {
     }
 
     public void assignProjManToProject(String initials, int projectID) throws Exception {
-            User u = getUser(initials);
-            ProjectManager pm = new ProjectManager(u);
-            Project project = getProject(projectID);
-            project.setProjectManager(pm);
+        User u = getUser(initials);
+        removeUser(u);
+        u = new ProjectManager(u);
+        addUser(u);
+        Project project = getProject(projectID);
+        project.setProjectManager((ProjectManager) u);
+
     }
 
     public Project getProject(int projectID) throws Exception {

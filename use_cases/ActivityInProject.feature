@@ -3,5 +3,10 @@ Feature: A project is able to have several activities
   Actor: Project manager
 
   Scenario: Add an activity to an existing project
-    Given the user is project manager
-    And there is an activity with information, id, time usage,
+    Given there is a project with a given ID
+    And the user is project manager
+    And there is an activity
+    When the activity is added to the project
+    Then the activity is in the project
+
+
