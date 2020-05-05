@@ -62,6 +62,7 @@ public class PlannerApplication {
     }
 
     public void addUser(User user) throws Exception {
+//        assert users != null && user.getInitials().length() <= 4 && user.getInitials().length() > 0 && !hasUser(user): "Length of " + "initials is not allowed";
         if (user.getInitials().length() < 1 || user.getInitials().length() > 4)
             throw new Exception("User must have at least 1 initial and maximum 4");
 
@@ -69,6 +70,7 @@ public class PlannerApplication {
             throw new Exception("User already exists");
         }
         users.add(user);
+//        assert hasUser(user);
     }
 
     public boolean hasUser(String initials) {

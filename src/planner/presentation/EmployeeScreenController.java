@@ -32,9 +32,7 @@ public class EmployeeScreenController {
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
 
-        LocalDate ld = LocalDate.now();
-        WeekFields week = WeekFields.of(Locale.GERMAN);
-        weekNumLabel.setText(""+ld.get(week.weekOfWeekBasedYear()));
+        weekNumLabel.setText(""+Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
 
 
 

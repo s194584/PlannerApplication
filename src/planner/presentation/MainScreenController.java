@@ -43,8 +43,10 @@ public class MainScreenController {
         if(user instanceof Admin) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainAdminScreen.fxml"));
             content = loader.load();
+
             AdminScreenController asc = loader.getController();
             asc.setPlannerApplication(plannerApplication);
+
         } else{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainEmployeeScreen.fxml"));
             content = loader.load();
