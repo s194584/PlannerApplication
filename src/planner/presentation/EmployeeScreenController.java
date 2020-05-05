@@ -7,6 +7,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import planner.app.Employee;
 import planner.app.PlannerApplication;
+import planner.app.ProjectManager;
+import planner.app.User;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -25,13 +27,19 @@ public class EmployeeScreenController {
     @FXML private TableColumn<?, ?> timeUsedCol;
     @FXML private TableColumn<?, ?> endDateCol;
 
-    private Employee currentEmployee;
+    private User currentUser;
     private PlannerApplication plannerApplication;
 
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
+        currentUser = plannerApplication.getCurrentUser();
 
+        if(currentUser instanceof ProjectManager){
+            managerBtn.setDisable(false);
+        }else{
+            managerBtn.setDisable(true);
+        }
         weekNumLabel.setText(""+Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
 
 
