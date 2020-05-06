@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import planner.app.Admin;
@@ -43,6 +45,7 @@ public class MainScreenController {
         if(user instanceof Admin) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainAdminScreen.fxml"));
             content = loader.load();
+
             AdminScreenController asc = loader.getController();
             asc.setPlannerApplication(plannerApplication);
         } else{
@@ -55,6 +58,16 @@ public class MainScreenController {
 
         mainContainer.getChildren().add(0,content);
         initialsLabel.setText(user.getInitials());
-
     }
+
+
+    @FXML
+    void debug(KeyEvent event) {
+        if(event.getCode() == KeyCode.Q){
+            plannerApplication.getUsers().stream().forEach(u -> System.out.print(u+u.getInitials() + ", "));
+            System.out.println();
+        }
+    }
+
+
 }

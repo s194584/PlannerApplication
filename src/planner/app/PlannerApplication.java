@@ -67,6 +67,7 @@ public class PlannerApplication {
     }
 
     public void addUser(User user) throws Exception {
+//        assert users != null && user.getInitials().length() <= 4 && user.getInitials().length() > 0 && !hasUser(user): "Length of " + "initials is not allowed";
         if (user.getInitials().length() < 1 || user.getInitials().length() > 4)
             throw new Exception("User must have at least 1 initial and maximum 4");
 
@@ -74,6 +75,7 @@ public class PlannerApplication {
             throw new Exception("User already exists");
         }
         users.add(user);
+//        assert hasUser(user);
     }
 
     public boolean hasUser(String initials) {
@@ -136,10 +138,13 @@ public class PlannerApplication {
     }
 
     public void assignProjManToProject(String initials, int projectID) throws NoSuchElementException {
-            User u = getUser(initials);
-            ProjectManager pm = new ProjectManager(u);
-            Project project = getProject(projectID);
-            project.setProjectManager(pm);
+        User u = getUser(initials);
+        removeUser(u);
+        u = new ProjectManager(u);
+        addUser(u);
+        Project project = getProject(projectID);
+        project.setProjectManager((ProjectManager) u);
+
     }
 
     public Project getProject(int projectID) throws NoSuchElementException {
