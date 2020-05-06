@@ -75,6 +75,8 @@ public class PlannerApplication {
         if (hasUser(user)) {
             throw new AlreadyExistsException("User already exists");
         }
+        if (!(currentUser instanceof Admin))
+            throw new OperationNotSupportedException("Only admin can add user");
         users.add(user);
 //        assert hasUser(user);
     }
@@ -191,5 +193,15 @@ public class PlannerApplication {
         Project project = getProject(projectID);
         Activity activity = getActivity(activityID);
         project.addActivity(activity);
+    }
+
+    public void removeActivity(int id) {
+        for (int i = 0; i < activities.size(); i++) {
+            if (activities.get(i).getID() == id) {
+                activities.remove(i);
+                return;
+            }
+        }
+        throw new NoSuchElementException("Activity does not exist");
     }
 }
