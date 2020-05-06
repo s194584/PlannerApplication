@@ -2,6 +2,7 @@ package planner.presentation;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +19,7 @@ import planner.app.User;
 import planner.presentation.prompts.ProjectEditorController;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class AdminScreenController {
     @FXML private Button addEmployeeBtn;
@@ -40,7 +42,7 @@ public class AdminScreenController {
         projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getProjectName()));
         projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
         projectManCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
-        projectActCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().numOfActivities()));
+        projectActCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivities()));
     }
 
     public void setPlannerApplication(PlannerApplication plannerApplication) {
@@ -171,6 +173,7 @@ public class AdminScreenController {
     public TextInputDialog showInputBox(String header){
         TextInputDialog td = new TextInputDialog();
         td.setHeaderText(header);
+        td.showAndWait();
         return td;
     }
 }

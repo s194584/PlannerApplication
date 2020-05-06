@@ -1,8 +1,11 @@
 package planner.app;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Project {
     private static int projectIDgen = 0;
@@ -10,7 +13,7 @@ public class Project {
     private int projectID;
     private ProjectManager projectManager;
     private Information information;
-    private List<Activity> activities = new ArrayList<Activity>();
+    private List<Activity> activities = new ArrayList<>();
 
     public Project() {
         this("");
@@ -58,13 +61,10 @@ public class Project {
         return information;
     }
 
-    public int numOfActivities() {
+    public int getNumberOfActivities() {
         return activities.size();
     }
 
-    public void setInformation(Information information) {
-        this.information = information;
-    }
     public void setDescription(String description) {
         information.setDescription(description);
     }
@@ -75,5 +75,28 @@ public class Project {
 
     public void setEndDate(String endDate) {
         information.setEndDate(endDate);
+    }
+
+    public void addActivity(Activity activity) {
+        activities.add(activity);
+    }
+
+    public Activity getActivity(int activityID) throws NoSuchElementException {
+        for (int i = 0; i < activities.size(); i++) {
+            Activity a = activities.get(i);
+            if (a.getID() == activityID) {
+                return a;
+            }
+        }
+        throw new NoSuchElementException("Activity does not exist");
+    }
+
+    public boolean hasActivity(int activityID) {
+        try {
+            getActivity(activityID);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
     }
 }

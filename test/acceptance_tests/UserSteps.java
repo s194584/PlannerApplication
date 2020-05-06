@@ -4,9 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import planner.app.Employee;
-import planner.app.PlannerApplication;
-import planner.app.User;
+import planner.app.*;
 
 import static org.junit.Assert.*;
 
@@ -24,6 +22,11 @@ public class UserSteps {
         plannerApplication.addUser(userHelper.getUser());
     }
 
+    @And("the user is an employee")
+    public void theUserIsAnEmployee() {
+        assertSame(userHelper.getUser().getClass(), Employee.class);
+    }
+
     @When("the login {string} is entered")
     public void theLoginIsEntered(String arg0) {
         plannerApplication.login(arg0);
@@ -35,15 +38,10 @@ public class UserSteps {
         assertTrue(user.getLoginStatus());
     }
 
-    @And("the user is an employee")
-    public void theUserIsAnEmployee() {
-        assertSame(userHelper.getUser().getClass(), Employee.class);
-    }
-
     @Then("the user {string} is not logged in")
     public void theUserIsNotLoggedIn(String arg0) throws Exception {
-        User u = plannerApplication.getUser(arg0);
-        assertFalse(u.getLoginStatus());
+        User user = plannerApplication.getUser(arg0);
+        assertFalse(user.getLoginStatus());
     }
 
     @And("the user is not logged in")
@@ -53,12 +51,12 @@ public class UserSteps {
 
     @Given("the admin is logged in")
     public void theAdminIsLoggedIn() {
-        plannerApplication.getAdmin().setLoginStatus(true);
+        assertTrue(plannerApplication.getAdmin().getLoginStatus());
     }
 
     @Given("the admin is not logged in")
     public void theAdminIsNotLoggedIn() {
-        plannerApplication.getAdmin().setLoginStatus(false);
+        assertFalse(plannerApplication.getAdmin().getLoginStatus());
     }
 
     @And("the user is an {string} class")
@@ -76,8 +74,34 @@ public class UserSteps {
         plannerApplication.login(userHelper.getUser().getInitials());
     }
 
-    @When("the user logs out")
+    @When("the admin logout succeeds")
     public void theUserLogsOut() {
-        plannerApplication.logout(plannerApplication.getCurrentUser().getInitials());
+        assertTrue(plannerApplication.logout(plannerApplication.getCurrentUser().getInitials()));
+    }
+
+    @When("the login {string} is entered and succeeds")
+    public void theLoginIsEnteredAndSucceeds(String arg0) throws Exception {
+        User user = plannerApplication.getUser(arg0);
+        assertTrue(plannerApplication.login(arg0));
+    }
+
+    @Given("an admin exists in the planner")
+    public void anAdminExistsInThePlanner() throws Exception {
+        userHelper.setUser(plannerApplication.getAdmin());
+    }
+
+    @When("the admin login succeeds")
+    public void theAdminLoginSucceeds() {
+        assertTrue(plannerApplication.login(plannerApplication.getAdmin().getInitials()));
+    }
+
+    @When("the user logout succeeds")
+    public void theUserLogoutSucceeds() {
+        assertTrue(plannerApplication.logout(userHelper.getUser().getInitials()));
+    }
+
+    @Then("the user's attempt to log out fails")
+    public void theUserSAttemptToLogOutFails() {
+        assertFalse(plannerApplication.logout(userHelper.getUser().getInitials()));
     }
 }
