@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import planner.app.*;
 
 import java.util.NoSuchElementException;
-import java.util.logging.LogRecord;
 
 import static org.junit.Assert.*;
 
@@ -123,7 +122,7 @@ public class ActivitySteps {
         assertEquals(act1.getDescription(), description);
         assertEquals(act1.getStartDate(), startDate);
         assertEquals(act1.getEndDate(), endDate);
-        assertEquals(act1.getTimeUsage(), timeUsage, 0.0);
+        assertEquals(act1.getEstimatedTimeUsage(), timeUsage, 0.0);
     }
 
     @When("the project manager changes the planner-activity's to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
@@ -134,7 +133,7 @@ public class ActivitySteps {
         act.setDescription(description);
         act.setStartDate(startDate);
         act.setEndDate(endDate);
-        act.setTimeUsage(timeUsage);
+        act.setEstimatedTimeUsage(timeUsage);
     }
 
     @When("the project manager changes the project-activity's name to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
@@ -145,7 +144,7 @@ public class ActivitySteps {
         act.setDescription(description);
         act.setStartDate(startDate);
         act.setEndDate(endDate);
-        act.setTimeUsage(timeUsage);
+        act.setEstimatedTimeUsage(timeUsage);
     }
 
     @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the project")
@@ -156,7 +155,7 @@ public class ActivitySteps {
         assertEquals(act1.getDescription(), description);
         assertEquals(act1.getStartDate(), startDate);
         assertEquals(act1.getEndDate(), endDate);
-        assertEquals(act1.getTimeUsage(), timeUsage, 0.0);
+        assertEquals(act1.getEstimatedTimeUsage(), timeUsage, 0.0);
     }
 
     @When("the project manager removes the activity from the planner")

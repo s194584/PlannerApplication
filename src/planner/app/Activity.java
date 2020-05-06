@@ -62,11 +62,11 @@ public class Activity {
         information.setEndDate(endDate);
     }
 
-    public void setTimeUsage(double timeUsage) {
+    public void setEstimatedTimeUsage(double timeUsage) {
         estimatedTimeUsage = timeUsage;
     }
 
-    public double getTimeUsage() {
+    public double getEstimatedTimeUsage() {
         return estimatedTimeUsage;
     }
 
