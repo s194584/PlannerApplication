@@ -21,7 +21,6 @@ Feature: Assign project manager to project
     When the admin assigns the employee as project manager to the project
     Then the employee is assigned as project manager to the project
 
-#
   Scenario: Admin attempts to assign project manager to non-existing project
     Given the admin login succeeds
     And there is a project manager with initials "ABC"

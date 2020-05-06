@@ -135,11 +135,13 @@ public class PlannerApplication {
         throw new NoSuchElementException("Project does not exist");
     }
 
-    public void assignProjManToProject(String initials, int projectID) throws NoSuchElementException {
+    public void assignProjManToProject(String initials, int projectID) throws Exception {
             User u = getUser(initials);
-            ProjectManager pm = new ProjectManager(u);
+            removeUser(u);
+            u = new ProjectManager(u);
+            addUser(u);
             Project project = getProject(projectID);
-            project.setProjectManager(pm);
+            project.setProjectManager((ProjectManager) u);
     }
 
     public Project getProject(int projectID) throws NoSuchElementException {
