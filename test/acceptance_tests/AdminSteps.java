@@ -56,6 +56,6 @@ public class AdminSteps {
 
     @Then("the error message {string} is shown")
     public void theErrorMessageIsShown(String msg) {
-        assertEquals(errorMessageHelper.getErrorMessage(), msg);
+        assertEquals(msg, errorMessageHelper.getErrorMessage());
     }
 }
