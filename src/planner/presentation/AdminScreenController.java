@@ -16,7 +16,7 @@ import planner.app.Employee;
 import planner.app.PlannerApplication;
 import planner.app.Project;
 import planner.app.User;
-import planner.presentation.prompts.ProjectEditorController;
+import planner.presentation.prompts.InformationEditorController;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -27,7 +27,7 @@ public class AdminScreenController {
     @FXML private Button createProjectBtn;
     @FXML private TextField projectField;
     @FXML private Button cancelProjectBtn;
-    @FXML private Button logoutBtn;
+    @FXML private Button editProjectBtn;
     @FXML private ListView employeeList;
     @FXML private TableView projectTable;
     @FXML private TableColumn<Project,String> projectNameCol;
@@ -79,7 +79,7 @@ public class AdminScreenController {
 
     @FXML
     void addEmployee() throws Exception {
-        TextInputDialog td = showInputBox("Enter the initials of the employee you wish to add.");
+        TextInputDialog td = createInputBox("Enter the initials of the employee you wish to add.");
         if(!td.showAndWait().isPresent()){
             return;
         }
@@ -101,6 +101,7 @@ public class AdminScreenController {
             plannerApplication.removeProject(project);
             projectTable.getItems().remove(project);
             System.out.println("Cancelled project with id " + project.getProjectID());
+            projectTable.getSelectionModel().clearSelection();
         }
         catch (Exception e) {
             showAlertMessage("Please select the project you wish to cancel");
@@ -109,7 +110,7 @@ public class AdminScreenController {
 
     @FXML
     void createProject() {
-        TextInputDialog td = showInputBox("Enter the name of the project");
+        TextInputDialog td = createInputBox("Enter the name of the project");
         if(!td.showAndWait().isPresent()){
             return;
         }
@@ -134,6 +135,7 @@ public class AdminScreenController {
             plannerApplication.getUsers().stream().forEach(u -> System.out.print(u.getInitials() + ", "));
             System.out.println();
             projectTable.refresh();
+            employeeList.getSelectionModel().clearSelection();
         }
         catch (Exception e) {
             showAlertMessage("Please select the user you wish to remove");
@@ -142,21 +144,29 @@ public class AdminScreenController {
     }
 
     @FXML
-    void editProject(MouseEvent event) throws IOException {
+    void editProjectByMouse(MouseEvent event) throws IOException {
         if(event.getButton().equals(MouseButton.PRIMARY)) {
-            if (event.getClickCount() == 2) {
-                Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
-                showProjectEditor(project);
-                System.out.println(project.getProjectName());
+            if (event.getClickCount() == 2||editProjectBtn.isPressed()) {
+                editProject();
             }
         }
     }
 
-    private void showProjectEditor(Project project) throws IOException {
+    @FXML
+    void editProjectByBtn() throws IOException {
+        editProject();
+    }
+
+    private void editProject() throws IOException {
+        Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
+        showInformationEditor(project);
+    }
+
+    private void showInformationEditor(Project project) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/projectEditor.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/infomationEditor.fxml"));
         Parent root2 = loader.load();
-        ProjectEditorController pec = loader.getController();
+        InformationEditorController pec = loader.getController();
         pec.setInformation(project.getInformation());
 
         stage.setScene(new Scene(root2));
@@ -170,10 +180,9 @@ public class AdminScreenController {
         alert.showAndWait();
     }
 
-    public TextInputDialog showInputBox(String header){
+    public TextInputDialog createInputBox(String header){
         TextInputDialog td = new TextInputDialog();
         td.setHeaderText(header);
-        td.showAndWait();
         return td;
     }
 }

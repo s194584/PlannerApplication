@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.ProjectManagerScreenController">
+   <children>
+      <Label text="Activity Overview">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <HBox spacing="224.0">
+         <children>
+            <ComboBox fx:id="projectComboBox" onAction="#updateSelection" prefWidth="150.0" promptText="Choose project" />
+            <Button fx:id="employeeBtn" mnemonicParsing="false" onAction="#showEmployeeScreen" text="Go to Employee" />
+         </children>
+      </HBox>
+      <TableView fx:id="activityTable">
+         <columns>
+            <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="desCol" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="estCol" prefWidth="103.0" text="Estimated time" />
+            <TableColumn fx:id="empCol" prefWidth="81.0" text="Employees" />
+            <TableColumn fx:id="startCol" prefWidth="75.0" text="Start date" />
+            <TableColumn fx:id="endCol" prefWidth="75.0" text="End date" />
+         </columns>
+      </TableView>
+      <HBox>
+         <children>
+            <Button fx:id="addActivityBtn" mnemonicParsing="false" onAction="#addActivity" text="Add" />
+            <Button fx:id="editActivityBtn" mnemonicParsing="false" onAction="#editActivity" text="Edit" />
+            <Button fx:id="cancelActivityBtn" mnemonicParsing="false" onAction="#cancelActivity" text="Cancel" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

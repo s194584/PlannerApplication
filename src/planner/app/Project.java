@@ -1,5 +1,7 @@
 package planner.app;
 
+
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -106,5 +108,14 @@ public class Project {
             }
         }
         throw new NoSuchElementException("Activity does not exist");
+    }
+
+    @Override
+    public String toString() {
+        return information.getName();
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
     }
 }

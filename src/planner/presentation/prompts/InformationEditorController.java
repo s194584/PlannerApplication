@@ -11,7 +11,7 @@ import planner.app.Information;
 
 import java.time.format.DateTimeFormatter;
 
-public class ProjectEditorController {
+public class InformationEditorController {
 
     @FXML private TextField nameField;
     @FXML private DatePicker startPicker;
@@ -20,6 +20,7 @@ public class ProjectEditorController {
     @FXML private Button confirmBtn;
     @FXML private Button cancelBtn;
     private Information information;
+    public Boolean hasResult =false;
 
 
     @FXML
@@ -38,6 +39,7 @@ public class ProjectEditorController {
         }catch (Exception e){
 
         }
+        hasResult = true;
         cancel();
     }
 
