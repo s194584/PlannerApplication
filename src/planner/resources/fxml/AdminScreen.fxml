@@ -44,11 +44,11 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView fx:id="projectTable" onMouseClicked="#editProjectByMouse" prefHeight="300.0" prefWidth="426.0">
+                  <TableView fx:id="projectTable" editable="true" onMouseClicked="#editProjectByMouse" prefHeight="300.0" prefWidth="426.0">
                     <columns>
                       <TableColumn fx:id="projectNameCol" prefWidth="124.33334350585938" text="Name" />
-                      <TableColumn fx:id="projectIDCol" prefWidth="73.66665649414062" text="ID" />
-                        <TableColumn fx:id="projectActCol" prefWidth="112.0" text="No. Activities" />
+                      <TableColumn fx:id="projectIDCol" editable="false" prefWidth="73.66665649414062" text="ID" />
+                        <TableColumn fx:id="projectActCol" editable="false" prefWidth="112.0" text="No. Activities" />
                         <TableColumn fx:id="projectManCol" prefWidth="112.33331298828125" text="Manager" />
                     </columns>
                   </TableView>

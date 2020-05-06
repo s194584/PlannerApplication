@@ -8,8 +8,9 @@ public class Activity {
     private double estimatedTimeUsage;
     private int activityID;
 
+
     public Activity() {
-        this(null, 0);
+        this(new Information("","","",""), 0);
     }
 
     public Activity(Information information, double estimatedTimeUsage) {
@@ -20,5 +21,25 @@ public class Activity {
 
     public int getID() {
         return activityID;
+    }
+
+
+    public String getName(){
+        return information.getName();
+    }
+
+    public String getDescription(){
+        return information.getDescription();
+    }
+    public double getEstimatedTimeUsage() {
+        return estimatedTimeUsage;
+    }
+
+    public void setEstimatedTimeUsage(double estimatedTimeUsage) {
+        this.estimatedTimeUsage = estimatedTimeUsage;
+    }
+
+    public Information getInformation() {
+        return information;
     }
 }

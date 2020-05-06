@@ -11,8 +11,16 @@ public class PlannerApplication {
     private List<Project> projects = new ArrayList<>();
     private List<Activity> activities = new ArrayList<>();
 
-    public PlannerApplication(){
+    public PlannerApplication() {
         users.add(admin);
+
+        // TESTING STANDARD
+        users.add(new Employee("a"));
+        projects.add(new Project("Woogle"));
+        try {
+            assignProjManToProject("a",20201);
+        } catch (Exception e) {
+        }
     }
 
     public int getNumberOfActivities() {
@@ -62,7 +70,7 @@ public class PlannerApplication {
         throw new NoSuchElementException("User does not exist");
     }
 
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return users;
     }
 
@@ -136,12 +144,14 @@ public class PlannerApplication {
     }
 
     public void assignProjManToProject(String initials, int projectID) throws Exception {
-            User u = getUser(initials);
+        User u = getUser(initials);
+        if (!(u instanceof ProjectManager)) {
             removeUser(u);
             u = new ProjectManager(u);
             addUser(u);
-            Project project = getProject(projectID);
-            project.setProjectManager((ProjectManager) u);
+        }
+        Project project = getProject(projectID);
+        project.setProjectManager((ProjectManager) u);
     }
 
     public Project getProject(int projectID) throws NoSuchElementException {

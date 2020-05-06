@@ -1,5 +1,6 @@
 package planner.app;
 
+import javafx.collections.ObservableList;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
@@ -98,5 +99,14 @@ public class Project {
         } catch (NoSuchElementException ex) {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return information.getName();
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
     }
 }

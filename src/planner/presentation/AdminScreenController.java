@@ -2,7 +2,6 @@ package planner.presentation;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,7 @@ import planner.app.Employee;
 import planner.app.PlannerApplication;
 import planner.app.Project;
 import planner.app.User;
-import planner.presentation.prompts.ProjectEditorController;
+import planner.presentation.prompts.InformationEditorController;
 
 import java.io.IOException;
 
@@ -158,14 +157,14 @@ public class AdminScreenController {
 
     private void editProject() throws IOException {
         Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
-        showProjectEditor(project);
+        showInformationEditor(project);
     }
 
-    private void showProjectEditor(Project project) throws IOException {
+    private void showInformationEditor(Project project) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/projectEditor.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/infomationEditor.fxml"));
         Parent root2 = loader.load();
-        ProjectEditorController pec = loader.getController();
+        InformationEditorController pec = loader.getController();
         pec.setInformation(project.getInformation());
 
         stage.setScene(new Scene(root2));
