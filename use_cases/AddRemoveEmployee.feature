@@ -39,6 +39,6 @@ Feature: Add and remove employees
 
   Scenario: Attempt to add employee with not 3 initials
     Given the user is the admin
-    And there is an employee with initials "ABCD"
+    And there is an employee with initials "ABCDE"
     When the employee is added to the planner
-    Then the error message "User must have 3 initials" is shown
+    Then the error message "User must have at least 1 initial and maximum 4" is shown

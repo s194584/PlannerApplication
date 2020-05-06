@@ -1,40 +1,46 @@
 package planner.app;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Project {
     private static int projectIDgen = 0;
 
-    private String projectName;
     private int projectID;
     private ProjectManager projectManager;
     private Information information;
-    private List<Activity> Activities;
+    private List<Activity> activities = new ArrayList<>();
 
     public Project() {
         this("");
     }
 
     public Project(String projectName) {
-        this(projectName, null);
+        this(projectName, new ProjectManager("N/A"));
     }
 
     public Project(String projectName, ProjectManager projectManager) {
-        projectID = projectIDgen++;
-        this.projectName = projectName;
+        projectID = Integer.parseInt("" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++);
         this.projectManager = projectManager;
+        information = new Information(projectName, "","","");
     }
 
-    public int getID() {
+    public Project(Information info) {
+        information = info;
+    }
+
+    public int getProjectID() {
         return projectID;
     }
 
     public String getProjectName() {
-        return projectName;
+        return information.getName();
     }
 
     public void setProjectName(String projectName) {
-        this.projectName = projectName;
+        information.setName(projectName);
     }
 
     public ProjectManager getProjectManager() {
@@ -46,6 +52,49 @@ public class Project {
     }
 
     public boolean hasProjectManager() {
-        return projectManager != null;
+        return !projectManager.getInitials().equals("N/A");
+    }
+
+    public Information getInformation() {
+        return information;
+    }
+
+    public int getNumberOfActivities() {
+        return activities.size();
+    }
+
+    public void setDescription(String description) {
+        information.setDescription(description);
+    }
+
+    public void setStartDate(String startDate) {
+        information.setStartDate(startDate);
+    }
+
+    public void setEndDate(String endDate) {
+        information.setEndDate(endDate);
+    }
+
+    public void addActivity(Activity activity) {
+        activities.add(activity);
+    }
+
+    public Activity getActivity(int activityID) throws NoSuchElementException {
+        for (int i = 0; i < activities.size(); i++) {
+            Activity a = activities.get(i);
+            if (a.getID() == activityID) {
+                return a;
+            }
+        }
+        throw new NoSuchElementException("Activity does not exist");
+    }
+
+    public boolean hasActivity(int activityID) {
+        try {
+            getActivity(activityID);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
     }
 }

@@ -3,7 +3,7 @@ Feature: Assign project manager to project
   Actor: Admin
 
   Scenario: Admin assigns project manager to project
-    Given the admin is logged in
+    Given the admin login succeeds
     And there is a project manager with initials "ABC"
     And the project manager is added to the planner
     And there is a project with a given ID
@@ -13,7 +13,7 @@ Feature: Assign project manager to project
 
 
   Scenario: Admin assigns employee as project manager to project
-    Given the admin is logged in
+    Given the admin login succeeds
     And there is an employee with initials "ABC"
     And the employee is added to the planner
     And there is a project with a given ID
@@ -23,7 +23,7 @@ Feature: Assign project manager to project
 
 #
   Scenario: Admin attempts to assign project manager to non-existing project
-    Given the admin is logged in
+    Given the admin login succeeds
     And there is a project manager with initials "ABC"
     And the project manager is added to the planner
     And there is a project with a given ID
