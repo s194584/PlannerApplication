@@ -1,12 +1,25 @@
 package planner.presentation;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import planner.app.Employee;
 import planner.app.PlannerApplication;
 import planner.app.Project;
+import planner.app.User;
+import planner.presentation.prompts.ProjectEditorController;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class AdminScreenController {
     @FXML private Button addEmployeeBtn;
@@ -14,12 +27,10 @@ public class AdminScreenController {
     @FXML private Button createProjectBtn;
     @FXML private TextField projectField;
     @FXML private Button cancelProjectBtn;
-    @FXML private Button addProjectLeaderBtn;
-    @FXML private TextField projEmployeeField;
-    @FXML private TextField projProjectField;
+    @FXML private Button logoutBtn;
     @FXML private ListView employeeList;
     @FXML private TableView projectTable;
-    @FXML private TableColumn projectNameCol;
+    @FXML private TableColumn<Project,String> projectNameCol;
     @FXML private TableColumn projectIDCol;
     @FXML private TableColumn<Project,String> projectActCol;
     @FXML private TableColumn<Project,String> projectManCol;
@@ -28,15 +39,27 @@ public class AdminScreenController {
 
     @FXML
     public void initialize(){
-        projectNameCol.setCellValueFactory(new PropertyValueFactory("projectName"));
+        projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getProjectName()));
         projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
-        projectManCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
-        projectActCol.setCellValueFactory((data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivites())));
+        projectManCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
+        projectActCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivities()));
     }
 
     public void setPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
+        refresh();
+    }
+
+    void refresh(){
+        ObservableList<String> startEmployees = employeeList.getItems();
+        for (User u : plannerApplication.getUsers()) {
+            if(!u.getInitials().equals("000")){
+                startEmployees.add(u.getInitials());
+            }
+        }
+
+        ObservableList<Project> startProjects = projectTable.getItems();
+        startProjects.addAll(plannerApplication.getProjects());
     }
 
     @FXML
@@ -47,6 +70,8 @@ public class AdminScreenController {
             plannerApplication.assignProjManToProject(employee, project.getProjectID());
             System.out.println("Assigned " + employee + " as project manager to " + project.getProjectID());
             projectTable.refresh();
+            projectTable.getSelectionModel().clearSelection();
+            employeeList.getSelectionModel().clearSelection();
         } catch (Exception ex) {
             showAlertMessage("Please select an employee and a project");
         }
@@ -55,6 +80,9 @@ public class AdminScreenController {
     @FXML
     void addEmployee() throws Exception {
         TextInputDialog td = showInputBox("Enter the initials of the employee you wish to add.");
+        if(!td.showAndWait().isPresent()){
+            return;
+        }
         try {
             plannerApplication.addUser(new Employee(td.getEditor().getText()));
             employeeList.getItems().add(td.getEditor().getText());}
@@ -82,7 +110,9 @@ public class AdminScreenController {
     @FXML
     void createProject() {
         TextInputDialog td = showInputBox("Enter the name of the project");
-
+        if(!td.showAndWait().isPresent()){
+            return;
+        }
         try {
             Project project = new Project(td.getEditor().getText());
             plannerApplication.addProject(project);
@@ -110,6 +140,30 @@ public class AdminScreenController {
         }
 
     }
+
+    @FXML
+    void editProject(MouseEvent event) throws IOException {
+        if(event.getButton().equals(MouseButton.PRIMARY)) {
+            if (event.getClickCount() == 2) {
+                Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
+                showProjectEditor(project);
+                System.out.println(project.getProjectName());
+            }
+        }
+    }
+
+    private void showProjectEditor(Project project) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/projectEditor.fxml"));
+        Parent root2 = loader.load();
+        ProjectEditorController pec = loader.getController();
+        pec.setInformation(project.getInformation());
+
+        stage.setScene(new Scene(root2));
+        stage.showAndWait();
+        projectTable.refresh();
+    }
+
 
     public void showAlertMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
