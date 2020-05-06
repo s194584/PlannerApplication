@@ -1,5 +1,6 @@
 package planner.app;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -69,10 +70,10 @@ public class PlannerApplication {
     public void addUser(User user) throws Exception {
 //        assert users != null && user.getInitials().length() <= 4 && user.getInitials().length() > 0 && !hasUser(user): "Length of " + "initials is not allowed";
         if (user.getInitials().length() < 1 || user.getInitials().length() > 4)
-            throw new Exception("User must have at least 1 initial and maximum 4");
+            throw new IllegalArgumentException("User must have at least 1 initial and maximum 4");
 
         if (hasUser(user)) {
-            throw new Exception("User already exists");
+            throw new AlreadyExistsException("User already exists");
         }
         users.add(user);
 //        assert hasUser(user);
@@ -93,7 +94,7 @@ public class PlannerApplication {
 
     public void removeUser(User user) throws Exception {
         if (user.getInitials().equals(admin.getInitials()))
-            throw new Exception("Admin cannot remove admin");
+            throw new OperationNotSupportedException("Admin cannot remove admin");
 
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getInitials().equals(user.getInitials())) {
@@ -101,7 +102,7 @@ public class PlannerApplication {
                 return;
             }
         }
-        throw new Exception("User does not exist");
+        throw new NoSuchElementException("User does not exist");
     }
 
     public void addProject(Project project) throws Exception {
@@ -137,7 +138,7 @@ public class PlannerApplication {
         throw new NoSuchElementException("Project does not exist");
     }
 
-    public void assignProjManToProject(String initials, int projectID) throws NoSuchElementException {
+    public void assignProjManToProject(String initials, int projectID) throws Exception {
         User u = getUser(initials);
         removeUser(u);
         u = new ProjectManager(u);
