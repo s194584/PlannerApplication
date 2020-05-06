@@ -42,7 +42,7 @@ public class AdminScreenController {
         projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getProjectName()));
         projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
         projectManCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
-        projectActCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivites()));
+        projectActCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivities()));
     }
 
     public void setPlannerApplication(PlannerApplication plannerApplication) {
