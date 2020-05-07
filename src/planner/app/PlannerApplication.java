@@ -12,8 +12,16 @@ public class PlannerApplication {
     private List<Project> projects = new ArrayList<>();
     private List<Activity> activities = new ArrayList<>();
 
-    public PlannerApplication(){
+    public PlannerApplication() {
         users.add(admin);
+
+        // TESTING STANDARD
+        users.add(new Employee("a"));
+        projects.add(new Project("Woogle"));
+        try {
+            assignProjManToProject("a",20201);
+        } catch (Exception e) {
+        }
     }
 
     public int getNumberOfActivities() {
@@ -63,7 +71,7 @@ public class PlannerApplication {
         throw new NoSuchElementException("User does not exist");
     }
 
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return users;
     }
 
@@ -75,6 +83,8 @@ public class PlannerApplication {
         if (hasUser(user)) {
             throw new AlreadyExistsException("User already exists");
         }
+        if (!(currentUser instanceof Admin))
+            throw new OperationNotSupportedException("Only admin can add user");
         users.add(user);
 //        assert hasUser(user);
     }
@@ -140,9 +150,11 @@ public class PlannerApplication {
 
     public void assignProjManToProject(String initials, int projectID) throws Exception {
         User u = getUser(initials);
-        removeUser(u);
-        u = new ProjectManager(u);
-        addUser(u);
+        if (!(u instanceof ProjectManager)) {
+            removeUser(u);
+            u = new ProjectManager(u);
+            addUser(u);
+        }
         Project project = getProject(projectID);
         project.setProjectManager((ProjectManager) u);
 
@@ -191,5 +203,15 @@ public class PlannerApplication {
         Project project = getProject(projectID);
         Activity activity = getActivity(activityID);
         project.addActivity(activity);
+    }
+
+    public void removeActivity(int id) {
+        for (int i = 0; i < activities.size(); i++) {
+            if (activities.get(i).getID() == id) {
+                activities.remove(i);
+                return;
+            }
+        }
+        throw new NoSuchElementException("Activity does not exist");
     }
 }

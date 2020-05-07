@@ -67,27 +67,17 @@ public class ProjectManagerSteps {
         assertFalse(projectHelper.getProject().hasProjectManager());
     }
 
-    @And("the user is project manager")
-    public void theUserIsProjectManager() throws Exception {
-        plannerApplication.addUser(new Employee("HBL"));
-        plannerApplication.assignProjManToProject("HBL",projectHelper.getProject().getProjectID());
-    }
+//    @And("the user is project manager")
+//    public void theUserIsProjectManager() throws Exception {
+//        plannerApplication.addUser(new Employee("HBL"));
+//        plannerApplication.assignProjManToProject("HBL",projectHelper.getProject().getProjectID());
+//    }
 
-    @And("there is an activity with information, id, estimated time")
-    public void thereIsAnActivityWithInformationIdEstimatedTime() {
-    }
-
-    @When("the activity is added to the project")
-    public void theActivityIsAddedToTheProject() {
-
-    }
-
-    @Then("the activity is in the project")
-    public void theActivityIsInTheProject() {
-    }
-
-    @And("there is an activity")
-    public void thereIsAnActivity() {
-        activityHelper.setActivity(new Activity());
+    @And("the project manager assigns employee {string} to the activity in the project")
+    public void theProjectManagerAssignsEmployeeToTheActivityInTheProject(String initials) {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Activity act = project.getActivity(activityHelper.getActivity().getID());
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        act.assignEmployee(emp);
     }
 }

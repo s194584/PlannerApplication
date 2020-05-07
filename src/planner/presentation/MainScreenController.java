@@ -43,14 +43,15 @@ public class MainScreenController {
 
         Parent content = null;
         if(user instanceof Admin) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainAdminScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminScreen.fxml"));
             content = loader.load();
 
             AdminScreenController asc = loader.getController();
             asc.setPlannerApplication(plannerApplication);
         } else{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainEmployeeScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeeScreen.fxml"));
             content = loader.load();
+
             EmployeeScreenController esc = loader.getController();
             esc.loadPlannerApplication(plannerApplication);
         }
