@@ -13,15 +13,19 @@ public class PlannerApplication {
     private List<Activity> activities = new ArrayList<>();
 
     public PlannerApplication() {
+
         users.add(admin);
 
         // TESTING STANDARD
         users.add(new Employee("a"));
         projects.add(new Project("Woogle"));
+
         try {
             assignProjManToProject("a",20201);
         } catch (Exception e) {
         }
+
+
     }
 
     public int getNumberOfActivities() {

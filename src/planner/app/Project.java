@@ -2,6 +2,7 @@ package planner.app;
 
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Project {
     public Project(String projectName, ProjectManager projectManager) {
         projectID = Integer.parseInt("" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++);
         this.projectManager = projectManager;
-        information = new Information(projectName, "","","");
+        information = new Information(projectName, "",null,null);
     }
 
     public Project(Information info) {
@@ -39,10 +40,6 @@ public class Project {
 
     public String getProjectName() {
         return information.getName();
-    }
-
-    public void setProjectName(String projectName) {
-        information.setName(projectName);
     }
 
     public ProjectManager getProjectManager() {
@@ -63,18 +60,6 @@ public class Project {
 
     public int getNumberOfActivities() {
         return activities.size();
-    }
-
-    public void setDescription(String description) {
-        information.setDescription(description);
-    }
-
-    public void setStartDate(String startDate) {
-        information.setStartDate(startDate);
-    }
-
-    public void setEndDate(String endDate) {
-        information.setEndDate(endDate);
     }
 
     public void addActivity(Activity activity) {

@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import planner.app.DateMapper;
 import planner.app.Information;
 
 import java.time.format.DateTimeFormatter;
@@ -34,8 +35,8 @@ public class InformationEditorController {
         information.setName(nameField.getText());
         information.setDescription(descriptionField.getText());
         try {
-            information.setStartDate(startPicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            information.setEndDate(endPicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            information.setStartDate(DateMapper.transformToDate(startPicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+            information.setEndDate(DateMapper.transformToDate(endPicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
         }catch (Exception e){
 
         }
@@ -47,7 +48,7 @@ public class InformationEditorController {
         this.information = information;
         nameField.setText(information.getName());
         descriptionField.setText(information.getDescription());
-        startPicker.setPromptText(information.getStartDate());
-        endPicker.setPromptText(information.getEndDate());
+        startPicker.setPromptText(DateMapper.transformToString(information.getStartDate()));
+        endPicker.setPromptText(DateMapper.transformToString(information.getEndDate()));
     }
 }

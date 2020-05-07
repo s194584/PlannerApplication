@@ -1,17 +1,19 @@
 package planner.app;
 
+import java.time.LocalDate;
+
 public class Information {
 
     private String description;
     private String name;
-    private String startDate;
-    private String endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public Information(String name, String description, String startDate, String endDate) {
+    public Information(String name, String description, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
-        this.endDate = endDate;
+        setEndDate(endDate);
     }
 
     public String getDescription() {
@@ -30,19 +32,25 @@ public class Information {
         this.name = name;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setEndDate(LocalDate endDate) throws IllegalArgumentException {
+        if (endDate != null && startDate != null) {
+            if (!startDate.isBefore(endDate)) {
+                throw new IllegalArgumentException("End date must be after start date");
+            } else {
+                this.endDate = endDate;
+            }
+        }
     }
 }

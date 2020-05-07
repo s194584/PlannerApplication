@@ -109,7 +109,7 @@ public class ActivitySteps {
     @And("there is an activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and a given ID")
     public void thereIsAnActivityWithNameDescriptionStartDateEndDateTimeUsageAndAGivenID(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Information info = new Information(name, description, startDate, endDate);
+        Information info = new Information(name, description, DateMapper.transformToDate(startDate), DateMapper.transformToDate(endDate));
         Activity act = new Activity(info, timeUsage);
         activityHelper.setActivity(act);
     }
@@ -117,45 +117,54 @@ public class ActivitySteps {
     @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the planner")
     public void theActivityWithNameDescriptionStartDateEndDateTimeUsageAndSameIDIsInThePlanner(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act1 = plannerApplication.getActivity(activityHelper.getActivity().getID());
-        assertEquals(act1.getName(), name);
-        assertEquals(act1.getDescription(), description);
-        assertEquals(act1.getStartDate(), startDate);
-        assertEquals(act1.getEndDate(), endDate);
-        assertEquals(act1.getEstimatedTimeUsage(), timeUsage, 0.0);
+        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getID());
+        Information info = act.getInformation();
+        assertEquals(info.getName(), name);
+        assertEquals(info.getDescription(), description);
+        assertEquals(info.getStartDate(), DateMapper.transformToDate(startDate));
+        assertEquals(info.getEndDate(), DateMapper.transformToDate(endDate));
+        assertEquals(act.getEstimatedTimeUsage(), timeUsage, 0.0);
     }
 
     @When("the project manager changes the planner-activity's to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
     public void theProjectManagerChangesThePlannerActivitySToDescriptionStartDateEndDateTimeUsage(
             String name, String description, String startDate, String endDate, double timeUsage) {
         Activity act = plannerApplication.getActivity(activityHelper.getActivity().getID());
-        act.setName(name);
-        act.setDescription(description);
-        act.setStartDate(startDate);
-        act.setEndDate(endDate);
+        Information info = act.getInformation();
+        info.setName(name);
+        info.setDescription(description);
+        info.setStartDate(DateMapper.transformToDate(startDate));
+        info.setEndDate(DateMapper.transformToDate(endDate));
         act.setEstimatedTimeUsage(timeUsage);
     }
 
     @When("the project manager changes the project-activity's name to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
     public void theProjectManagerChangesTheProjectActivitySNameToDescriptionStartDateEndDateTimeUsage(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
-        act.setName(name);
-        act.setDescription(description);
-        act.setStartDate(startDate);
-        act.setEndDate(endDate);
-        act.setEstimatedTimeUsage(timeUsage);
+        try {
+            Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+            Information info = act.getInformation();
+            info.setName(name);
+            info.setDescription(description);
+            info.setStartDate(DateMapper.transformToDate(startDate));
+            info.setEndDate(DateMapper.transformToDate(endDate));
+            act.setEstimatedTimeUsage(timeUsage);
+        } catch (IllegalArgumentException ex) {
+            errorMessageHelper.setErrorMessage("End date must be after start date");
+        }
+
     }
 
     @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the project")
     public void theActivityWithNameDescriptionStartDateEndDateTimeUsageAndSameIDIsInTheProject(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act1 = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
-        assertEquals(act1.getName(), name);
-        assertEquals(act1.getDescription(), description);
-        assertEquals(act1.getStartDate(), startDate);
-        assertEquals(act1.getEndDate(), endDate);
-        assertEquals(act1.getEstimatedTimeUsage(), timeUsage, 0.0);
+        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+        Information info = act.getInformation();
+        assertEquals(info.getName(), name);
+        assertEquals(info.getDescription(), description);
+        assertEquals(info.getStartDate(), DateMapper.transformToDate(startDate));
+        assertEquals(info.getEndDate(), DateMapper.transformToDate(endDate));
+        assertEquals(act.getEstimatedTimeUsage(), timeUsage, 0.0);
     }
 
     @When("the project manager removes the activity from the planner")

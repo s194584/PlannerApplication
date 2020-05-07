@@ -30,9 +30,9 @@ public class ProjectManagerScreenController {
 
     @FXML
     public void initialize(){
-        nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
-        desCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription().length()>15 ?
-                data.getValue().getDescription().substring(0,14)+"...":data.getValue().getDescription()));
+        nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
+        desCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
+                data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
         estCol.setCellValueFactory(new PropertyValueFactory("estimatedTimeUsage"));
 //        projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getProjectName()));
 //        projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
