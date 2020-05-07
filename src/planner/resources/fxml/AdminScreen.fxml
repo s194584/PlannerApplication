@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.AdminScreenController">
+   <children>
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" text="Employees" textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </Label>
+                  <ListView fx:id="employeeList" prefHeight="300.0" prefWidth="200.0" />
+                  <HBox>
+                     <children>
+                        <Button fx:id="addEmployeeButton" mnemonicParsing="false" onAction="#addEmployee" prefHeight="30.0" prefWidth="100.0" text="Add" />
+                        <Button fx:id="removeEmployeeButton" mnemonicParsing="false" onAction="#removeEmployee" prefHeight="30.0" prefWidth="100.0" text="Remove" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="addProjectLeaderBtn" mnemonicParsing="false" onAction="#assignProjectManager" prefHeight="82.0" prefWidth="130.0" text="Assign as &#10;manager to &#10;project" textAlignment="CENTER" />
+            <VBox alignment="CENTER">
+               <children>
+                  <Label text="Projects">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView fx:id="projectTable" editable="true" onMouseClicked="#editProjectByMouse" prefHeight="300.0" prefWidth="426.0">
+                    <columns>
+                      <TableColumn fx:id="projectNameCol" prefWidth="124.33334350585938" text="Name" />
+                      <TableColumn fx:id="projectIDCol" editable="false" prefWidth="73.66665649414062" text="ID" />
+                        <TableColumn fx:id="projectActCol" editable="false" prefWidth="112.0" text="No. Activities" />
+                        <TableColumn fx:id="projectManCol" prefWidth="112.33331298828125" text="Manager" />
+                    </columns>
+                  </TableView>
+                  <HBox>
+                     <children>
+                        <Button fx:id="createProjectBtn" mnemonicParsing="false" onAction="#createProject" prefHeight="30.0" prefWidth="100.0" text="Create" />
+                        <Button fx:id="editProjectBtn" mnemonicParsing="false" onAction="#editProject" prefHeight="30.0" prefWidth="100.0" text="Edit" />
+                        <Button fx:id="cancelProjectBtn" mnemonicParsing="false" onAction="#cancelProject" prefHeight="30.0" prefWidth="100.0" text="Cancel" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="20.0" left="50.0" right="50.0" top="50.0" />
+   </padding>
+</VBox>
