@@ -1,6 +1,7 @@
 package planner.app;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Activity implements Workable{
@@ -13,7 +14,7 @@ public class Activity implements Workable{
     private List<Employee> assignedEmployees = new ArrayList<>();
 
     public Activity() {
-        this(new Information("", "", "", ""), 0);
+        this(new Information("", "", null, null), 0);
     }
 
     public Activity(Information information, double estimatedTimeUsage) {
@@ -28,38 +29,6 @@ public class Activity implements Workable{
 
     public Information getInformation() {
         return information;
-    }
-
-    public String getName() {
-        return information.getName();
-    }
-
-    public void setName(String name) {
-        information.setName(name);
-    }
-
-    public String getDescription() {
-        return information.getDescription();
-    }
-
-    public void setDescription(String description) {
-        information.setDescription(description);
-    }
-
-    public String getStartDate() {
-        return information.getStartDate();
-    }
-
-    public void setStartDate(String startDate) {
-        information.setStartDate(startDate);
-    }
-
-    public String getEndDate() {
-        return information.getEndDate();
-    }
-
-    public void setEndDate(String endDate) {
-        information.setEndDate(endDate);
     }
 
     public void setEstimatedTimeUsage(double timeUsage) {
