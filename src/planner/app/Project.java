@@ -1,5 +1,7 @@
 package planner.app;
 
+
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -96,5 +98,24 @@ public class Project {
         } catch (NoSuchElementException ex) {
             return false;
         }
+    }
+
+    public void removeActivity(int id) throws NoSuchElementException {
+        for (int i = 0; i < activities.size(); i++) {
+            if (activities.get(i).getID() == id) {
+                activities.remove(i);
+                return;
+            }
+        }
+        throw new NoSuchElementException("Activity does not exist");
+    }
+
+    @Override
+    public String toString() {
+        return information.getName();
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
     }
 }

@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import planner.app.*;
 
 import java.util.NoSuchElementException;
-import java.util.logging.LogRecord;
 
 import static org.junit.Assert.*;
 
@@ -29,16 +28,9 @@ public class ActivitySteps {
         this.errorMessageHelper = errorMessageHelper;
     }
 
-    @Given("a project manager {string} exists in the planner")
-    public void anProjectManagerExistsInThePlanner(String arg0) throws Exception {
-        userHelper.setUser(new ProjectManager(arg0));
-        plannerApplication.addUser(userHelper.getUser());
-    }
-
-    @And("the employee logs in and is the current user")
-    public void theEmployeeIsTheCurrentUser() {
-        plannerApplication.login(userHelper.getUser().getInitials());
-        assertEquals(plannerApplication.getCurrentUser(), userHelper.getUser());
+    @Given("a project manager {string} is added to the planner")
+    public void aProjectManagerIsAddedToThePlanner(String initials) throws Exception {
+        plannerApplication.addUser(new ProjectManager(initials));
     }
 
     @And("there is an activity with a given ID")
@@ -54,6 +46,16 @@ public class ActivitySteps {
     @Then("the activity is in the planner")
     public void theActivityIsInThePlanner() {
         assertTrue(plannerApplication.hasActivity(activityHelper.getActivity()));
+    }
+
+    @When("the activity is added to the project")
+    public void theActivityIsAddedToTheProject() {
+        projectHelper.getProject().addActivity(activityHelper.getActivity());
+    }
+
+    @Then("the activity is in the project")
+    public void theActivityIsInTheProject() {
+        assertTrue(projectHelper.getProject().hasActivity(activityHelper.getActivity().getID()));
     }
 
     @When("the project manager adds the activity to the project")
@@ -102,5 +104,74 @@ public class ActivitySteps {
     @And("the activity is not in the planner")
     public void theActivityIsNotInThePlanner() {
         assertFalse(plannerApplication.hasActivity(activityHelper.getActivity()));
+    }
+
+    @And("there is an activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and a given ID")
+    public void thereIsAnActivityWithNameDescriptionStartDateEndDateTimeUsageAndAGivenID(
+            String name, String description, String startDate, String endDate, double timeUsage) {
+        Information info = new Information(name, description, startDate, endDate);
+        Activity act = new Activity(info, timeUsage);
+        activityHelper.setActivity(act);
+    }
+
+    @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the planner")
+    public void theActivityWithNameDescriptionStartDateEndDateTimeUsageAndSameIDIsInThePlanner(
+            String name, String description, String startDate, String endDate, double timeUsage) {
+        Activity act1 = plannerApplication.getActivity(activityHelper.getActivity().getID());
+        assertEquals(act1.getName(), name);
+        assertEquals(act1.getDescription(), description);
+        assertEquals(act1.getStartDate(), startDate);
+        assertEquals(act1.getEndDate(), endDate);
+        assertEquals(act1.getEstimatedTimeUsage(), timeUsage, 0.0);
+    }
+
+    @When("the project manager changes the planner-activity's to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
+    public void theProjectManagerChangesThePlannerActivitySToDescriptionStartDateEndDateTimeUsage(
+            String name, String description, String startDate, String endDate, double timeUsage) {
+        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getID());
+        act.setName(name);
+        act.setDescription(description);
+        act.setStartDate(startDate);
+        act.setEndDate(endDate);
+        act.setEstimatedTimeUsage(timeUsage);
+    }
+
+    @When("the project manager changes the project-activity's name to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
+    public void theProjectManagerChangesTheProjectActivitySNameToDescriptionStartDateEndDateTimeUsage(
+            String name, String description, String startDate, String endDate, double timeUsage) {
+        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+        act.setName(name);
+        act.setDescription(description);
+        act.setStartDate(startDate);
+        act.setEndDate(endDate);
+        act.setEstimatedTimeUsage(timeUsage);
+    }
+
+    @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the project")
+    public void theActivityWithNameDescriptionStartDateEndDateTimeUsageAndSameIDIsInTheProject(
+            String name, String description, String startDate, String endDate, double timeUsage) {
+        Activity act1 = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+        assertEquals(act1.getName(), name);
+        assertEquals(act1.getDescription(), description);
+        assertEquals(act1.getStartDate(), startDate);
+        assertEquals(act1.getEndDate(), endDate);
+        assertEquals(act1.getEstimatedTimeUsage(), timeUsage, 0.0);
+    }
+
+    @When("the project manager removes the activity from the planner")
+    public void theProjectManagerRemovesTheActivityFromThePlanner() {
+        plannerApplication.removeActivity(activityHelper.getActivity().getID());
+    }
+
+    @When("the project manager removes the activity from the project")
+    public void theProjectManagerRemovesTheActivityFromTheProject() {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        project.removeActivity(activityHelper.getActivity().getID());
+    }
+
+    @Then("the activity is not in the project")
+    public void theActivityIsNotInTheProject() {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        assertFalse(project.hasActivity(activityHelper.getActivity().getID()));
     }
 }

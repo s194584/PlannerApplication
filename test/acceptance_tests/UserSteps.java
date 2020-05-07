@@ -11,43 +11,35 @@ import static org.junit.Assert.*;
 public class UserSteps {
     PlannerApplication plannerApplication;
     UserHelper userHelper;
-    public UserSteps (PlannerApplication pa, UserHelper uh){
-        plannerApplication = pa;
-        userHelper = uh;
+    ErrorMessageHelper errorMessageHelper;
+
+    public UserSteps (PlannerApplication plannerApplication, UserHelper userHelper, ErrorMessageHelper errorMessageHelper) {
+        this.plannerApplication = plannerApplication;
+        this.userHelper = userHelper;
+        this.errorMessageHelper = errorMessageHelper;
     }
 
-    @Given("an employee {string} exists in the planner")
-    public void anUserExistsInThePlanner(String arg0) throws Exception {
-        userHelper.setUser(new Employee(arg0));
-        plannerApplication.addUser(userHelper.getUser());
-    }
-
-    @And("the user is an employee")
-    public void theUserIsAnEmployee() {
-        assertSame(userHelper.getUser().getClass(), Employee.class);
-    }
-
-    @When("the login {string} is entered")
-    public void theLoginIsEntered(String arg0) {
-        plannerApplication.login(arg0);
+    @Given("an employee {string} is added to the planner")
+    public void anEmployeeIsAddedToThePlanner(String initials) throws Exception {
+        plannerApplication.addUser(new Employee(initials));
     }
 
     @Then("the user {string} is logged in")
-    public void theUserIsLoggedIn(String arg0) throws Exception {
-        User user = plannerApplication.getUser(arg0);
+    public void theUserIsLoggedIn(String initials) {
+        User user = plannerApplication.getUser(initials);
         assertTrue(user.getLoginStatus());
     }
 
     @Then("the user {string} is not logged in")
-    public void theUserIsNotLoggedIn(String arg0) throws Exception {
-        User user = plannerApplication.getUser(arg0);
+    public void theUserIsNotLoggedIn(String initials) {
+        User user = plannerApplication.getUser(initials);
         assertFalse(user.getLoginStatus());
     }
 
-    @And("the user is not logged in")
-    public void theUserIsNotLoggedIn() {
-        assertFalse(userHelper.getUser().getLoginStatus());
-    }
+//    @And("the user is not logged in")
+//    public void theUserIsNotLoggedIn() {
+//        assertFalse(userHelper.getUser().getLoginStatus());
+//    }
 
     @Given("the admin is logged in")
     public void theAdminIsLoggedIn() {
@@ -61,33 +53,12 @@ public class UserSteps {
 
     @And("the user is an {string} class")
     public void theUserIsAnClass(String arg0) throws ClassNotFoundException {
-        assertSame(userHelper.getUser().getClass(), Class.forName("planner.app."+arg0));
-    }
-
-    @Given("the user is the admin")
-    public void theUserIsTheAdmin() {
-        userHelper.setUser(plannerApplication.getAdmin());
-    }
-
-    @Given("the user is logged in")
-    public void theUserIsLoggedIn() {
-        plannerApplication.login(userHelper.getUser().getInitials());
+        assertSame(plannerApplication.getCurrentUser().getClass(), Class.forName("planner.app."+arg0));
     }
 
     @When("the admin logout succeeds")
-    public void theUserLogsOut() {
-        assertTrue(plannerApplication.logout(plannerApplication.getCurrentUser().getInitials()));
-    }
-
-    @When("the login {string} is entered and succeeds")
-    public void theLoginIsEnteredAndSucceeds(String arg0) throws Exception {
-        User user = plannerApplication.getUser(arg0);
-        assertTrue(plannerApplication.login(arg0));
-    }
-
-    @Given("an admin exists in the planner")
-    public void anAdminExistsInThePlanner() throws Exception {
-        userHelper.setUser(plannerApplication.getAdmin());
+    public void theAdminLogoutSucceeds() {
+        assertTrue(plannerApplication.logout(plannerApplication.getAdmin().getInitials()));
     }
 
     @When("the admin login succeeds")
@@ -95,13 +66,21 @@ public class UserSteps {
         assertTrue(plannerApplication.login(plannerApplication.getAdmin().getInitials()));
     }
 
-    @When("the user logout succeeds")
-    public void theUserLogoutSucceeds() {
-        assertTrue(plannerApplication.logout(userHelper.getUser().getInitials()));
+    @And("the employee {string} logs in and is the current user")
+    public void theEmployeeLogsInAndIsTheCurrentUser(String initials) {
+        if (!plannerApplication.login(initials));
+            errorMessageHelper.setErrorMessage("User does not exist");
+        assertEquals(plannerApplication.getCurrentUser().getInitials(), initials);
     }
 
-    @Then("the user's attempt to log out fails")
-    public void theUserSAttemptToLogOutFails() {
-        assertFalse(plannerApplication.logout(userHelper.getUser().getInitials()));
+    @And("the current user logs out")
+    public void theCurrentUserLogsOut() {
+        plannerApplication.logout(plannerApplication.getCurrentUser().getInitials());
+    }
+
+    @When("the user {string} logs out")
+    public void theUserLogsOut(String initials) {
+        if (!plannerApplication.logout(initials))
+            errorMessageHelper.setErrorMessage("User is not logged in");
     }
 }

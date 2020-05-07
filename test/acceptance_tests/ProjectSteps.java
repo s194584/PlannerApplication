@@ -3,6 +3,7 @@ package acceptance_tests;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import planner.app.Activity;
 import planner.app.Information;
 import planner.app.PlannerApplication;
 import planner.app.Project;
@@ -15,11 +16,14 @@ public class ProjectSteps {
     ProjectHelper projectHelper;
     PlannerApplication plannerApplication;
     ErrorMessageHelper errorMessageHelper;
+    ActivityHelper activityHelper;
 
-    public ProjectSteps(ProjectHelper projectHelper, PlannerApplication plannerApplication, ErrorMessageHelper errorMessageHelper) {
+    public ProjectSteps(ProjectHelper projectHelper, PlannerApplication plannerApplication,
+                        ErrorMessageHelper errorMessageHelper, ActivityHelper activityHelper) {
         this.projectHelper = projectHelper;
         this.plannerApplication = plannerApplication;
         this.errorMessageHelper = errorMessageHelper;
+        this.activityHelper = activityHelper;
     }
 
     @And("there is a project with a given ID")
@@ -68,17 +72,6 @@ public class ProjectSteps {
         assertEquals(projectName, project.getProjectName());
     }
 
-    @When("the name of the project is changed to {string}")
-    public void theNameOfTheProjectIsChangedTo(String projectName) {
-        projectHelper.getProject().setProjectName(projectName);
-    }
-
-    @Then("the name of the project in the planner is changed to {string}")
-    public void theNameOfTheProjectInThePlannerIsChangedTo(String projectName) throws Exception {
-        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        assertEquals(projectName, project.getProjectName());
-    }
-
     @And("there is a project with name {string}, description {string}, start date {string}, end date {string}")
     public void thereIsAProjectWithNameDescriptionStartDateEndDate(String name, String description, String startDate, String endDate) {
         Information info = new Information(name, description, startDate, endDate);
@@ -121,4 +114,10 @@ public class ProjectSteps {
     }
 
 
+    @And("the employee {string} is assigned to the activity in the project")
+    public void theEmployeeIsAssignedToTheActivityInTheProject(String initials) {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Activity act = project.getActivity(activityHelper.getActivity().getID());
+        assertTrue(act.isEmployeeAssigned(initials));
+    }
 }
