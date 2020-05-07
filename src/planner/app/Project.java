@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Project {
+public class Project implements Workable{
     private static int projectIDgen = 0;
 
     private int projectID;

@@ -2,7 +2,6 @@ package planner.presentation;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +12,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import planner.app.*;
-import planner.presentation.prompts.InformationEditor;
+import planner.presentation.prompts.Editor;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectManagerScreenController {
@@ -85,7 +83,7 @@ public class ProjectManagerScreenController {
     @FXML
     void addActivity(ActionEvent event) {
         Activity newActivity = new Activity();
-        InformationEditor ie = new InformationEditor(newActivity, plannerApplication);
+        Editor ie = new Editor(newActivity, plannerApplication);
         System.out.println(ie.hasResult()+ " Is the right");
         if(ie.hasResult()){
             projectComboBox.getValue().addActivity(newActivity);
@@ -106,7 +104,7 @@ public class ProjectManagerScreenController {
     @FXML
     void editActivity() {
         Activity activity = activityTable.getSelectionModel().getSelectedItem();
-        InformationEditor ie = new InformationEditor(activity, plannerApplication);
+        Editor ie = new Editor(activity, plannerApplication);
         activityTable.refresh();
         activityTable.getSelectionModel().clearSelection();
     }

@@ -3,7 +3,7 @@ package planner.app;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Activity {
+public class Activity implements Workable{
 
     private static int activityIDgen = 0;
 
