@@ -215,4 +215,13 @@ public class PlannerApplication {
         }
         throw new NoSuchElementException("Activity does not exist");
     }
+
+    public List<Activity> getActivitesAssignedTo(User e) {
+        //        return assignedEmployees.stream().anyMatch(e -> e.getInitials().equals(initials));
+        List<Activity> temp = new ArrayList<>();
+        for (int i = 0; i < projects.size(); i++) {
+           // temp.add(projects.get(i).getActivities().stream());
+        }
+        return temp;
+    }
 }

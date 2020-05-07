@@ -8,9 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.converter.DoubleStringConverter;
 import planner.app.*;
 import planner.presentation.prompts.Editor;
 
@@ -24,7 +26,7 @@ public class ProjectManagerScreenController {
     @FXML private TableView<Activity> activityTable;
     @FXML private TableColumn<Activity, String> nameCol;
     @FXML private TableColumn<Activity, String> desCol;
-    @FXML private TableColumn estCol;
+    @FXML private TableColumn<Activity, Double> estCol;
     @FXML private TableColumn<Activity, String> empCol;
     @FXML private TableColumn<Activity, String> startCol;
     @FXML private TableColumn<Activity, String> endCol;
@@ -38,12 +40,17 @@ public class ProjectManagerScreenController {
         editActivityBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
         cancelActivityBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
 
-        nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
-        desCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription().length()>15 ?
-                data.getValue().getDescription().substring(0,14)+"...":data.getValue().getDescription()));
+        nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
+        desCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
+                data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
         estCol.setCellValueFactory(new PropertyValueFactory("estimatedTimeUsage"));
-        startCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getStartDate())));
-        endCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getEndDate())));
+        startCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getInformation().getStartDate())));
+        endCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getInformation().getEndDate())));
+        activityTable.setEditable(true);
+        estCol.setEditable(true);
+        estCol.setCellFactory(TextFieldTableCell.<Activity,Double>forTableColumn(new DoubleStringConverter()));
+        estCol.setOnEditCommit(data -> data.getRowValue().setEstimatedTimeUsage(data.getNewValue()));
+
     }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
@@ -112,7 +119,8 @@ public class ProjectManagerScreenController {
     @FXML
     void editActivityByMouse(MouseEvent event){
             if(event.getButton().equals(MouseButton.PRIMARY) &&
-                    event.getClickCount()==2 && !activityTable.getItems().isEmpty()){
+                    event.getClickCount()==2 &&
+                    !activityTable.getSelectionModel().getSelectedItems().isEmpty()){
                 editActivity();
             }
     }

@@ -23,4 +23,9 @@ public abstract class User {
     public boolean getLoginStatus(){
         return loginStatus;
     }
+
+    @Override
+    public String toString() {
+        return initials;
+    }
 }

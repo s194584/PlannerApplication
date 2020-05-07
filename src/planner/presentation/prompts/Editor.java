@@ -25,8 +25,9 @@ public class Editor {
             loader = new FXMLLoader(getClass().getResource("/fxml/prompts/Editor.fxml"));
             HBox root = loader.load();
             EditorController ec = loader.getController();
-            ec.loadPlannerApplication(plannerApplication);
             ec.setInformation(workable.getInformation());
+            ec.setWorkable(workable);
+            ec.loadPlannerApplication(plannerApplication);
             if(workable instanceof Project){
                 root.getChildren().remove(1);
                 root.getChildren().remove(1);

@@ -39,9 +39,16 @@ public class Activity implements Workable{
         return estimatedTimeUsage;
     }
 
+    public List<Employee> getAssignedEmployees() {
+        return assignedEmployees;
+    }
+
     public void assignEmployee(Employee emp) {
-        assignedEmployees.add(emp);
-        emp.incrementNoOfActivities();
+        if(!assignedEmployees.contains(emp)) {
+            assignedEmployees.add(emp);
+            emp.incrementNoOfActivities();
+        }
+
     }
 
     public boolean isEmployeeAssigned(String initials) {

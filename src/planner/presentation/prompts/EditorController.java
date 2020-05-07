@@ -16,12 +16,12 @@ import java.util.List;
 public class EditorController {
 
     /* To Do:
-    Assign employee
-    Datoer
+    Assign employee*
+    Datoer*
     Antal activiteter i angivet tidsrum
     Refactor så employee har activities. Det samme for project manager.
     Employee skal kunne registerer tid.
-    Generelt skal employee virke (evt. planlægge egne aktiviteter.
+    Generelt skal employee virke (evt. planlægge egne aktiviteter)
     Projekt Manager overview (estimated time).
     * */
 
@@ -32,17 +32,18 @@ public class EditorController {
     @FXML private Button confirmBtn;
     @FXML private Button cancelBtn;
     @FXML private TableView<Employee> employeeTable;
+    @FXML private ListView<Employee> assignedEmployees;
     @FXML private TableColumn<Employee, String> empCol;
     @FXML private TableColumn<Employee, String> noActCol;
     @FXML private Button assignToAct;
 
 
     private Information information;
-    public Boolean hasResult =false;
+    public Boolean hasResult = false;
     private Workable workable;
     PlannerApplication plannerApplication;
 
-    public void initialize(){
+    public void initialize() {
         empCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInitials()));
         noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getNoOfActivities())));
     }
@@ -52,12 +53,16 @@ public class EditorController {
         refresh();
     }
 
-    void refresh(){
+    void refresh() {
         List<User> users = plannerApplication.getUsers();
+        employeeTable.getItems().clear();
         ObservableList<Employee> startEmployees = employeeTable.getItems();
-        for(int i =1 ; i<users.size(); i++){
+        for (int i = 1; i < users.size(); i++) {
             startEmployees.add((Employee) users.get(i));
         }
+        Activity a = (Activity) workable;
+        assignedEmployees.getItems().clear();
+        assignedEmployees.getItems().addAll(a.getAssignedEmployees());
     }
 
     @FXML
@@ -68,32 +73,57 @@ public class EditorController {
 
     @FXML
     void confirm() {
+        boolean validInput = true;
         information.setName(nameField.getText());
         information.setDescription(descriptionField.getText());
-        try {
-            information.setStartDate(startPicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        }catch (Exception e){
-            System.out.println("No start date selected");
+
+        //.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        if(startPicker.getValue()!=null){
+            information.setStartDate(startPicker.getValue());
         }
+
+
         try {
-            information.setEndDate(endPicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        }catch (Exception e){
-            System.out.println("No end date selected");
+            information.setEndDate(endPicker.getValue());
+        } catch (IllegalArgumentException e) {
+            validInput = false;
         }
-        hasResult = true;
-        cancel();
+        if (validInput) {
+            hasResult = true;
+            cancel();
+        }
+
+    }
+
+    public void setWorkable(Workable workable){
+        this.workable = workable;
     }
 
     public void setInformation(Information information) {
         this.information = information;
         nameField.setText(information.getName());
         descriptionField.setText(information.getDescription());
-        startPicker.setPromptText(information.getStartDate());
-        endPicker.setPromptText(information.getEndDate());
+        try {
+            //information.getStartDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+            startPicker.setPromptText(DateMapper.transformToString(information.getStartDate()));
+        } catch (NullPointerException e) {
+            System.out.println("No start date");
+        }
+        try {
+            //information.getEndDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+            endPicker.setPromptText(DateMapper.transformToString(information.getEndDate()));
+        } catch (NullPointerException e) {
+            System.out.println("No end date");
+        }
     }
 
     @FXML
-    public void assignToAct(){
-
+    public void assignToAct() {
+        ObservableList<Employee> employeesToBe = employeeTable.getSelectionModel().getSelectedItems();
+        Activity a = (Activity) workable;
+        for (Employee e: employeesToBe) {
+            a.assignEmployee(e);
+        }
+        refresh();
     }
 }
