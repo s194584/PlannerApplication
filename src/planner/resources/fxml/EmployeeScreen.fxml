@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.EmployeeScreenController">
+   <children>
+      <HBox alignment="CENTER" spacing="5.0">
+         <children>
+            <Label alignment="CENTER" text="Activity overview" />
+            <Label text="Week:">
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <Label fx:id="weekNumLabel" text="WEEKNUMBER">
+               <padding>
+                  <Insets right="200.0" />
+               </padding>
+            </Label>
+            <Button fx:id="managerBtn" mnemonicParsing="false" onAction="#showManagerScreen" text="Go to Manager" />
+         </children>
+      </HBox>
+      <TableView fx:id="activityTable">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="descriptionCol" prefWidth="115.0" text="Description" />
+            <TableColumn fx:id="etaCol" prefWidth="102.0" text="Estimated Time" />
+            <TableColumn fx:id="timeUsedCol" prefWidth="75.0" text="Time used" />
+            <TableColumn fx:id="endDateCol" prefWidth="75.0" text="End date" />
+        </columns>
+      </TableView>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
