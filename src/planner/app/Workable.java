@@ -1,5 +1,5 @@
 package planner.app;
 
 public interface Workable {
-    public Information getInformation();
+    Information getInformation();
 }
