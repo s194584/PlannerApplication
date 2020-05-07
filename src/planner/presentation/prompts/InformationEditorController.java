@@ -22,7 +22,6 @@ public class InformationEditorController {
     private Information information;
     public Boolean hasResult =false;
 
-
     @FXML
     void cancel() {
         Stage win = (Stage) cancelBtn.getScene().getWindow();
@@ -35,9 +34,13 @@ public class InformationEditorController {
         information.setDescription(descriptionField.getText());
         try {
             information.setStartDate(startPicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        }catch (Exception e){
+            System.out.println("No start date selected");
+        }
+        try {
             information.setEndDate(endPicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         }catch (Exception e){
-
+            System.out.println("No end date selected");
         }
         hasResult = true;
         cancel();

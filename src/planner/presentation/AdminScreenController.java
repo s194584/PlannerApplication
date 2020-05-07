@@ -2,7 +2,6 @@ package planner.presentation;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +18,6 @@ import planner.app.User;
 import planner.presentation.prompts.InformationEditorController;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class AdminScreenController {
     @FXML private Button addEmployeeBtn;
@@ -164,7 +162,7 @@ public class AdminScreenController {
 
     private void showInformationEditor(Project project) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/infomationEditor.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/informationEditor.fxml"));
         Parent root2 = loader.load();
         InformationEditorController pec = loader.getController();
         pec.setInformation(project.getInformation());

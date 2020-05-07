@@ -14,7 +14,7 @@ public class PlannerApplication {
 
     public PlannerApplication() {
         users.add(admin);
-
+        login("000");
         // TESTING STANDARD
         users.add(new Employee("a"));
         projects.add(new Project("Woogle"));
@@ -22,6 +22,7 @@ public class PlannerApplication {
             assignProjManToProject("a",20201);
         } catch (Exception e) {
         }
+        logout("000");
     }
 
     public int getNumberOfActivities() {

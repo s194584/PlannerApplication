@@ -72,6 +72,7 @@ public class Activity {
 
     public void assignEmployee(Employee emp) {
         assignedEmployees.add(emp);
+        emp.incrementNoOfActivities();
     }
 
     public boolean isEmployeeAssigned(String initials) {
