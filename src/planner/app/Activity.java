@@ -9,9 +9,18 @@ public class Activity implements Workable{
     private Information information;
     private double estimatedTimeUsage;
     private int id;
+    private double totalTimeRegistered = 0;
 
     public Activity() {
         this(new Information("", "", LocalDate.now(), LocalDate.now().plusDays(1)), 0);
+    }
+
+    public void addRegisteredTime(double time) {
+        totalTimeRegistered += time;
+    }
+
+    public double getTotalTimeRegistered() {
+        return totalTimeRegistered;
     }
 
     public Activity(Information information, double estimatedTimeUsage) {

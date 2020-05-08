@@ -54,6 +54,8 @@ public class Employee extends User {
             throw new IllegalArgumentException("Registered time cannot be negative");
 
         registeredTimeOnActivities.put(activityID, oldTime + time);
+        Activity activity = activitiesAssignedTo.get(activityID);
+        activity.addRegisteredTime(time);
     }
 
     public double getRegisteredTime(int activityID) {
