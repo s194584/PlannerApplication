@@ -18,5 +18,5 @@ Feature: Employee can register time on activities
 	And the current user logs out
     And the employee "TGB" logs in and is the current user
 
-  #Scenario: Register time on activity in project assigned to
+#  Scenario: Register time on activity in project assigned to
 

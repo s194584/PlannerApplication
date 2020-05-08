@@ -141,14 +141,14 @@ public class ActivitySteps {
     @When("the project manager changes the project-activity's name to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
     public void theProjectManagerChangesTheProjectActivitySNameToDescriptionStartDateEndDateTimeUsage(
             String name, String description, String startDate, String endDate, double timeUsage) {
+        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+        Information info = act.getInformation();
+        info.setName(name);
+        info.setDescription(description);
+        info.setStartDate(DateMapper.transformToDate(startDate));
+        act.setEstimatedTimeUsage(timeUsage);
         try {
-            Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
-            Information info = act.getInformation();
-            info.setName(name);
-            info.setDescription(description);
-            info.setStartDate(DateMapper.transformToDate(startDate));
             info.setEndDate(DateMapper.transformToDate(endDate));
-            act.setEstimatedTimeUsage(timeUsage);
         } catch (IllegalArgumentException ex) {
             errorMessageHelper.setErrorMessage("End date must be after start date");
         }
@@ -182,5 +182,11 @@ public class ActivitySteps {
     public void theActivityIsNotInTheProject() {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         assertFalse(project.hasActivity(activityHelper.getActivity().getID()));
+    }
+
+    @Then("the employee {string} is assigned to the activity")
+    public void theEmployeeIsAssignedToTheActivity(String initials) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        assertTrue(emp.isAssignedToActivity(activityHelper.getActivity()));
     }
 }
