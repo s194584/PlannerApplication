@@ -11,6 +11,7 @@ public class Employee extends User {
     private HashMap<Integer, Activity> activitiesAssignedTo = new HashMap<>();
     private HashMap<Integer, Double> registeredTimeOnActivities = new HashMap<>();
 
+
     public Employee(String initials) {
         super(initials);
     }

@@ -46,8 +46,9 @@ public class ProjectManagerScreenController {
         estCol.setCellValueFactory(new PropertyValueFactory("estimatedTimeUsage"));
         startCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
                 getInformation().getStartDate()))));
-        endCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
-                getInformation().getEndDate()))));
+        endCol.setCellValueFactory(data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
+                getInformation().getEndDate())));
+        usedCol.setCellValueFactory(new PropertyValueFactory("totalTimeRegistered"));
 
     }
 
