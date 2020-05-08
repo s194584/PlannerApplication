@@ -1,7 +1,6 @@
 package planner.app;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 import java.util.List;
 
 public class Activity implements Workable{
@@ -10,7 +9,7 @@ public class Activity implements Workable{
 
     private Information information;
     private double estimatedTimeUsage;
-    private int activityID;
+    private int id;
     private List<Employee> assignedEmployees = new ArrayList<>();
 
     public Activity() {
@@ -18,13 +17,13 @@ public class Activity implements Workable{
     }
 
     public Activity(Information information, double estimatedTimeUsage) {
-        activityID = activityIDgen++;
+        id = activityIDgen++;
         this.information = information;
         this.estimatedTimeUsage = estimatedTimeUsage;
     }
 
-    public int getID() {
-        return activityID;
+    public int getId() {
+        return id;
     }
 
     public Information getInformation() {
@@ -52,6 +51,6 @@ public class Activity implements Workable{
     }
 
     public boolean isEmployeeAssigned(String initials) {
-        return assignedEmployees.stream().anyMatch(e -> e.getInitials().equals(initials));
+        return assignedEmployees.stream().allMatch(e -> e.getInitials().equals(initials));
     }
 }

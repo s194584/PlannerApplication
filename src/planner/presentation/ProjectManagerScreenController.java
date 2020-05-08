@@ -46,6 +46,7 @@ public class ProjectManagerScreenController {
         estCol.setCellValueFactory(new PropertyValueFactory("estimatedTimeUsage"));
         startCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getInformation().getStartDate())));
         endCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getInformation().getEndDate())));
+
         activityTable.setEditable(true);
         estCol.setEditable(true);
         estCol.setCellFactory(TextFieldTableCell.<Activity,Double>forTableColumn(new DoubleStringConverter()));
@@ -102,7 +103,7 @@ public class ProjectManagerScreenController {
     @FXML
     void cancelActivity(ActionEvent event) {
         Activity activity = activityTable.getSelectionModel().getSelectedItem();
-        projectComboBox.getValue().removeActivity(activity.getID());
+        projectComboBox.getValue().removeActivity(activity.getId());
         activityTable.getItems().remove(activity);
         activityTable.refresh();
         activityTable.getSelectionModel().clearSelection();

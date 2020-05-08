@@ -5,8 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import planner.app.*;
 
-import java.util.NoSuchElementException;
-
 import static org.junit.Assert.*;
 
 public class ProjectSteps {
@@ -114,7 +112,7 @@ public class ProjectSteps {
     @And("the employee {string} is assigned to the activity in the project")
     public void theEmployeeIsAssignedToTheActivityInTheProject(String initials) {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        Activity act = project.getActivity(activityHelper.getActivity().getID());
+        Activity act = project.getActivity(activityHelper.getActivity().getId());
         assertTrue(act.isEmployeeAssigned(initials));
     }
 }

@@ -14,8 +14,9 @@ public class PlannerApplication {
 
     public PlannerApplication() {
         users.add(admin);
-        login("000");
+
         // TESTING STANDARD
+        login("000");
         users.add(new Employee("a"));
         projects.add(new Project("Woogle"));
         try {
@@ -184,7 +185,7 @@ public class PlannerApplication {
     public Activity getActivity(int activityID) throws NoSuchElementException {
         for (int i = 0; i < activities.size(); i++) {
             Activity a = activities.get(i);
-            if (a.getID() == activityID) {
+            if (a.getId() == activityID) {
                 return a;
             }
         }
@@ -193,7 +194,7 @@ public class PlannerApplication {
 
     public boolean hasActivity(Activity activity) {
         try {
-            getActivity(activity.getID());
+            getActivity(activity.getId());
             return true;
         } catch (NoSuchElementException ex) {
             return false;
@@ -208,7 +209,7 @@ public class PlannerApplication {
 
     public void removeActivity(int id) {
         for (int i = 0; i < activities.size(); i++) {
-            if (activities.get(i).getID() == id) {
+            if (activities.get(i).getId() == id) {
                 activities.remove(i);
                 return;
             }
@@ -219,8 +220,16 @@ public class PlannerApplication {
     public List<Activity> getActivitesAssignedTo(User e) {
         //        return assignedEmployees.stream().anyMatch(e -> e.getInitials().equals(initials));
         List<Activity> temp = new ArrayList<>();
+        Project tempo;
+        Activity tempa;
         for (int i = 0; i < projects.size(); i++) {
-           // temp.add(projects.get(i).getActivities().stream());
+           tempo = projects.get(i);
+           for (int j = 0 ; j< tempo.getNumberOfActivities();j++){
+               tempa = tempo.getActivities().get(j);
+               if(tempa.isEmployeeAssigned(e.getInitials()));
+                temp.add(tempa);
+               }
+
         }
         return temp;
     }

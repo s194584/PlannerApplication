@@ -1,16 +1,19 @@
 package planner.presentation.prompts;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 import planner.app.*;
 
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.List;
 
 public class EditorController {
@@ -46,6 +49,38 @@ public class EditorController {
     public void initialize() {
         empCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInitials()));
         noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getNoOfActivities())));
+
+
+        endPicker.setDayCellFactory(datePicker -> new DateCell(){
+            public void updateItem(LocalDate date, boolean empty){
+                super.updateItem(date,empty);
+                if (date.equals(LocalDate.now().plusDays(1))) {
+                    // Tomorrow is too soon.
+                    setDisable(true);
+                }
+                if(information.getStartDate()!= null||date.isBefore(startPicker.getValue() == null ? information.getStartDate() : startPicker.getValue())) {
+                    setDisable(true);
+                }
+            }
+        });
+        startPicker.setDayCellFactory(datePicker -> new DateCell(){
+            public void updateItem(LocalDate date, boolean empty){
+                super.updateItem(date,empty);
+                if (date.equals(LocalDate.now().plusDays(1))) {
+                    // Tomorrow is too soon.
+                    setDisable(true);
+                }
+            }
+        });
+
+        startPicker.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
+            startPicker.setStyle("");
+        });
+        endPicker.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            endPicker.setStyle("");
+        });
+
+
     }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
@@ -82,11 +117,13 @@ public class EditorController {
             information.setStartDate(startPicker.getValue());
         }
 
-
         try {
             information.setEndDate(endPicker.getValue());
         } catch (IllegalArgumentException e) {
             validInput = false;
+            String errorStyle = "-fx-background-color:#F44336";
+            startPicker.setStyle(errorStyle);
+            endPicker.setStyle(errorStyle);
         }
         if (validInput) {
             hasResult = true;

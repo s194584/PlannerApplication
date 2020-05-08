@@ -55,13 +55,13 @@ public class ActivitySteps {
 
     @Then("the activity is in the project")
     public void theActivityIsInTheProject() {
-        assertTrue(projectHelper.getProject().hasActivity(activityHelper.getActivity().getID()));
+        assertTrue(projectHelper.getProject().hasActivity(activityHelper.getActivity().getId()));
     }
 
     @When("the project manager adds the activity to the project")
     public void theProjectManagerAddsTheActivityToTheProject() {
         try {
-            int activityID = activityHelper.getActivity().getID();
+            int activityID = activityHelper.getActivity().getId();
 
             int projectID = projectHelper.getProject().getProjectID();
             plannerApplication.addActivityToProject(activityID, projectID);
@@ -72,7 +72,7 @@ public class ActivitySteps {
 
     @Then("the activity is added to the project in the planner")
     public void theActivityIsAddedToTheProjectInThePlanner() {
-        int activityID = activityHelper.getActivity().getID();
+        int activityID = activityHelper.getActivity().getId();
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         assertTrue(project.hasActivity(activityID));
     }
@@ -117,7 +117,7 @@ public class ActivitySteps {
     @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the planner")
     public void theActivityWithNameDescriptionStartDateEndDateTimeUsageAndSameIDIsInThePlanner(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getID());
+        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getId());
         Information info = act.getInformation();
         assertEquals(info.getName(), name);
         assertEquals(info.getDescription(), description);
@@ -129,7 +129,7 @@ public class ActivitySteps {
     @When("the project manager changes the planner-activity's to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
     public void theProjectManagerChangesThePlannerActivitySToDescriptionStartDateEndDateTimeUsage(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getID());
+        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getId());
         Information info = act.getInformation();
         info.setName(name);
         info.setDescription(description);
@@ -142,7 +142,7 @@ public class ActivitySteps {
     public void theProjectManagerChangesTheProjectActivitySNameToDescriptionStartDateEndDateTimeUsage(
             String name, String description, String startDate, String endDate, double timeUsage) {
         try {
-            Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+            Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getId());
             Information info = act.getInformation();
             info.setName(name);
             info.setDescription(description);
@@ -158,7 +158,7 @@ public class ActivitySteps {
     @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the project")
     public void theActivityWithNameDescriptionStartDateEndDateTimeUsageAndSameIDIsInTheProject(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getId());
         Information info = act.getInformation();
         assertEquals(info.getName(), name);
         assertEquals(info.getDescription(), description);
@@ -169,18 +169,18 @@ public class ActivitySteps {
 
     @When("the project manager removes the activity from the planner")
     public void theProjectManagerRemovesTheActivityFromThePlanner() {
-        plannerApplication.removeActivity(activityHelper.getActivity().getID());
+        plannerApplication.removeActivity(activityHelper.getActivity().getId());
     }
 
     @When("the project manager removes the activity from the project")
     public void theProjectManagerRemovesTheActivityFromTheProject() {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        project.removeActivity(activityHelper.getActivity().getID());
+        project.removeActivity(activityHelper.getActivity().getId());
     }
 
     @Then("the activity is not in the project")
     public void theActivityIsNotInTheProject() {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        assertFalse(project.hasActivity(activityHelper.getActivity().getID()));
+        assertFalse(project.hasActivity(activityHelper.getActivity().getId()));
     }
 }

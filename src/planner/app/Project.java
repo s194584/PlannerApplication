@@ -2,7 +2,6 @@ package planner.app;
 
 
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -69,7 +68,7 @@ public class Project implements Workable{
     public Activity getActivity(int activityID) throws NoSuchElementException {
         for (int i = 0; i < activities.size(); i++) {
             Activity a = activities.get(i);
-            if (a.getID() == activityID) {
+            if (a.getId() == activityID) {
                 return a;
             }
         }
@@ -87,7 +86,7 @@ public class Project implements Workable{
 
     public void removeActivity(int id) throws NoSuchElementException {
         for (int i = 0; i < activities.size(); i++) {
-            if (activities.get(i).getID() == id) {
+            if (activities.get(i).getId() == id) {
                 activities.remove(i);
                 return;
             }

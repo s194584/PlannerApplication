@@ -36,9 +36,10 @@ public class EmployeeScreenController {
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
         descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
                 data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
-        etaCol.setCellValueFactory(new PropertyValueFactory("estimatedTimeUsage"));
-        timeUsedCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getInformation().getStartDate())));
-        endDateCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getInformation().getEndDate())));
+        etaCol.setCellValueFactory(new PropertyValueFactory<>("estimatedTimeUsage"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        timeUsedCol.setCellValueFactory((data -> new SimpleObjectProperty<>(data.getValue().getInformation().getStartDate())));
+        endDateCol.setCellValueFactory((data -> new SimpleObjectProperty<>(data.getValue().getInformation().getEndDate())));
     }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
@@ -51,11 +52,7 @@ public class EmployeeScreenController {
             managerBtn.setDisable(true);
         }
         weekNumLabel.setText(""+Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
-        plannerApplication.getActivitesAssignedTo(currentUser);
-
-
-
-
+        activityTable.getItems().addAll(plannerApplication.getActivitesAssignedTo(currentUser));
     }
 
     public void showManagerScreen() throws IOException {
