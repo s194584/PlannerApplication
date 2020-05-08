@@ -29,6 +29,7 @@ public class EmployeeScreenController {
     @FXML private TableColumn<Activity, Double> etaCol;
     @FXML private TableColumn<Activity, Double> timeUsedCol;
     @FXML private TableColumn<Activity, Integer> endDateCol;
+    @FXML private Label sessionTimeLabel;
 
     private Employee currentEmployee;
     private PlannerApplication plannerApplication;
@@ -36,6 +37,8 @@ public class EmployeeScreenController {
     @FXML
     public void initialize(){
         registerBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
+
+
 
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
         descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
@@ -75,6 +78,7 @@ public class EmployeeScreenController {
     private void refresh(){
         activityTable.getItems().clear();
         activityTable.getItems().addAll(currentEmployee.getActivities());
+        sessionTimeLabel.setText(""+currentEmployee.getRegisteredTimeInSession());
     }
 
     @FXML
