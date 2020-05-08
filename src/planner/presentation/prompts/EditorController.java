@@ -1,5 +1,6 @@
 package planner.presentation.prompts;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import planner.app.*;
@@ -46,6 +48,7 @@ public class EditorController {
     @FXML private ListView<Employee> assignedEmployees;
     @FXML private TableColumn<Employee, String> empCol;
     @FXML private TableColumn<Employee, String> noActCol;
+    @FXML private TableColumn<Employee, Boolean> absenceCol;
     @FXML private Button assignToAct;
 
 
@@ -58,12 +61,20 @@ public class EditorController {
         employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         empCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInitials()));
         noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getActivities().size())));
+        absenceCol.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isAvailable(startPicker.
+                getValue(),endPicker.getValue())));
 
         estimatedTimeField.setTextFormatter(new TextFormatter<>(new DoubleStringConverter()));
 
         // Adding handlers on DatePickers
         startPicker.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
             startPicker.setStyle("");
+        });
+        startPicker.valueProperty().addListener((observableValue, date, t1) -> {
+            employeeTable.refresh();
+        });
+        endPicker.valueProperty().addListener((observableValue, date, t1) -> {
+            employeeTable.refresh();
         });
         endPicker.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             endPicker.setStyle("");

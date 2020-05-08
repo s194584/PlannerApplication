@@ -28,7 +28,7 @@ public class Editor {
             ec.setInformation(workable.getInformation());
             ec.setWorkable(workable);
             ec.loadPlannerApplication(plannerApplication);
-            if(workable instanceof Project){
+            if(workable instanceof Project || workable instanceof AbsenceActivity){
                 root.getChildren().remove(1);
                 root.getChildren().remove(1);
             }

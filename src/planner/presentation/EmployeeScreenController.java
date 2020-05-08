@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.DoubleStringConverter;
 import planner.app.*;
+import planner.presentation.prompts.Editor;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -73,6 +74,12 @@ public class EmployeeScreenController {
 
     @FXML
     void registerAbsence() {
+        AbsenceActivity aa = new AbsenceActivity();
+        Editor editor = new Editor(aa,plannerApplication);
+        if(editor.hasResult()){
+            currentEmployee.assignActivity(aa);
+        }
+        refresh();
     }
 
     @FXML
