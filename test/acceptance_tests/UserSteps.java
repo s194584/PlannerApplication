@@ -83,4 +83,10 @@ public class UserSteps {
         if (!plannerApplication.logout(initials))
             errorMessageHelper.setErrorMessage("User is not logged in");
     }
+
+    @Then("the employee {string} has {double} hours registered in session")
+    public void theEmployeeHasHoursRegisteredInSession(String initials, double hours) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        assertEquals(hours, emp.getRegisteredTimeInSession(), 0.0);
+    }
 }

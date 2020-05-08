@@ -10,10 +10,17 @@ public class Employee extends User {
 
     private HashMap<Integer, Activity> activitiesAssignedTo = new HashMap<>();
     private HashMap<Integer, Double> registeredTimeOnActivities = new HashMap<>();
+    private double registeredTimeInSession = 0;
 
 
     public Employee(String initials) {
         super(initials);
+    }
+
+    @Override
+    public void setLoginStatus(boolean b) {
+        super.setLoginStatus(b);
+        registeredTimeInSession = 0;
     }
 
     public void assignActivity(Activity activity) {
@@ -57,9 +64,14 @@ public class Employee extends User {
         registeredTimeOnActivities.put(activityID, oldTime + time);
         Activity activity = activitiesAssignedTo.get(activityID);
         activity.addRegisteredTime(time);
+        registeredTimeInSession += time;
     }
 
     public double getRegisteredTime(int activityID) {
         return registeredTimeOnActivities.get(activityID);
+    }
+
+    public double getRegisteredTimeInSession() {
+        return registeredTimeInSession;
     }
 }

@@ -55,3 +55,14 @@ Feature: Employee can register time on activities
     Then the error message "Registered time cannot be negative" is shown
     And the employee "TGB" has 7.0 hours registered to the activity
 
+  Scenario: Amount of time registered in session
+    Given the employee "BOB" has 0.0 hours registered to the activity
+    And the employee "BOB" has 0.0 hours registered in session
+    And the activity has 0.0 registered hours
+    When the employee "BOB" registers 5.0 hours to the activity
+    Then the employee "BOB" has 5.0 hours registered to the activity
+    And the employee "BOB" has 5.0 hours registered in session
+    And the activity has 5.0 registered hours
+    Then the current user logs out
+    When the employee "BOB" logs in and is the current user
+    Then the employee "BOB" has 0.0 hours registered in session
