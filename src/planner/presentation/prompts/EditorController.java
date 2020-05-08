@@ -2,24 +2,13 @@ package planner.presentation.prompts;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import planner.app.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class EditorController {
@@ -61,7 +50,7 @@ public class EditorController {
         employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         empCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInitials()));
         noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getActivities().size())));
-        absenceCol.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isAvailable(startPicker.
+        absenceCol.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isAbsent(startPicker.
                 getValue(),endPicker.getValue())));
 
         estimatedTimeField.setTextFormatter(new TextFormatter<>(new DoubleStringConverter()));

@@ -35,10 +35,6 @@ public class Project implements Workable{
         information = info;
     }
 
-
-
-
-
     public int getProjectID() {
         return projectID;
     }

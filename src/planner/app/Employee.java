@@ -28,12 +28,17 @@ public class Employee extends User {
         return activitiesAssignedTo.containsKey(id);
     }
 
-    public boolean isAvailable(LocalDate start, LocalDate end){
-        List<Activity> activities = getActivities();
-        List<Activity> temp = activities.stream().filter(a -> a instanceof AbsenceActivity).collect(Collectors.toList());
-        if(temp.size()!=0){
-            return !temp.stream().anyMatch(a -> end.isBefore(a.getInformation().getStartDate())||
-                    start.isAfter( a.getInformation().getEndDate()));
+    public boolean isAbsent(LocalDate selectedStart, LocalDate selectedEnd) {
+        List<Activity> temp = getActivities().stream().filter(a -> a instanceof AbsenceActivity).collect(Collectors.toList());
+        if (temp.size() != 0) {
+            return temp.stream().anyMatch(a -> {
+                LocalDate infoStart = a.getInformation().getStartDate();
+                LocalDate infoEnd = a.getInformation().getEndDate();
+
+                return (infoStart.isAfter(selectedStart) && infoStart.isBefore(selectedEnd)) ||
+                        (infoEnd.isAfter(selectedStart) && infoEnd.isBefore(selectedEnd)) ||
+                        (selectedStart.isAfter(infoStart) && selectedStart.isBefore(infoEnd));
+            });
         }
         return false;
     }
