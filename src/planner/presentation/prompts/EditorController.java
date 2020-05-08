@@ -66,9 +66,12 @@ public class EditorController {
 
         estimatedTimeField.setTextFormatter(new TextFormatter<>(new DoubleStringConverter()));
 
-        // Adding handlers on DatePickers
+        // Adding handlers on DatePickers to resetStyle
         startPicker.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
-            startPicker.setStyle("");
+            resetDateStyles();
+        });
+        endPicker.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            resetDateStyles();
         });
         startPicker.valueProperty().addListener((observableValue, date, t1) -> {
             employeeTable.refresh();
@@ -76,11 +79,11 @@ public class EditorController {
         endPicker.valueProperty().addListener((observableValue, date, t1) -> {
             employeeTable.refresh();
         });
-        endPicker.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            endPicker.setStyle("");
-        });
     }
-
+    private void resetDateStyles(){
+        startPicker.setStyle("");
+        endPicker.setStyle("");
+    }
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
         if(workable instanceof Activity){
@@ -121,8 +124,6 @@ public class EditorController {
         }catch(NumberFormatException e){
             // Nothing app breaking happens, when this error is thrown
         }
-
-
 
         information.setName(nameField.getText());
         information.setDescription(descriptionField.getText());
