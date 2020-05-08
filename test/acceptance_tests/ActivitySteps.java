@@ -189,4 +189,21 @@ public class ActivitySteps {
         Employee emp = (Employee) plannerApplication.getUser(initials);
         assertTrue(emp.isAssignedToActivity(activityHelper.getActivity()));
     }
+
+    @When("the employee {string} registers {double} hours to the activity")
+    public void theEmployeeRegistersHoursToTheActivity(String initials, double hours) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        try {
+            emp.registerTime(activityHelper.getActivity().getID(), hours);
+        } catch (IllegalArgumentException e) {
+            errorMessageHelper.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Given("the employee {string} has {double} hours registered to the activity")
+    public void theEmployeeHasHoursRegisteredToTheActivity(String initials, double hours) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        double hoursRegistered = emp.getRegisteredTime(activityHelper.getActivity().getID());
+        assertEquals(hours, hoursRegistered, 0.0);
+    }
 }

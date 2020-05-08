@@ -18,5 +18,15 @@ Feature: Employee can register time on activities
 	And the current user logs out
     And the employee "TGB" logs in and is the current user
 
-#  Scenario: Register time on activity in project assigned to
+  Scenario: Register time on activity in project assigned to
+    Given the employee "TGB" has 0.0 hours registered to the activity
+    When the employee "TGB" registers 7.0 hours to the activity
+    Then the employee "TGB" has 7.0 hours registered to the activity
+    When the employee "TGB" registers 4.0 hours to the activity
+    Then the employee "TGB" has 11.0 hours registered to the activity
 
+  Scenario: Attempt to register negative time on activity in project assigned to
+    Given the employee "TGB" has 0.0 hours registered to the activity
+    When the employee "TGB" registers -7.0 hours to the activity
+    Then the error message "Cannot register negative hours" is shown
+    And the employee "TGB" has 0.0 hours registered to the activity
