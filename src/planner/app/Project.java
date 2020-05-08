@@ -2,6 +2,7 @@ package planner.app;
 
 
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Project implements Workable{
@@ -25,7 +26,7 @@ public class Project implements Workable{
     }
 
     public Project(String projectName, ProjectManager projectManager) {
-        this(new Information(projectName, "" ,null, null), projectManager);
+        this(new Information(projectName, "" , LocalDate.now(), LocalDate.now().plusDays(1)), projectManager);
     }
 
     public Project(Information info, ProjectManager projectManager) {

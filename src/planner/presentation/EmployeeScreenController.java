@@ -1,5 +1,6 @@
 package planner.presentation;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -20,12 +21,13 @@ import java.util.Optional;
 public class EmployeeScreenController {
     @FXML private Label weekNumLabel;
     @FXML private Button managerBtn;
+    @FXML private Button registerBtn;
     @FXML private TableView<Activity> activityTable;
     @FXML private TableColumn<Activity, String> nameCol;
     @FXML private TableColumn<Activity, Integer> idCol;
     @FXML private TableColumn<Activity, String> descriptionCol;
     @FXML private TableColumn<Activity, Double> etaCol;
-    @FXML private TableColumn<Activity, LocalDate> timeUsedCol;
+    @FXML private TableColumn<Activity, Double> timeUsedCol;
     @FXML private TableColumn<Activity, Integer> endDateCol;
 
     private Employee currentEmployee;
@@ -33,12 +35,15 @@ public class EmployeeScreenController {
 
     @FXML
     public void initialize(){
+        registerBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
+
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
         descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
                 data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
         etaCol.setCellValueFactory(new PropertyValueFactory<>("estimatedTimeUsage"));
         idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        timeUsedCol.setCellValueFactory((data -> new SimpleObjectProperty<>(data.getValue().getInformation().getStartDate())));
+        timeUsedCol.setCellValueFactory((data -> new SimpleDoubleProperty(currentEmployee.getRegisteredTime(data.
+                getValue().getID())).asObject()));
         endDateCol.setCellValueFactory((data -> new SimpleObjectProperty<>(DateMapper.transformToWeekNumber(data.getValue().
                 getInformation().getEndDate()))));
     }
@@ -86,16 +91,18 @@ public class EmployeeScreenController {
     void registerTime() {
         TextInputDialog td = timeRegisterBox("Please enter used time [hr]");
         Optional<String> result = td.showAndWait();
-        //currentUser.registerTime(Double.parseDouble(result.toString()));
         try {
-            result.ifPresent(s -> System.out.println(Utiliy.roundDoubleToHalf(Double.parseDouble(s))));
-        } catch(Exception e){
+            result.ifPresent(s -> currentEmployee.registerTime(activityTable.getSelectionModel().getSelectedItem().
+                    getID(),Utiliy.roundDoubleToHalf(Double.parseDouble(s))));
+        } catch(NumberFormatException e){
             showAlertMessage("Please enter a number!");
+            registerTime();
+        } catch (IllegalArgumentException e){
+            showAlertMessage("Registered time cannot be negative");
             registerTime();
         }
         refresh();
     }
-
 
     public TextInputDialog timeRegisterBox(String header){
         TextInputDialog td = new TextInputDialog();
@@ -108,5 +115,4 @@ public class EmployeeScreenController {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
         alert.showAndWait();
     }
-
 }

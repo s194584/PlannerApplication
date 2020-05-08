@@ -66,13 +66,7 @@ public class EditorController {
 
         estimatedTimeField.setTextFormatter(new TextFormatter<>(new DoubleStringConverter()));
 
-        // Adding handlers on DatePickers to resetStyle
-        startPicker.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
-            resetDateStyles();
-        });
-        endPicker.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            resetDateStyles();
-        });
+        // Adding listeners on DatePickers to refresh.
         startPicker.valueProperty().addListener((observableValue, date, t1) -> {
             employeeTable.refresh();
         });
@@ -80,12 +74,17 @@ public class EditorController {
             employeeTable.refresh();
         });
     }
+
+    @FXML
     private void resetDateStyles(){
         startPicker.setStyle("");
         endPicker.setStyle("");
     }
-    public void loadPlannerApplication(PlannerApplication plannerApplication) {
+
+    public void loadPlannerApplication(PlannerApplication plannerApplication, Workable w) {
         this.plannerApplication = plannerApplication;
+        workable = w;
+        setInformation(workable.getInformation());
         if(workable instanceof Activity){
             estimatedTimeField.setText("" + ((Activity) workable).getEstimatedTimeUsage());
         }
@@ -147,21 +146,19 @@ public class EditorController {
 
     }
 
-    public void setWorkable(Workable workable){
-        this.workable = workable;
-    }
-
     public void setInformation(Information information) {
         this.information = information;
         nameField.setText(information.getName());
         descriptionField.setText(information.getDescription());
         try {
             startPicker.setPromptText(DateMapper.transformToString(information.getStartDate()));
+            startPicker.setValue(information.getStartDate());
         } catch (NullPointerException e) {
             System.out.println("No start date");
         }
         try {
             endPicker.setPromptText(DateMapper.transformToString(information.getEndDate()));
+            endPicker.setValue(information.getEndDate());
         } catch (NullPointerException e) {
             System.out.println("No end date");
         }

@@ -39,6 +39,10 @@ public class AdminScreenController {
 
     @FXML
     public void initialize(){
+        cancelProjectBtn.disableProperty().bind(projectTable.getSelectionModel().selectedItemProperty().isNull());
+        editProjectBtn.disableProperty().bind(projectTable.getSelectionModel().selectedItemProperty().isNull());
+        removeEmployeeBtn.disableProperty().bind(employeeList.getSelectionModel().selectedItemProperty().isNull());
+
         projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getInformation().getName()));
         projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
         projectManCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
@@ -152,6 +156,7 @@ public class AdminScreenController {
         Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
         Editor editor = new Editor(project,plannerApplication);
         projectTable.refresh();
+        employeeList.getSelectionModel().clearSelection();
     }
 
     public void showAlertMessage(String message) {

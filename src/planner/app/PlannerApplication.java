@@ -22,21 +22,22 @@ public class PlannerApplication {
         // TESTING STANDARD
         users.put("a", new Employee("a"));
 
+        login("000");
         Project someProject = new Project("Woogle");
         projects.put(someProject.getProjectID(), someProject);
-        login("000");
         try {
-            assignProjManToProject("a",20201);
+            assignProjManToProject("a",20200);
+
             login("a");
             addActivity(new Activity());
             addActivity(new Activity());
             addActivity(new Activity());
-            addActivityToProject(0,20201);
-            addActivityToProject(1,20201);
-            addActivityToProject(2,20201);
+            addActivityToProject(0,20200);
+            addActivityToProject(1,20200);
+            addActivityToProject(2,20200);
             logout("a");
         } catch (Exception ignored) {
-
+            System.out.println(ignored.getMessage());
         }
         logout("000");
     }
