@@ -219,8 +219,11 @@ public class PlannerApplication {
     }
 
     public ArrayList<Employee> getEmployeesAssignedToActivity(Activity a) {
-        ArrayList<Employee> temp = (ArrayList<Employee>) users.values().stream().filter(u -> u instanceof Employee).map(u -> (Employee) u).filter(e ->
-                e.isAssignedToActivity(a)).collect(Collectors.toList());
+        ArrayList<Employee> temp = (ArrayList<Employee>) users.values().stream()
+                .filter(u -> u instanceof Employee)
+                .map(u -> (Employee) u)
+                .filter(e -> e.isAssignedToActivity(a))
+                .collect(Collectors.toList());
         return temp;
     }
 }
