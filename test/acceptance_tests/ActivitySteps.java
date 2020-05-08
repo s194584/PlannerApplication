@@ -206,4 +206,11 @@ public class ActivitySteps {
         double hoursRegistered = emp.getRegisteredTime(activityHelper.getActivity().getID());
         assertEquals(hours, hoursRegistered, 0.0);
     }
+
+    @And("the activity has {double} registered hours")
+    public void theActivityHasRegisteredHours(double hours) {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Activity act = project.getActivity(activityHelper.getActivity().getID());
+        assertEquals(hours, act.getTotalTimeRegistered(), 0.0);
+    }
 }
