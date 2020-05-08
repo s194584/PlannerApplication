@@ -17,21 +17,24 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <HBox spacing="224.0">
+      <HBox spacing="278.0">
          <children>
             <ComboBox fx:id="projectComboBox" onAction="#updateSelection" prefWidth="150.0" promptText="Choose project" />
             <Button fx:id="employeeBtn" mnemonicParsing="false" onAction="#showEmployeeScreen" text="Go to Employee" />
          </children>
       </HBox>
-      <TableView fx:id="activityTable">
+      <TableView fx:id="activityTable" onMouseClicked="#editActivityByMouse">
          <columns>
             <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="desCol" prefWidth="75.0" text="Description" />
-            <TableColumn fx:id="estCol" prefWidth="103.0" text="Estimated time" />
-            <TableColumn fx:id="empCol" prefWidth="81.0" text="Employees" />
-            <TableColumn fx:id="startCol" prefWidth="75.0" text="Start date" />
-            <TableColumn fx:id="endCol" prefWidth="75.0" text="End date" />
+            <TableColumn fx:id="desCol" prefWidth="114.0" text="Description" />
+            <TableColumn fx:id="estCol" prefWidth="97.0" text="Estimated time" />
+            <TableColumn fx:id="usedCol" prefWidth="69.0" text="Time used" />
+            <TableColumn fx:id="startCol" prefWidth="87.0" text="Start week" />
+            <TableColumn fx:id="endCol" prefWidth="86.0" text="End week" />
          </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <HBox>
          <children>

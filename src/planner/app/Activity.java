@@ -1,29 +1,27 @@
 package planner.app;
 
-import java.util.ArrayList;
 import java.time.LocalDate;
-import java.util.List;
 
-public class Activity {
+public class Activity implements Workable{
 
     private static int activityIDgen = 0;
 
     private Information information;
     private double estimatedTimeUsage;
-    private int activityID;
+    private int id;
 
     public Activity() {
-        this(new Information("", "", null, null), 0);
+        this(new Information("", "", LocalDate.now(), LocalDate.now().plusDays(1)), 0);
     }
 
     public Activity(Information information, double estimatedTimeUsage) {
-        activityID = activityIDgen++;
+        id = activityIDgen++;
         this.information = information;
         this.estimatedTimeUsage = estimatedTimeUsage;
     }
 
     public int getID() {
-        return activityID;
+        return id;
     }
 
     public Information getInformation() {

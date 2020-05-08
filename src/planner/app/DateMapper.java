@@ -2,6 +2,9 @@ package planner.app;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 
 public class DateMapper {
 
@@ -14,4 +17,8 @@ public class DateMapper {
         return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
+    public static int transformToWeekNumber(LocalDate date){
+        TemporalField weekOfYear = WeekFields.of(Locale.getDefault()).weekOfYear();
+        return date.get(weekOfYear);
+    }
 }

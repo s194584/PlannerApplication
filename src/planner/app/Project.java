@@ -2,10 +2,9 @@ package planner.app;
 
 
 
-import java.time.LocalDate;
 import java.util.*;
 
-public class Project {
+public class Project implements Workable{
     private static int projectIDgen = 0;
 
     private int projectID;

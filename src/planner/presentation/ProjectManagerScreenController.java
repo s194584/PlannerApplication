@@ -1,19 +1,20 @@
 package planner.presentation;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import planner.app.*;
-import planner.presentation.prompts.InformationEditor;
+import planner.presentation.prompts.Editor;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,23 +25,31 @@ public class ProjectManagerScreenController {
     @FXML private TableView<Activity> activityTable;
     @FXML private TableColumn<Activity, String> nameCol;
     @FXML private TableColumn<Activity, String> desCol;
-    @FXML private TableColumn estCol;
+    @FXML private TableColumn<Activity, Double> estCol;
     @FXML private TableColumn<Activity, String> empCol;
     @FXML private TableColumn<Activity, String> startCol;
     @FXML private TableColumn<Activity, String> endCol;
+    @FXML private TableColumn<Activity, Double> usedCol;
+    @FXML private Button addActivityBtn;
+    @FXML private Button editActivityBtn;
+    @FXML private Button cancelActivityBtn;
 
     @FXML
     public void initialize(){
+        addActivityBtn.setDisable(true);
+        editActivityBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
+        cancelActivityBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
+
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
         desCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
                 data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
         estCol.setCellValueFactory(new PropertyValueFactory("estimatedTimeUsage"));
-//        projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getProjectName()));
-//        projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
-//        projectManCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
-//        projectActCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivities()));
-    }
+        startCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
+                getInformation().getStartDate()))));
+        endCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
+                getInformation().getEndDate()))));
 
+    }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
@@ -66,6 +75,9 @@ public class ProjectManagerScreenController {
 
     @FXML
     void updateSelection(ActionEvent event) {
+        if(projectComboBox.getSelectionModel().getSelectedItem()!=null){
+            addActivityBtn.setDisable(false);
+        }
         activityTable.getItems().clear();
         HashMap<Integer, Activity> selectedProject = projectComboBox.getSelectionModel().getSelectedItem().getActivities();
         for (Activity a : selectedProject.values()) {
@@ -74,31 +86,39 @@ public class ProjectManagerScreenController {
     }
 
     @FXML
-    void addActivity(ActionEvent event) throws IOException {
+    void addActivity(ActionEvent event) {
         Activity newActivity = new Activity();
-        InformationEditor ie = new InformationEditor(newActivity.getInformation());
-        System.out.println(ie.hasResult()+ " Is the right");
+        Editor ie = new Editor(newActivity, plannerApplication);
         if(ie.hasResult()){
             projectComboBox.getValue().addActivity(newActivity);
             activityTable.getItems().add(newActivity);
             activityTable.refresh();
         }
-
-    }
-
-    private void showInformationEditor(Information information) throws IOException {
-
     }
 
     @FXML
     void cancelActivity(ActionEvent event) {
-
+        Activity activity = activityTable.getSelectionModel().getSelectedItem();
+        projectComboBox.getValue().removeActivity(activity.getID());
+        activityTable.getItems().remove(activity);
+        activityTable.refresh();
+        activityTable.getSelectionModel().clearSelection();
     }
 
     @FXML
-    void editActivity(ActionEvent event) {
-
+    void editActivity() {
+        Activity activity = activityTable.getSelectionModel().getSelectedItem();
+        Editor ie = new Editor(activity, plannerApplication);
+        activityTable.refresh();
+        activityTable.getSelectionModel().clearSelection();
     }
 
-
+    @FXML
+    void editActivityByMouse(MouseEvent event){
+            if(event.getButton().equals(MouseButton.PRIMARY) &&
+                    event.getClickCount()==2 &&
+                    !activityTable.getSelectionModel().getSelectedItems().isEmpty()){
+                editActivity();
+            }
+    }
 }

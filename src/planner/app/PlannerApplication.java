@@ -1,11 +1,12 @@
 package planner.app;
 
-import io.cucumber.java.en_old.Ac;
-
 import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class PlannerApplication {
     private User admin = new Admin("000");
@@ -23,13 +24,21 @@ public class PlannerApplication {
 
         Project someProject = new Project("Woogle");
         projects.put(someProject.getProjectID(), someProject);
-
+        login("000");
         try {
             assignProjManToProject("a",20201);
+            login("a");
+            addActivity(new Activity());
+            addActivity(new Activity());
+            addActivity(new Activity());
+            addActivityToProject(0,20201);
+            addActivityToProject(1,20201);
+            addActivityToProject(2,20201);
+            logout("a");
         } catch (Exception ignored) {
+
         }
-
-
+        logout("000");
     }
 
     public int getNumberOfActivities() {
@@ -207,5 +216,11 @@ public class PlannerApplication {
         Activity activity = activities.remove(id);
         if (activity == null)
             throw new NoSuchElementException("Activity does not exist");
+    }
+
+    public ArrayList<Employee> getEmployeesAssignedToActivity(Activity a) {
+        ArrayList<Employee> temp = (ArrayList<Employee>) users.values().stream().filter(u -> u instanceof Employee).map(u -> (Employee) u).filter(e ->
+                e.isAssignedToActivity(a)).collect(Collectors.toList());
+        return temp;
     }
 }

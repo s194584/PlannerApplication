@@ -29,7 +29,7 @@ public class MainScreenController {
         Scene scene = logoutBtn.getScene();
         Stage stage = (Stage) scene.getWindow();
 
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/fxml/loginScreen.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/fxml/LoginScreen.fxml"));
         Parent loginScreen = loginLoader.load();
         LoginScreenController lsc = loginLoader.getController();
         lsc.setPlannerApplication(plannerApplication);
