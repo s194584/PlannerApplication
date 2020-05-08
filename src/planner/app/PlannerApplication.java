@@ -1,11 +1,12 @@
 package planner.app;
 
-import io.cucumber.java.en_old.Ac;
-
 import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class PlannerApplication {
     private User admin = new Admin("000");
@@ -23,19 +24,19 @@ public class PlannerApplication {
 
         Project someProject = new Project("Woogle");
         projects.put(someProject.getProjectID(), someProject);
-
+        login("000");
         try {
             assignProjManToProject("a",20201);
-        } catch (Exception ignored) {
             login("a");
-//            addActivity(new Activity());
-//            addActivity(new Activity());
-//            addActivity(new Activity());
-//            addActivityToProject(0,20201);
-//            addActivityToProject(1,20201);
-//            addActivityToProject(2,20201);
+            addActivity(new Activity());
+            addActivity(new Activity());
+            addActivity(new Activity());
+            addActivityToProject(0,20201);
+            addActivityToProject(1,20201);
+            addActivityToProject(2,20201);
             logout("a");
-        } catch (Exception e) {
+        } catch (Exception ignored) {
+
         }
         logout("000");
     }
@@ -184,7 +185,7 @@ public class PlannerApplication {
 
     public void addActivity(Activity activity) throws IllegalAccessException {
         if (currentUser instanceof ProjectManager) {
-            activities.put(activity.getId(), activity);
+            activities.put(activity.getID(), activity);
         } else
             throw new IllegalAccessException("Not authorized to add/remove activity");
     }
@@ -198,7 +199,7 @@ public class PlannerApplication {
 
     public boolean hasActivity(Activity activity) {
         try {
-            getActivity(activity.getId());
+            getActivity(activity.getID());
             return true;
         } catch (NoSuchElementException ex) {
             return false;
@@ -217,19 +218,9 @@ public class PlannerApplication {
             throw new NoSuchElementException("Activity does not exist");
     }
 
-//    public List<Activity> getActivitesAssignedTo(User e) {
-//        //        return assignedEmployees.stream().anyMatch(e -> e.getInitials().equals(initials));
-//        List<Activity> temp = new ArrayList<>();
-//        Project tempo;
-//        Activity tempa;
-//        for (int i = 0; i < projects.size(); i++) {
-//           tempo = projects.get(i);
-//           for (int j = 0 ; j< tempo.getNumberOfActivities();j++){
-//               tempa = tempo.getActivities().get(j);
-//               if(tempa.isEmployeeAssigned(e.getInitials()));
-//                temp.add(tempa);
-//               }
-//        }
-//        return temp;
-//    }
+    public ArrayList<Employee> getEmployeesAssignedToActivity(Activity a) {
+        ArrayList<Employee> temp = (ArrayList<Employee>) users.values().stream().filter(u -> u instanceof Employee).map(u -> (Employee) u).filter(e ->
+                e.isAssignedToActivity(a)).collect(Collectors.toList());
+        return temp;
+    }
 }

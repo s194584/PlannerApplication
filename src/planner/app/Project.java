@@ -2,7 +2,6 @@ package planner.app;
 
 
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class Project implements Workable{
@@ -64,7 +63,7 @@ public class Project implements Workable{
     }
 
     public void addActivity(Activity activity) {
-        activities.put(activity.getId(), activity);
+        activities.put(activity.getID(), activity);
     }
 
     public Activity getActivity(int activityID) throws NoSuchElementException {

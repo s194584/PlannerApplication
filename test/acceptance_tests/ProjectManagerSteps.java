@@ -76,7 +76,7 @@ public class ProjectManagerSteps {
     @And("the project manager assigns employee {string} to the activity in the project")
     public void theProjectManagerAssignsEmployeeToTheActivityInTheProject(String initials) {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        Activity act = project.getActivity(activityHelper.getActivity().getId());
+        Activity act = project.getActivity(activityHelper.getActivity().getID());
         Employee emp = (Employee) plannerApplication.getUser(initials);
         emp.assignActivity(act);
     }

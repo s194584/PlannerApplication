@@ -27,7 +27,7 @@ public class EmployeeScreenController {
     @FXML private TableColumn<Activity, LocalDate> timeUsedCol;
     @FXML private TableColumn<Activity, Integer> endDateCol;
 
-    private User currentUser;
+    private Employee currentEmployee;
     private PlannerApplication plannerApplication;
 
     @FXML
@@ -36,7 +36,7 @@ public class EmployeeScreenController {
         descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
                 data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
         etaCol.setCellValueFactory(new PropertyValueFactory<>("estimatedTimeUsage"));
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
         timeUsedCol.setCellValueFactory((data -> new SimpleObjectProperty<>(data.getValue().getInformation().getStartDate())));
         endDateCol.setCellValueFactory((data -> new SimpleObjectProperty<>(DateMapper.transformToWeekNumber(data.getValue().
                 getInformation().getEndDate()))));
@@ -44,8 +44,8 @@ public class EmployeeScreenController {
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
-        currentUser = plannerApplication.getCurrentUser();
-        if(currentUser instanceof ProjectManager){
+        currentEmployee = (Employee) plannerApplication.getCurrentUser();
+        if(currentEmployee instanceof ProjectManager){
             managerBtn.setDisable(false);
         }else{
             managerBtn.setDisable(true);
@@ -68,7 +68,7 @@ public class EmployeeScreenController {
 
     private void refresh(){
         activityTable.getItems().clear();
-        activityTable.getItems().addAll(plannerApplication.getActivitesAssignedTo(currentUser));
+        activityTable.getItems().addAll(currentEmployee.getActivities());
     }
 
     @FXML

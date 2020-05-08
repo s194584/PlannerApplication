@@ -8,16 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.util.converter.DoubleStringConverter;
 import planner.app.*;
 import planner.presentation.prompts.Editor;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -102,7 +99,7 @@ public class ProjectManagerScreenController {
     @FXML
     void cancelActivity(ActionEvent event) {
         Activity activity = activityTable.getSelectionModel().getSelectedItem();
-        projectComboBox.getValue().removeActivity(activity.getId());
+        projectComboBox.getValue().removeActivity(activity.getID());
         activityTable.getItems().remove(activity);
         activityTable.refresh();
         activityTable.getSelectionModel().clearSelection();

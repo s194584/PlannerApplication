@@ -55,8 +55,9 @@ public class EditorController {
     PlannerApplication plannerApplication;
 
     public void initialize() {
+        employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         empCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInitials()));
-        noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getNoOfActivities())));
+        noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getActivities().size())));
 
         estimatedTimeField.setTextFormatter(new TextFormatter<>(new DoubleStringConverter()));
 
@@ -71,6 +72,9 @@ public class EditorController {
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
+        if(workable instanceof Activity){
+            estimatedTimeField.setText("" + ((Activity) workable).getEstimatedTimeUsage());
+        }
         refresh();
     }
 
@@ -84,9 +88,10 @@ public class EditorController {
         if(workable instanceof Activity) {
             Activity a = (Activity) workable;
             assignedEmployees.getItems().clear();
-            assignedEmployees.getItems().addAll(a.getAssignedEmployees());
-            estimatedTimeField.setText("" + ((Activity) workable).getEstimatedTimeUsage());
+            assignedEmployees.getItems().addAll(plannerApplication.getEmployeesAssignedToActivity(a));
+
         }
+        assignedEmployees.refresh();
     }
 
     @FXML
@@ -155,7 +160,7 @@ public class EditorController {
         ObservableList<Employee> employeesToBe = employeeTable.getSelectionModel().getSelectedItems();
         Activity a = (Activity) workable;
         for (Employee e: employeesToBe) {
-            a.assignEmployee(e);
+            e.assignActivity(a);
         }
         refresh();
     }

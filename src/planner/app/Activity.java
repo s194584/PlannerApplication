@@ -11,7 +11,7 @@ public class Activity implements Workable{
     private int id;
 
     public Activity() {
-        this(new Information("", "", LocalDate.now(), LocalDate.now()), 0);
+        this(new Information("", "", LocalDate.now(), LocalDate.now().plusDays(1)), 0);
     }
 
     public Activity(Information information, double estimatedTimeUsage) {
@@ -20,7 +20,7 @@ public class Activity implements Workable{
         this.estimatedTimeUsage = estimatedTimeUsage;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
