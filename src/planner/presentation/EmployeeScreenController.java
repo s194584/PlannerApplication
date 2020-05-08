@@ -26,7 +26,7 @@ public class EmployeeScreenController {
     @FXML private TableColumn<Activity, String> descriptionCol;
     @FXML private TableColumn<Activity, Double> etaCol;
     @FXML private TableColumn<Activity, LocalDate> timeUsedCol;
-    @FXML private TableColumn<Activity, LocalDate> endDateCol;
+    @FXML private TableColumn<Activity, Integer> endDateCol;
 
     private User currentUser;
     private PlannerApplication plannerApplication;
@@ -39,7 +39,8 @@ public class EmployeeScreenController {
         etaCol.setCellValueFactory(new PropertyValueFactory<>("estimatedTimeUsage"));
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         timeUsedCol.setCellValueFactory((data -> new SimpleObjectProperty<>(data.getValue().getInformation().getStartDate())));
-        endDateCol.setCellValueFactory((data -> new SimpleObjectProperty<>(data.getValue().getInformation().getEndDate())));
+        endDateCol.setCellValueFactory((data -> new SimpleObjectProperty<>(DateMapper.transformToWeekNumber(data.getValue().
+                getInformation().getEndDate()))));
     }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {

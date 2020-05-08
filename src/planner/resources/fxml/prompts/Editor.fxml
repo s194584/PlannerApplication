@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="moduleContainer" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.prompts.EditorController">
+<HBox fx:id="moduleContainer" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.prompts.EditorController">
    <children>
       <VBox fx:id="editModule" spacing="10.0">
          <children>
@@ -67,22 +67,41 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="assignedVBox" alignment="CENTER_LEFT">
+      <VBox fx:id="assignedVBox">
          <children>
-            <Label text="Assigned Employees" />
+            <Label text="Estimated time [hr]">
+               <padding>
+                  <Insets bottom="5.0" top="2.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="estimatedTimeField" alignment="CENTER" prefHeight="26.0">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label text="Assigned Employees">
+               <padding>
+                  <Insets top="14.0" />
+               </padding></Label>
             <ListView fx:id="assignedEmployees" prefHeight="200.0" prefWidth="150.0" />
          </children>
          <padding>
-            <Insets top="34.0" />
+            <Insets top="6.0" />
          </padding>
       </VBox>
       <VBox fx:id="assignModule" prefHeight="200.0" prefWidth="249.0" spacing="10.0">
          <children>
             <TableView fx:id="employeeTable" prefHeight="300.0" prefWidth="249.0">
                <columns>
-                  <TableColumn fx:id="empCol" prefWidth="96.0" text="Employee" />
-                  <TableColumn fx:id="noActCol" prefWidth="151.0" text="No. of activities" />
+                  <TableColumn fx:id="empCol" prefWidth="110.0" text="Employee" />
+                  <TableColumn fx:id="noActCol" prefWidth="137.0" text="No. of activities" />
                </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
             <Button fx:id="assignToAct" mnemonicParsing="false" onAction="#assignToAct" text="Assign to activity" />
          </children>

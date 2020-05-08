@@ -1,6 +1,8 @@
 package planner.presentation.prompts;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -11,6 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import planner.app.*;
 
 import java.time.LocalDate;
@@ -21,17 +25,21 @@ public class EditorController {
     /* To Do:
     Assign employee*
     Datoer*
+
     Antal activiteter i angivet tidsrum
+
     Refactor så employee har activities. Det samme for project manager.
     Employee skal kunne registerer tid.
     Generelt skal employee virke (evt. planlægge egne aktiviteter)
-    Projekt Manager overview (estimated time).
+
+    Projekt Manager overview (estimated time) *
     * */
 
     @FXML private TextField nameField;
     @FXML private DatePicker startPicker;
     @FXML private DatePicker endPicker;
     @FXML private TextArea descriptionField;
+    @FXML private TextField estimatedTimeField;
     @FXML private Button confirmBtn;
     @FXML private Button cancelBtn;
     @FXML private TableView<Employee> employeeTable;
@@ -50,37 +58,15 @@ public class EditorController {
         empCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInitials()));
         noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getNoOfActivities())));
 
+        estimatedTimeField.setTextFormatter(new TextFormatter<>(new DoubleStringConverter()));
 
-        endPicker.setDayCellFactory(datePicker -> new DateCell(){
-            public void updateItem(LocalDate date, boolean empty){
-                super.updateItem(date,empty);
-                if (date.equals(LocalDate.now().plusDays(1))) {
-                    // Tomorrow is too soon.
-                    setDisable(true);
-                }
-                if(information.getStartDate()!= null||date.isBefore(startPicker.getValue() == null ? information.getStartDate() : startPicker.getValue())) {
-                    setDisable(true);
-                }
-            }
-        });
-        startPicker.setDayCellFactory(datePicker -> new DateCell(){
-            public void updateItem(LocalDate date, boolean empty){
-                super.updateItem(date,empty);
-                if (date.equals(LocalDate.now().plusDays(1))) {
-                    // Tomorrow is too soon.
-                    setDisable(true);
-                }
-            }
-        });
-
+        // Adding handlers on DatePickers
         startPicker.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
             startPicker.setStyle("");
         });
         endPicker.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             endPicker.setStyle("");
         });
-
-
     }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
@@ -95,9 +81,12 @@ public class EditorController {
         for (int i = 1; i < users.size(); i++) {
             startEmployees.add((Employee) users.get(i));
         }
-        Activity a = (Activity) workable;
-        assignedEmployees.getItems().clear();
-        assignedEmployees.getItems().addAll(a.getAssignedEmployees());
+        if(workable instanceof Activity) {
+            Activity a = (Activity) workable;
+            assignedEmployees.getItems().clear();
+            assignedEmployees.getItems().addAll(a.getAssignedEmployees());
+            estimatedTimeField.setText("" + ((Activity) workable).getEstimatedTimeUsage());
+        }
     }
 
     @FXML
@@ -109,10 +98,20 @@ public class EditorController {
     @FXML
     void confirm() {
         boolean validInput = true;
+
+        try {
+            double num = Double.parseDouble(estimatedTimeField.getText());
+            num = ((int) (num*2 + 0.5))/2.0;
+            ((Activity) workable).setEstimatedTimeUsage(num);
+        }catch(NumberFormatException e){
+            // Nothing app breaking happens, when this error is thrown
+        }
+
+
+
         information.setName(nameField.getText());
         information.setDescription(descriptionField.getText());
 
-        //.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")
         if(startPicker.getValue()!=null){
             information.setStartDate(startPicker.getValue());
         }
@@ -141,13 +140,11 @@ public class EditorController {
         nameField.setText(information.getName());
         descriptionField.setText(information.getDescription());
         try {
-            //information.getStartDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
             startPicker.setPromptText(DateMapper.transformToString(information.getStartDate()));
         } catch (NullPointerException e) {
             System.out.println("No start date");
         }
         try {
-            //information.getEndDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
             endPicker.setPromptText(DateMapper.transformToString(information.getEndDate()));
         } catch (NullPointerException e) {
             System.out.println("No end date");

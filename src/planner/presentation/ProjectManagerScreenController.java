@@ -44,14 +44,10 @@ public class ProjectManagerScreenController {
         desCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
                 data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
         estCol.setCellValueFactory(new PropertyValueFactory("estimatedTimeUsage"));
-        startCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getInformation().getStartDate())));
-        endCol.setCellValueFactory((data -> new SimpleObjectProperty(data.getValue().getInformation().getEndDate())));
-
-        activityTable.setEditable(true);
-        estCol.setEditable(true);
-        estCol.setCellFactory(TextFieldTableCell.<Activity,Double>forTableColumn(new DoubleStringConverter()));
-        estCol.setOnEditCommit(data -> data.getRowValue().setEstimatedTimeUsage(data.getNewValue()));
-
+        startCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
+                getInformation().getStartDate()))));
+        endCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
+                getInformation().getEndDate()))));
     }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
@@ -92,7 +88,6 @@ public class ProjectManagerScreenController {
     void addActivity(ActionEvent event) {
         Activity newActivity = new Activity();
         Editor ie = new Editor(newActivity, plannerApplication);
-        System.out.println(ie.hasResult()+ " Is the right");
         if(ie.hasResult()){
             projectComboBox.getValue().addActivity(newActivity);
             activityTable.getItems().add(newActivity);

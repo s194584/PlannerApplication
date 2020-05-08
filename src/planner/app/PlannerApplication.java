@@ -229,7 +229,6 @@ public class PlannerApplication {
                if(tempa.isEmployeeAssigned(e.getInitials()));
                 temp.add(tempa);
                }
-
         }
         return temp;
     }
