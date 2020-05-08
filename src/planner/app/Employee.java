@@ -31,10 +31,12 @@ public class Employee extends User {
     }
 
     public void registerTime(int activityID, double time) {
-        if (time < 0)
-            throw new IllegalArgumentException("Cannot register negative hours");
 
-        registeredTimeOnActivities.compute(activityID, (k, oldTime) -> oldTime + time);
+        double oldTime = registeredTimeOnActivities.get(activityID);
+        if (oldTime + time < 0)
+            throw new IllegalArgumentException("Registered time cannot be negative");
+
+        registeredTimeOnActivities.put(activityID, oldTime + time);
     }
 
     public double getRegisteredTime(int activityID) {
