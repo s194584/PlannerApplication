@@ -101,8 +101,7 @@ public class EditorController {
 
         try {
             double num = Double.parseDouble(estimatedTimeField.getText());
-            num = ((int) (num*2 + 0.5))/2.0;
-            ((Activity) workable).setEstimatedTimeUsage(num);
+            ((Activity) workable).setEstimatedTimeUsage(Utiliy.roundDoubleToHalf(num));
         }catch(NumberFormatException e){
             // Nothing app breaking happens, when this error is thrown
         }

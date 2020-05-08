@@ -19,8 +19,18 @@ public class PlannerApplication {
         login("000");
         users.add(new Employee("a"));
         projects.add(new Project("Woogle"));
+
         try {
+
             assignProjManToProject("a",20201);
+            login("a");
+            addActivity(new Activity());
+            addActivity(new Activity());
+            addActivity(new Activity());
+            addActivityToProject(0,20201);
+            addActivityToProject(1,20201);
+            addActivityToProject(2,20201);
+            logout("a");
         } catch (Exception e) {
         }
         logout("000");

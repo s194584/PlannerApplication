@@ -5,17 +5,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.util.converter.DoubleStringConverter;
 import planner.app.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Optional;
 
 public class EmployeeScreenController {
     @FXML private Label weekNumLabel;
@@ -46,14 +45,13 @@ public class EmployeeScreenController {
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
         currentUser = plannerApplication.getCurrentUser();
-        System.out.println(currentUser);
         if(currentUser instanceof ProjectManager){
             managerBtn.setDisable(false);
         }else{
             managerBtn.setDisable(true);
         }
         weekNumLabel.setText(""+Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
-        activityTable.getItems().addAll(plannerApplication.getActivitesAssignedTo(currentUser));
+        refresh();
     }
 
     public void showManagerScreen() throws IOException {
@@ -70,6 +68,38 @@ public class EmployeeScreenController {
 
     private void refresh(){
         activityTable.getItems().clear();
-        activityTable.getItems().addAll();
+        activityTable.getItems().addAll(plannerApplication.getActivitesAssignedTo(currentUser));
     }
+
+    @FXML
+    void registerAbsence() {
+    }
+
+    @FXML
+    void registerTime() {
+        TextInputDialog td = timeRegisterBox("Please enter used time [hr]");
+        Optional<String> result = td.showAndWait();
+        //currentUser.registerTime(Double.parseDouble(result.toString()));
+        try {
+            result.ifPresent(s -> System.out.println(Utiliy.roundDoubleToHalf(Double.parseDouble(s))));
+        } catch(Exception e){
+            showAlertMessage("Please enter a number!");
+            registerTime();
+        }
+        refresh();
+    }
+
+
+    public TextInputDialog timeRegisterBox(String header){
+        TextInputDialog td = new TextInputDialog();
+        td.getEditor().setTextFormatter(new TextFormatter<>(new DoubleStringConverter()));
+        td.setHeaderText(header);
+        return td;
+    }
+
+    public void showAlertMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message);
+        alert.showAndWait();
+    }
+
 }

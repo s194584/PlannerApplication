@@ -30,6 +30,7 @@ public class ProjectManagerScreenController {
     @FXML private TableColumn<Activity, String> empCol;
     @FXML private TableColumn<Activity, String> startCol;
     @FXML private TableColumn<Activity, String> endCol;
+    @FXML private TableColumn<Activity, Double> usedCol;
     @FXML private Button addActivityBtn;
     @FXML private Button editActivityBtn;
     @FXML private Button cancelActivityBtn;
@@ -48,6 +49,7 @@ public class ProjectManagerScreenController {
                 getInformation().getStartDate()))));
         endCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
                 getInformation().getEndDate()))));
+
     }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) {
