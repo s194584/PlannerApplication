@@ -1,18 +1,18 @@
 package planner.app;
 
+import io.cucumber.java.en_old.Ac;
+
 import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 public class PlannerApplication {
     private User admin = new Admin("000");
     private User currentUser;
     private HashMap<String, User> users = new HashMap<>();
     private HashMap<Integer, Project> projects = new HashMap<>();
-    private List<Activity> activities = new ArrayList<>();
+    private HashMap<Integer, Activity> activities = new HashMap<>();
 
     public PlannerApplication() {
 
@@ -26,7 +26,7 @@ public class PlannerApplication {
 
         try {
             assignProjManToProject("a",20201);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
 
@@ -74,7 +74,7 @@ public class PlannerApplication {
     }
 
     public ArrayList<User> getUsers() {
-        return new ArrayList(users.values());
+        return new ArrayList<>(users.values());
     }
 
     public void addUser(User user) throws Exception {
@@ -144,14 +144,16 @@ public class PlannerApplication {
         if (!admin.getLoginStatus())
             throw new IllegalAccessException("Not authorized to add/remove project");
 
-        Project project = projects.get(id);
+        Project project = projects.remove(id);
         if (project == null)
             throw new NoSuchElementException("Project does not exist");
     }
 
     public void assignProjManToProject(String initials, int projectID) throws Exception {
         User u = getUser(initials);
+
         if (!(u instanceof ProjectManager)) {
+            // Re-insert user as project manager
             removeUser(u);
             u = new ProjectManager(u);
             addUser(u);
@@ -162,33 +164,28 @@ public class PlannerApplication {
     }
 
     public Project getProject(int projectID) throws NoSuchElementException {
-        for (int i = 0; i < projects.size(); i++) {
-            Project p = projects.get(i);
-            if (p.getProjectID() == projectID)
-                return p;
-        }
-        throw new NoSuchElementException("Project does not exist");
+        Project project = projects.get(projectID);
+        if (project == null)
+            throw new NoSuchElementException("Project does not exist");
+        return project;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    public ArrayList<Project> getProjects() {
+        return new ArrayList<>(projects.values());
     }
 
     public void addActivity(Activity activity) throws IllegalAccessException {
         if (currentUser instanceof ProjectManager) {
-            activities.add(activity);
+            activities.put(activity.getID(), activity);
         } else
             throw new IllegalAccessException("Not authorized to add/remove activity");
     }
 
     public Activity getActivity(int activityID) throws NoSuchElementException {
-        for (int i = 0; i < activities.size(); i++) {
-            Activity a = activities.get(i);
-            if (a.getID() == activityID) {
-                return a;
-            }
-        }
-        throw new NoSuchElementException("Activity does not exist");
+        Activity activity = activities.get(activityID);
+        if (activity == null)
+            throw new NoSuchElementException("Activity does not exist");
+        return activity;
     }
 
     public boolean hasActivity(Activity activity) {
@@ -207,12 +204,8 @@ public class PlannerApplication {
     }
 
     public void removeActivity(int id) {
-        for (int i = 0; i < activities.size(); i++) {
-            if (activities.get(i).getID() == id) {
-                activities.remove(i);
-                return;
-            }
-        }
-        throw new NoSuchElementException("Activity does not exist");
+        Activity activity = activities.remove(id);
+        if (activity == null)
+            throw new NoSuchElementException("Activity does not exist");
     }
 }
