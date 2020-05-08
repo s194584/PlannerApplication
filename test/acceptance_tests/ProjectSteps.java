@@ -66,7 +66,7 @@ public class ProjectSteps {
     public void theProjectWithNameAndSameIDIsInThePlanner(String projectName) throws Exception {
         //theProjectIsInThePlanner();
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        assertEquals(projectName, project.getProjectName());
+        assertEquals(projectName, project.getInformation().getName());
     }
 
     @And("there is a project with name {string}, description {string}, start date {string}, end date {string}")

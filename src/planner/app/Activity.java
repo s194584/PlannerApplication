@@ -11,7 +11,6 @@ public class Activity {
     private Information information;
     private double estimatedTimeUsage;
     private int activityID;
-    private List<Employee> assignedEmployees = new ArrayList<>();
 
     public Activity() {
         this(new Information("", "", null, null), 0);
@@ -39,11 +38,4 @@ public class Activity {
         return estimatedTimeUsage;
     }
 
-    public void assignEmployee(Employee emp) {
-        assignedEmployees.add(emp);
-    }
-
-    public boolean isEmployeeAssigned(String initials) {
-        return assignedEmployees.stream().anyMatch(e -> e.getInitials().equals(initials));
-    }
 }

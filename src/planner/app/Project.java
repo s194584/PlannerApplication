@@ -3,10 +3,7 @@ package planner.app;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class Project {
     private static int projectIDgen = 0;
@@ -14,7 +11,7 @@ public class Project {
     private int projectID;
     private ProjectManager projectManager;
     private Information information;
-    private List<Activity> activities = new ArrayList<>();
+    private HashMap<Integer, Activity> activities = new HashMap<>();
 
     public Project() {
         this("");
@@ -24,22 +21,26 @@ public class Project {
         this(projectName, new ProjectManager("N/A"));
     }
 
-    public Project(String projectName, ProjectManager projectManager) {
-        projectID = Integer.parseInt("" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++);
-        this.projectManager = projectManager;
-        information = new Information(projectName, "",null,null);
+    public Project(Information info) {
+        this(info, null);
     }
 
-    public Project(Information info) {
+    public Project(String projectName, ProjectManager projectManager) {
+        this(new Information(projectName, "" ,null, null), projectManager);
+    }
+
+    public Project(Information info, ProjectManager projectManager) {
+        projectID = Integer.parseInt("" + Calendar.getInstance().get(Calendar.YEAR) + projectIDgen++);
+        this.projectManager = projectManager;
         information = info;
     }
 
+
+
+
+
     public int getProjectID() {
         return projectID;
-    }
-
-    public String getProjectName() {
-        return information.getName();
     }
 
     public ProjectManager getProjectManager() {
@@ -63,17 +64,14 @@ public class Project {
     }
 
     public void addActivity(Activity activity) {
-        activities.add(activity);
+        activities.put(activity.getID(), activity);
     }
 
     public Activity getActivity(int activityID) throws NoSuchElementException {
-        for (int i = 0; i < activities.size(); i++) {
-            Activity a = activities.get(i);
-            if (a.getID() == activityID) {
-                return a;
-            }
-        }
-        throw new NoSuchElementException("Activity does not exist");
+        Activity activity = activities.get(activityID);
+        if (activity == null)
+            throw new NoSuchElementException("Activity does not exist");
+        return activity;
     }
 
     public boolean hasActivity(int activityID) {
@@ -86,13 +84,9 @@ public class Project {
     }
 
     public void removeActivity(int id) throws NoSuchElementException {
-        for (int i = 0; i < activities.size(); i++) {
-            if (activities.get(i).getID() == id) {
-                activities.remove(i);
-                return;
-            }
-        }
-        throw new NoSuchElementException("Activity does not exist");
+        Activity activity = activities.remove(id);
+        if (activity == null)
+            throw new NoSuchElementException("Activity does not exist");
     }
 
     @Override
@@ -100,7 +94,7 @@ public class Project {
         return information.getName();
     }
 
-    public List<Activity> getActivities() {
+    public HashMap<Integer, Activity> getActivities() {
         return activities;
     }
 }
