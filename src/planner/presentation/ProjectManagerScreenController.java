@@ -17,6 +17,8 @@ import planner.app.*;
 import planner.presentation.prompts.Editor;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProjectManagerScreenController {
@@ -80,8 +82,8 @@ public class ProjectManagerScreenController {
             addActivityBtn.setDisable(false);
         }
         activityTable.getItems().clear();
-        List<Activity> selectedProject = projectComboBox.getSelectionModel().getSelectedItem().getActivities();
-        for (Activity a:selectedProject) {
+        HashMap<Integer, Activity> selectedProject = projectComboBox.getSelectionModel().getSelectedItem().getActivities();
+        for (Activity a : selectedProject.values()) {
             activityTable.getItems().add(a);
         }
     }

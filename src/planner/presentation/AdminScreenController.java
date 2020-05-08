@@ -39,7 +39,7 @@ public class AdminScreenController {
 
     @FXML
     public void initialize(){
-        projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getProjectName()));
+        projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getInformation().getName()));
         projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
         projectManCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
         projectActCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivities()));
@@ -117,7 +117,7 @@ public class AdminScreenController {
             Project project = new Project(td.getEditor().getText());
             plannerApplication.addProject(project);
             projectTable.getItems().add(project);
-            System.out.println("Added project with name " + project.getProjectName() + " and id " + project.getProjectID());
+            System.out.println("Added project with name " + project.getInformation().getName() + " and id " + project.getProjectID());
         }
         catch (Exception e) {
             showAlertMessage(e.getMessage());

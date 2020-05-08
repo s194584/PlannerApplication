@@ -1,35 +1,39 @@
 package planner.app;
 
+import io.cucumber.java.en_old.Ac;
+
 import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 public class PlannerApplication {
     private User admin = new Admin("000");
     private User currentUser;
-    private List<User> users = new ArrayList<>();
-    private List<Project> projects = new ArrayList<>();
-    private List<Activity> activities = new ArrayList<>();
+    private HashMap<String, User> users = new HashMap<>();
+    private HashMap<Integer, Project> projects = new HashMap<>();
+    private HashMap<Integer, Activity> activities = new HashMap<>();
 
     public PlannerApplication() {
-        users.add(admin);
+
+        users.put(admin.getInitials(), admin);
 
         // TESTING STANDARD
-        login("000");
-        users.add(new Employee("a"));
-        projects.add(new Project("Woogle"));
+        users.put("a", new Employee("a"));
+
+        Project someProject = new Project("Woogle");
+        projects.put(someProject.getProjectID(), someProject);
 
         try {
-
             assignProjManToProject("a",20201);
+        } catch (Exception ignored) {
             login("a");
-            addActivity(new Activity());
-            addActivity(new Activity());
-            addActivity(new Activity());
-            addActivityToProject(0,20201);
-            addActivityToProject(1,20201);
-            addActivityToProject(2,20201);
+//            addActivity(new Activity());
+//            addActivity(new Activity());
+//            addActivity(new Activity());
+//            addActivityToProject(0,20201);
+//            addActivityToProject(1,20201);
+//            addActivityToProject(2,20201);
             logout("a");
         } catch (Exception e) {
         }
@@ -49,25 +53,21 @@ public class PlannerApplication {
     }
 
     public boolean login(String initials) {
-        for (User u : users) {
-            if (u.getInitials().equals(initials)) {
-                u.setLoginStatus(true);
-                setCurrentUser(u);
-                return true;
-            }
-        }
-        return false;
+        User u = users.get(initials);
+        if (u == null)
+            return false;
+        u.setLoginStatus(true);
+        setCurrentUser(u);
+        return true;
     }
 
     public boolean logout(String initials) {
-        for (User u : users) {
-            if (u.getInitials().equals(initials) && u.getLoginStatus()) {
-                u.setLoginStatus(false);
-                setCurrentUser(null);
-                return true;
-            }
-        }
-        return false;
+        User u = users.get(initials);
+        if (u == null || !u.getLoginStatus())
+            return false;
+        u.setLoginStatus(false);
+        setCurrentUser(null);
+        return true;
     }
 
     public User getAdmin() {
@@ -75,21 +75,19 @@ public class PlannerApplication {
     }
 
     public User getUser(String initials) throws NoSuchElementException {
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            if (user.getInitials().equals(initials))
-                return user;
-        }
-        throw new NoSuchElementException("User does not exist");
+        User u = users.get(initials);
+        if (u == null)
+            throw new NoSuchElementException("User does not exist");
+        return u;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public ArrayList<User> getUsers() {
+        return new ArrayList<>(users.values());
     }
 
     public void addUser(User user) throws Exception {
 //        assert users != null && user.getInitials().length() <= 4 && user.getInitials().length() > 0 && !hasUser(user): "Length of " + "initials is not allowed";
-        if (user.getInitials().length() < 1 || user.getInitials().length() > 4)
+        if (!isValidInitials(user.getInitials()))
             throw new IllegalArgumentException("User must have at least 1 initial and maximum 4");
 
         if (hasUser(user)) {
@@ -97,8 +95,14 @@ public class PlannerApplication {
         }
         if (!(currentUser instanceof Admin))
             throw new OperationNotSupportedException("Only admin can add user");
-        users.add(user);
+
+        // Add user if everything is OK
+        users.put(user.getInitials(), user);
 //        assert hasUser(user);
+    }
+
+    private boolean isValidInitials(String initials) {
+        return initials.length() >= 1 && initials.length() <= 4;
     }
 
     public boolean hasUser(String initials) {
@@ -118,18 +122,15 @@ public class PlannerApplication {
         if (user.getInitials().equals(admin.getInitials()))
             throw new OperationNotSupportedException("Admin cannot remove admin");
 
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getInitials().equals(user.getInitials())) {
-                users.remove(i);
-                return;
-            }
-        }
-        throw new NoSuchElementException("User does not exist");
+        User removedUser = users.remove(user.getInitials());
+
+        if (removedUser == null)
+            throw new NoSuchElementException("User does not exist");
     }
 
     public void addProject(Project project) throws Exception {
         if (admin.getLoginStatus())
-            projects.add(project);
+            projects.put(project.getProjectID(), project);
         else
             throw new Exception("Not authorized to add/remove project");
     }
@@ -151,18 +152,16 @@ public class PlannerApplication {
         if (!admin.getLoginStatus())
             throw new IllegalAccessException("Not authorized to add/remove project");
 
-        for (int i = 0; i < projects.size(); i++) {
-            if (projects.get(i).getProjectID() == id) {
-                projects.remove(i);
-                return;
-            }
-        }
-        throw new NoSuchElementException("Project does not exist");
+        Project project = projects.remove(id);
+        if (project == null)
+            throw new NoSuchElementException("Project does not exist");
     }
 
     public void assignProjManToProject(String initials, int projectID) throws Exception {
         User u = getUser(initials);
+
         if (!(u instanceof ProjectManager)) {
+            // Re-insert user as project manager
             removeUser(u);
             u = new ProjectManager(u);
             addUser(u);
@@ -173,33 +172,28 @@ public class PlannerApplication {
     }
 
     public Project getProject(int projectID) throws NoSuchElementException {
-        for (int i = 0; i < projects.size(); i++) {
-            Project p = projects.get(i);
-            if (p.getProjectID() == projectID)
-                return p;
-        }
-        throw new NoSuchElementException("Project does not exist");
+        Project project = projects.get(projectID);
+        if (project == null)
+            throw new NoSuchElementException("Project does not exist");
+        return project;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    public ArrayList<Project> getProjects() {
+        return new ArrayList<>(projects.values());
     }
 
     public void addActivity(Activity activity) throws IllegalAccessException {
         if (currentUser instanceof ProjectManager) {
-            activities.add(activity);
+            activities.put(activity.getId(), activity);
         } else
             throw new IllegalAccessException("Not authorized to add/remove activity");
     }
 
     public Activity getActivity(int activityID) throws NoSuchElementException {
-        for (int i = 0; i < activities.size(); i++) {
-            Activity a = activities.get(i);
-            if (a.getId() == activityID) {
-                return a;
-            }
-        }
-        throw new NoSuchElementException("Activity does not exist");
+        Activity activity = activities.get(activityID);
+        if (activity == null)
+            throw new NoSuchElementException("Activity does not exist");
+        return activity;
     }
 
     public boolean hasActivity(Activity activity) {
@@ -218,28 +212,24 @@ public class PlannerApplication {
     }
 
     public void removeActivity(int id) {
-        for (int i = 0; i < activities.size(); i++) {
-            if (activities.get(i).getId() == id) {
-                activities.remove(i);
-                return;
-            }
-        }
-        throw new NoSuchElementException("Activity does not exist");
+        Activity activity = activities.remove(id);
+        if (activity == null)
+            throw new NoSuchElementException("Activity does not exist");
     }
 
-    public List<Activity> getActivitesAssignedTo(User e) {
-        //        return assignedEmployees.stream().anyMatch(e -> e.getInitials().equals(initials));
-        List<Activity> temp = new ArrayList<>();
-        Project tempo;
-        Activity tempa;
-        for (int i = 0; i < projects.size(); i++) {
-           tempo = projects.get(i);
-           for (int j = 0 ; j< tempo.getNumberOfActivities();j++){
-               tempa = tempo.getActivities().get(j);
-               if(tempa.isEmployeeAssigned(e.getInitials()));
-                temp.add(tempa);
-               }
-        }
-        return temp;
-    }
+//    public List<Activity> getActivitesAssignedTo(User e) {
+//        //        return assignedEmployees.stream().anyMatch(e -> e.getInitials().equals(initials));
+//        List<Activity> temp = new ArrayList<>();
+//        Project tempo;
+//        Activity tempa;
+//        for (int i = 0; i < projects.size(); i++) {
+//           tempo = projects.get(i);
+//           for (int j = 0 ; j< tempo.getNumberOfActivities();j++){
+//               tempa = tempo.getActivities().get(j);
+//               if(tempa.isEmployeeAssigned(e.getInitials()));
+//                temp.add(tempa);
+//               }
+//        }
+//        return temp;
+//    }
 }

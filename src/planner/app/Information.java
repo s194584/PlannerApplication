@@ -46,10 +46,11 @@ public class Information {
 
     public void setEndDate(LocalDate endDate) throws IllegalArgumentException {
         if (endDate != null && startDate != null) {
-            if (!startDate.isAfter(endDate)||startDate.isEqual(endDate)) {
-                this.endDate = endDate;
-            } else {
+            if (!startDate.isBefore(endDate)) {
+                this.endDate = startDate.plusDays(1);
                 throw new IllegalArgumentException("End date must be after start date");
+            } else {
+                this.endDate = endDate;
             }
         }
     }

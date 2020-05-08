@@ -1,22 +1,23 @@
 package planner.app;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class Employee extends User {
-    private int noOfActivities=0;
 
-    public Employee (String in){
-        super(in);
+    private HashMap<Integer, Activity> activitiesAssignedTo = new HashMap<>();
+
+    public Employee (String initials){
+        super(initials);
     }
 
-    public void incrementNoOfActivities(){
-        this.noOfActivities++;
+    public void assignActivity(Activity activity) {
+        activitiesAssignedTo.put(activity.getID(), activity);
     }
 
-    public int getNoOfActivities(){
-        return noOfActivities;
+    public boolean isAssignedToActivity(Activity activity) {
+        return isAssignedToActivity(activity.getID());
     }
 
-}
-
-
+    public boolean isAssignedToActivity(int id) {
+        return activitiesAssignedTo.containsKey(id);
+    }

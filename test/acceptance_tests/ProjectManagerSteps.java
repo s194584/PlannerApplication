@@ -78,6 +78,6 @@ public class ProjectManagerSteps {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         Activity act = project.getActivity(activityHelper.getActivity().getId());
         Employee emp = (Employee) plannerApplication.getUser(initials);
-        act.assignEmployee(emp);
+        emp.assignActivity(act);
     }
 }

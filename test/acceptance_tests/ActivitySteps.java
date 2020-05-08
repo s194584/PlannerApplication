@@ -55,13 +55,13 @@ public class ActivitySteps {
 
     @Then("the activity is in the project")
     public void theActivityIsInTheProject() {
-        assertTrue(projectHelper.getProject().hasActivity(activityHelper.getActivity().getId()));
+        assertTrue(projectHelper.getProject().hasActivity(activityHelper.getActivity().getID()));
     }
 
     @When("the project manager adds the activity to the project")
     public void theProjectManagerAddsTheActivityToTheProject() {
         try {
-            int activityID = activityHelper.getActivity().getId();
+            int activityID = activityHelper.getActivity().getID();
 
             int projectID = projectHelper.getProject().getProjectID();
             plannerApplication.addActivityToProject(activityID, projectID);
@@ -72,7 +72,7 @@ public class ActivitySteps {
 
     @Then("the activity is added to the project in the planner")
     public void theActivityIsAddedToTheProjectInThePlanner() {
-        int activityID = activityHelper.getActivity().getId();
+        int activityID = activityHelper.getActivity().getID();
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         assertTrue(project.hasActivity(activityID));
     }
@@ -117,7 +117,7 @@ public class ActivitySteps {
     @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the planner")
     public void theActivityWithNameDescriptionStartDateEndDateTimeUsageAndSameIDIsInThePlanner(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getId());
+        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getID());
         Information info = act.getInformation();
         assertEquals(info.getName(), name);
         assertEquals(info.getDescription(), description);
@@ -129,7 +129,7 @@ public class ActivitySteps {
     @When("the project manager changes the planner-activity's to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
     public void theProjectManagerChangesThePlannerActivitySToDescriptionStartDateEndDateTimeUsage(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getId());
+        Activity act = plannerApplication.getActivity(activityHelper.getActivity().getID());
         Information info = act.getInformation();
         info.setName(name);
         info.setDescription(description);
@@ -141,14 +141,14 @@ public class ActivitySteps {
     @When("the project manager changes the project-activity's name to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
     public void theProjectManagerChangesTheProjectActivitySNameToDescriptionStartDateEndDateTimeUsage(
             String name, String description, String startDate, String endDate, double timeUsage) {
+        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+        Information info = act.getInformation();
+        info.setName(name);
+        info.setDescription(description);
+        info.setStartDate(DateMapper.transformToDate(startDate));
+        act.setEstimatedTimeUsage(timeUsage);
         try {
-            Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getId());
-            Information info = act.getInformation();
-            info.setName(name);
-            info.setDescription(description);
-            info.setStartDate(DateMapper.transformToDate(startDate));
             info.setEndDate(DateMapper.transformToDate(endDate));
-            act.setEstimatedTimeUsage(timeUsage);
         } catch (IllegalArgumentException ex) {
             errorMessageHelper.setErrorMessage("End date must be after start date");
         }
@@ -158,7 +158,7 @@ public class ActivitySteps {
     @Then("the activity with name {string}, description {string}, start date {string}, end date {string}, time usage {double} and same ID is in the project")
     public void theActivityWithNameDescriptionStartDateEndDateTimeUsageAndSameIDIsInTheProject(
             String name, String description, String startDate, String endDate, double timeUsage) {
-        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getId());
+        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
         Information info = act.getInformation();
         assertEquals(info.getName(), name);
         assertEquals(info.getDescription(), description);
@@ -169,18 +169,24 @@ public class ActivitySteps {
 
     @When("the project manager removes the activity from the planner")
     public void theProjectManagerRemovesTheActivityFromThePlanner() {
-        plannerApplication.removeActivity(activityHelper.getActivity().getId());
+        plannerApplication.removeActivity(activityHelper.getActivity().getID());
     }
 
     @When("the project manager removes the activity from the project")
     public void theProjectManagerRemovesTheActivityFromTheProject() {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        project.removeActivity(activityHelper.getActivity().getId());
+        project.removeActivity(activityHelper.getActivity().getID());
     }
 
     @Then("the activity is not in the project")
     public void theActivityIsNotInTheProject() {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        assertFalse(project.hasActivity(activityHelper.getActivity().getId()));
+        assertFalse(project.hasActivity(activityHelper.getActivity().getID()));
+    }
+
+    @Then("the employee {string} is assigned to the activity")
+    public void theEmployeeIsAssignedToTheActivity(String initials) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        assertTrue(emp.isAssignedToActivity(activityHelper.getActivity()));
     }
 }
