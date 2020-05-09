@@ -4,10 +4,11 @@ Feature: Add and remove project
 
   Scenario: Admin creates a project with information and adds it to the planner
     Given the admin login succeeds
+    And the planner has 0 projects
     And there is a project with name "Pandekagehuset", description "Website for Pandekagehuset", start date "30-09-2020", end date "24-03-2021"
     When the project is added to the planner
     Then there is a project with name "Pandekagehuset", description "Website for Pandekagehuset", start date "30-09-2020", end date "24-03-2021" in the planner
-    And the project's toString is "Pandekagehuset"
+    And the planner has 1 projects
 
   Scenario: Admin creates a project with information and adds it to the planner
     Given the admin login succeeds

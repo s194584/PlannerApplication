@@ -18,8 +18,6 @@ Feature: Add and remove employees
     When the employee is removed from the planner
     Then an employee with initials "HBL" is not in the planner
 
-
-
   # Fail scenarios
   Scenario: Attempt to remove an employee that is not in the planner
     And there is an employee with initials "HBL"

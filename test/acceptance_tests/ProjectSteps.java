@@ -118,6 +118,16 @@ public class ProjectSteps {
 
     @And("the project's toString is {string}")
     public void theProjectSToStringIs(String projectName) {
-        assertEquals(projectName, projectHelper.getProject().getInformation().getName());
+        assertEquals(projectName, projectHelper.getProject().toString());
+    }
+
+    @And("the planner has {int} projects")
+    public void thePlannerHasProjects(int n) {
+        assertEquals(n, plannerApplication.getProjects().size());
+    }
+
+    @And("the project has {int} activities")
+    public void theProjectHasActivities(int n) {
+        assertEquals(n, projectHelper.getProject().getNumberOfActivities());
     }
 }

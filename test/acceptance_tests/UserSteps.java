@@ -95,9 +95,7 @@ public class UserSteps {
 
     @Given("these employees are contained in the planner")
     public void theseEmployeesAreContainedInThePlanner(List<String> listOfInitials) throws Exception {
-        System.out.println(listOfInitials);
         for (String initials : listOfInitials) {
-            System.out.println(initials);
             plannerApplication.addUser(new Employee(initials));
         }
     }

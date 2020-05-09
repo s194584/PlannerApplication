@@ -1,6 +1,7 @@
 package acceptance_tests;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import planner.app.PlannerApplication;
 
@@ -22,5 +23,10 @@ public class PlannerSteps {
     @Then("the employee {string} is in the planner")
     public void theEmployeeIsInThePlanner(String initials) {
         assertTrue(plannerApplication.hasUser(initials));
+    }
+
+    @Given("the planner has {int} activities")
+    public void thePlannerHasActivities(int n) {
+        assertEquals(n, plannerApplication.getNumberOfActivities());
     }
 }

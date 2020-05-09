@@ -27,24 +27,24 @@ public class PlannerApplication {
         users.put(admin.getInitials(), admin);
 
         // Default settings for GUI testing
-        users.put("a", new Employee("a"));
-        Project someProject = new Project("Woogle");
-        projects.put(someProject.getProjectID(), someProject);
-        login("000");
-        try {
-            assignProjManToProject("a",20201);
-            login("a");
-            addActivity(new Activity());
-            addActivity(new Activity());
-            addActivity(new Activity());
-            addActivityToProject(0,20201);
-            addActivityToProject(1,20201);
-            addActivityToProject(2,20201);
-            logout("a");
-        } catch (Exception ignored) {
-
-        }
-        logout("000");
+//        users.put("a", new Employee("a"));
+//        Project someProject = new Project("Woogle");
+//        projects.put(someProject.getProjectID(), someProject);
+//        login("000");
+//        try {
+//            assignProjManToProject("a",20201);
+//            login("a");
+//            addActivity(new Activity());
+//            addActivity(new Activity());
+//            addActivity(new Activity());
+//            addActivityToProject(0,20201);
+//            addActivityToProject(1,20201);
+//            addActivityToProject(2,20201);
+//            logout("a");
+//        } catch (Exception ignored) {
+//
+//        }
+//        logout("000");
     }
 
     public int getNumberOfActivities() {

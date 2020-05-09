@@ -94,6 +94,7 @@ public class Project implements Workable{
         return information.getName();
     }
 
+    // Used by GUI
     public HashMap<Integer, Activity> getActivities() {
         return activities;
     }
