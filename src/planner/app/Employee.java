@@ -6,17 +6,23 @@ import java.util.List;
 
 public class Employee extends User {
 
+    // Activities employee is assigned to
     private HashMap<Integer, Activity> activitiesAssignedTo = new HashMap<>();
+
+    // Table of employee's registered time on activities
     private HashMap<Integer, Double> registeredTimeOnActivities = new HashMap<>();
+
+    // Total registered time in one login session - resets at logout
     private double registeredTimeInSession = 0;
 
     public Employee(String initials) {
         super(initials);
     }
 
+    // Overriding User's setLoginStatus to reset total registered time at logout
     @Override
-    public void setLoginStatus(boolean b) {
-        super.setLoginStatus(b);
+    public void setLoginStatus(boolean loginStatus) {
+        super.setLoginStatus(loginStatus);
         registeredTimeInSession = 0;
     }
 
@@ -37,15 +43,19 @@ public class Employee extends User {
         return new ArrayList<>(activitiesAssignedTo.values());
     }
 
+    // Register time on activity assigned to
     public void registerTime(int activityID, double time) {
 
         double oldTime = registeredTimeOnActivities.get(activityID);
         if (oldTime + time < 0)
             throw new IllegalArgumentException("Registered time cannot be negative");
 
-        registeredTimeOnActivities.put(activityID, oldTime + time);
+        registeredTimeOnActivities.put(activityID, oldTime + time); // Increment the 'old' registered time
+
+        // Also add the registered time to the activity
         Activity activity = activitiesAssignedTo.get(activityID);
         activity.addRegisteredTime(time);
+
         registeredTimeInSession += time;
     }
 

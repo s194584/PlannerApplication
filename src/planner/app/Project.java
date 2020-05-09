@@ -1,7 +1,5 @@
 package planner.app;
 
-
-
 import java.util.*;
 
 public class Project implements Workable{
@@ -9,7 +7,11 @@ public class Project implements Workable{
 
     private int projectID;
     private ProjectManager projectManager;
+
+    // Info about the project's name, description, start and end dates
     private Information information;
+
+    // Table of activities
     private HashMap<Integer, Activity> activities = new HashMap<>();
 
     public Project() {
@@ -35,9 +37,6 @@ public class Project implements Workable{
     }
 
 
-
-
-
     public int getProjectID() {
         return projectID;
     }
@@ -51,7 +50,7 @@ public class Project implements Workable{
     }
 
     public boolean hasProjectManager() {
-        return !projectManager.getInitials().equals("N/A");
+        return !projectManager.getInitials().equals("N/A"); // Don't do this
     }
 
     public Information getInformation() {
@@ -66,6 +65,7 @@ public class Project implements Workable{
         activities.put(activity.getID(), activity);
     }
 
+    // Returns activity or throws an exception if it doesn't exist
     public Activity getActivity(int activityID) throws NoSuchElementException {
         Activity activity = activities.get(activityID);
         if (activity == null)
