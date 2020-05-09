@@ -6,7 +6,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import planner.app.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -141,14 +146,14 @@ public class ActivitySteps {
     @When("the project manager changes the project-activity's name to {string}, description {string}, start date {string}, end date {string}, time usage {double}")
     public void theProjectManagerChangesTheProjectActivitySNameToDescriptionStartDateEndDateTimeUsage(
             String name, String description, String startDate, String endDate, double timeUsage) {
+        Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
+        Information info = act.getInformation();
+        info.setName(name);
+        info.setDescription(description);
+        info.setStartDate(DateMapper.transformToDate(startDate));
+        act.setEstimatedTimeUsage(timeUsage);
         try {
-            Activity act = projectHelper.getProject().getActivity(activityHelper.getActivity().getID());
-            Information info = act.getInformation();
-            info.setName(name);
-            info.setDescription(description);
-            info.setStartDate(DateMapper.transformToDate(startDate));
             info.setEndDate(DateMapper.transformToDate(endDate));
-            act.setEstimatedTimeUsage(timeUsage);
         } catch (IllegalArgumentException ex) {
             errorMessageHelper.setErrorMessage("End date must be after start date");
         }
@@ -169,18 +174,77 @@ public class ActivitySteps {
 
     @When("the project manager removes the activity from the planner")
     public void theProjectManagerRemovesTheActivityFromThePlanner() {
-        plannerApplication.removeActivity(activityHelper.getActivity().getID());
+        try {
+            plannerApplication.removeActivity(activityHelper.getActivity().getID());
+        } catch (NoSuchElementException e) {
+            errorMessageHelper.setErrorMessage(e.getMessage());
+        }
     }
 
     @When("the project manager removes the activity from the project")
     public void theProjectManagerRemovesTheActivityFromTheProject() {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        project.removeActivity(activityHelper.getActivity().getID());
+        try {
+            project.removeActivity(activityHelper.getActivity().getID());
+        } catch (NoSuchElementException e) {
+            errorMessageHelper.setErrorMessage(e.getMessage());
+        }
     }
 
     @Then("the activity is not in the project")
     public void theActivityIsNotInTheProject() {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         assertFalse(project.hasActivity(activityHelper.getActivity().getID()));
+    }
+
+    @Then("the employee {string} is assigned to the activity")
+    public void theEmployeeIsAssignedToTheActivity(String initials) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        assertTrue(emp.isAssignedToActivity(activityHelper.getActivity()));
+    }
+
+    @When("the employee {string} registers {double} hours to the activity")
+    public void theEmployeeRegistersHoursToTheActivity(String initials, double hours) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        try {
+            emp.registerTime(activityHelper.getActivity().getID(), hours);
+        } catch (IllegalArgumentException e) {
+            errorMessageHelper.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Given("the employee {string} has {double} hours registered to the activity")
+    public void theEmployeeHasHoursRegisteredToTheActivity(String initials, double hours) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        double hoursRegistered = emp.getRegisteredTime(activityHelper.getActivity().getID());
+        assertEquals(hours, hoursRegistered, 0.0);
+    }
+
+    @And("the activity has {double} registered hours")
+    public void theActivityHasRegisteredHours(double hours) {
+        Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
+        Activity act = project.getActivity(activityHelper.getActivity().getID());
+        assertEquals(hours, act.getTotalTimeRegistered(), 0.0);
+    }
+
+
+    @Then("these employees are assigned to the activity")
+    public void theseEmployeesAreAssignedToTheActivity(List<String> listOfInitials) {
+        ArrayList<Employee> assignedEmployees = plannerApplication.getEmployeesAssignedToActivity(activityHelper.getActivity());
+        assertEquals(listOfInitials.size(), assignedEmployees.size());
+        boolean sameElems = true;
+        for (Employee emp : assignedEmployees) {
+            if (!listOfInitials.contains(emp.getInitials())) {
+                sameElems = false;
+            }
+        }
+        assertTrue(sameElems);
+    }
+
+    @And("the employee {string} has the activity")
+    public void theEmployeeHasTheActivity(String initials) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        List<Activity> acts = emp.getActivities();
+        assertTrue(acts.contains(activityHelper.getActivity()));
     }
 }

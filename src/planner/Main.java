@@ -14,7 +14,7 @@ public class Main extends Application {
         // The resource folder has to be marked as such in project structure
         PlannerApplication plannerApplication = new PlannerApplication();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
 
 //        primaryStage.setTitle("Planner Application");
         primaryStage.setScene(new Scene(root));

@@ -1,8 +1,8 @@
 package planner.presentation;
 
+import io.cucumber.java.an.E;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,10 +16,10 @@ import planner.app.Employee;
 import planner.app.PlannerApplication;
 import planner.app.Project;
 import planner.app.User;
-import planner.presentation.prompts.InformationEditorController;
+import planner.presentation.prompts.Editor;
+import planner.presentation.prompts.EditorController;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class AdminScreenController {
     @FXML private Button addEmployeeBtn;
@@ -39,7 +39,7 @@ public class AdminScreenController {
 
     @FXML
     public void initialize(){
-        projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getProjectName()));
+        projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getInformation().getName()));
         projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
         projectManCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
         projectActCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getNumberOfActivities()));
@@ -57,7 +57,6 @@ public class AdminScreenController {
                 startEmployees.add(u.getInitials());
             }
         }
-
         ObservableList<Project> startProjects = projectTable.getItems();
         startProjects.addAll(plannerApplication.getProjects());
     }
@@ -118,12 +117,11 @@ public class AdminScreenController {
             Project project = new Project(td.getEditor().getText());
             plannerApplication.addProject(project);
             projectTable.getItems().add(project);
-            System.out.println("Added project with name " + project.getProjectName() + " and id " + project.getProjectID());
+            System.out.println("Added project with name " + project.getInformation().getName() + " and id " + project.getProjectID());
         }
         catch (Exception e) {
             showAlertMessage(e.getMessage());
         }
-
     }
 
     @FXML
@@ -132,15 +130,12 @@ public class AdminScreenController {
             String employee = employeeList.getSelectionModel().getSelectedItem().toString();
             plannerApplication.removeUser(plannerApplication.getUser(employee));
             employeeList.getItems().remove(employee);
-            plannerApplication.getUsers().stream().forEach(u -> System.out.print(u.getInitials() + ", "));
-            System.out.println();
             projectTable.refresh();
             employeeList.getSelectionModel().clearSelection();
         }
         catch (Exception e) {
             showAlertMessage("Please select the user you wish to remove");
         }
-
     }
 
     @FXML
@@ -153,27 +148,11 @@ public class AdminScreenController {
     }
 
     @FXML
-    void editProjectByBtn() throws IOException {
-        editProject();
-    }
-
-    private void editProject() throws IOException {
+    void editProject(){
         Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
-        showInformationEditor(project);
-    }
-
-    private void showInformationEditor(Project project) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/infomationEditor.fxml"));
-        Parent root2 = loader.load();
-        InformationEditorController pec = loader.getController();
-        pec.setInformation(project.getInformation());
-
-        stage.setScene(new Scene(root2));
-        stage.showAndWait();
+        Editor editor = new Editor(project,plannerApplication);
         projectTable.refresh();
     }
-
 
     public void showAlertMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);

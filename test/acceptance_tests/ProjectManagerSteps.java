@@ -78,6 +78,11 @@ public class ProjectManagerSteps {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         Activity act = project.getActivity(activityHelper.getActivity().getID());
         Employee emp = (Employee) plannerApplication.getUser(initials);
-        act.assignEmployee(emp);
+        emp.assignActivity(act);
+    }
+
+    @And("the admin assigns the employee {string} as project manager to the project")
+    public void theAdminAssignsTheEmployeeAsProjectManagerToTheProject(String initials) {
+        projectHelper.getProject().setProjectManager((ProjectManager) plannerApplication.getUser(initials));
     }
 }
