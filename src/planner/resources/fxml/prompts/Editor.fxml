@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="moduleContainer" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.prompts.EditorController">
+<HBox fx:id="moduleContainer" prefHeight="365.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.prompts.EditorController">
    <children>
       <VBox fx:id="editModule" spacing="10.0">
          <children>
@@ -34,7 +34,7 @@
                   <Label alignment="CENTER" text="Name" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label alignment="CENTER" text="Start date" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label alignment="CENTER" text="End date" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <TextField fx:id="nameField" alignment="CENTER" prefHeight="26.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <TextField fx:id="nameField" alignment="CENTER" prefHeight="26.0" promptText="Enter Name" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <padding>
                         <Insets left="10.0" right="10.0" />
                      </padding>
@@ -42,8 +42,8 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="startPicker" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <DatePicker fx:id="endPicker" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="startPicker" onMouseClicked="#resetDateStyles" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="endPicker" onMouseClicked="#resetDateStyles" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" />
@@ -54,7 +54,7 @@
                   <VBox>
                      <children>
                         <Label alignment="CENTER" text="Description" />
-                        <TextArea fx:id="descriptionField" prefHeight="200.0" prefWidth="340.0" />
+                        <TextArea fx:id="descriptionField" prefHeight="200.0" prefWidth="340.0" promptText="Enter description" />
                      </children>
                   </VBox>
                </children>
@@ -74,7 +74,7 @@
                   <Insets bottom="5.0" top="2.0" />
                </padding>
             </Label>
-            <TextField fx:id="estimatedTimeField" alignment="CENTER" prefHeight="26.0">
+            <TextField fx:id="estimatedTimeField" alignment="CENTER" prefHeight="26.0" promptText="Enter estimated time">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
@@ -96,8 +96,9 @@
          <children>
             <TableView fx:id="employeeTable" prefHeight="300.0" prefWidth="249.0">
                <columns>
-                  <TableColumn fx:id="empCol" prefWidth="110.0" text="Employee" />
-                  <TableColumn fx:id="noActCol" prefWidth="137.0" text="No. of activities" />
+                  <TableColumn fx:id="empCol" prefWidth="77.56787109375" resizable="false" text="Employee" />
+                  <TableColumn fx:id="noActCol" prefWidth="107.74072265625" resizable="false" text="No. of activities" />
+                  <TableColumn fx:id="absenceCol" prefWidth="62.5556640625" resizable="false" text="Absence" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

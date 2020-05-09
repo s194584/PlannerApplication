@@ -44,7 +44,7 @@ Feature: Employee can register time on activities
     Then the employee "TGB" has 7.0 hours registered to the activity
     And the activity has 7.0 registered hours
     When the employee "TGB" registers -3.0 hours to the activity
-    And the employee "TGB" has 4.0 hours registered to the activity
+    Then the employee "TGB" has 4.0 hours registered to the activity
     And the activity has 4.0 registered hours
 
   Scenario: Total registered time cannot be negative

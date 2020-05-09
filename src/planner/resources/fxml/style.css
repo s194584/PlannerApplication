@@ -6,3 +6,9 @@
 /*TextField{*/
 /*    !*-fx-background-color: #d1a545,linear-gradient(to bottom, derive(#d1a545,60.0%) 5.0%,derive(#d1a545,90.0%) 40.0%);*!*/
 /*}*/
+
+.root{
+    /*-fx-background-image: url("background.jpg");*/
+    -fx-background-color: white
+;
+}

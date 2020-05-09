@@ -1,6 +1,6 @@
-Feature: Employee plans own employee-activities
+Feature: Employee gets assigned to activities correctly
   Description:
-  Actor: Employee
+  Actor: Project manager
 
   Background: Get employees assigned to activity
     Given the admin login succeeds

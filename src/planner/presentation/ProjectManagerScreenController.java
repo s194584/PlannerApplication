@@ -33,12 +33,14 @@ public class ProjectManagerScreenController {
     @FXML private Button addActivityBtn;
     @FXML private Button editActivityBtn;
     @FXML private Button cancelActivityBtn;
+    @FXML private Button editProjectBtn;
 
     @FXML
     public void initialize(){
-        addActivityBtn.setDisable(true);
+        addActivityBtn.disableProperty().bind(projectComboBox.valueProperty().isNull());
         editActivityBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
         cancelActivityBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
+        editProjectBtn.disableProperty().bind(projectComboBox.valueProperty().isNull());
 
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
         desCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
@@ -46,8 +48,9 @@ public class ProjectManagerScreenController {
         estCol.setCellValueFactory(new PropertyValueFactory("estimatedTimeUsage"));
         startCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
                 getInformation().getStartDate()))));
-        endCol.setCellValueFactory((data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
-                getInformation().getEndDate()))));
+        endCol.setCellValueFactory(data -> new SimpleObjectProperty(DateMapper.transformToWeekNumber(data.getValue().
+                getInformation().getEndDate())));
+        usedCol.setCellValueFactory(new PropertyValueFactory("totalTimeRegistered"));
 
     }
 
@@ -71,13 +74,11 @@ public class ProjectManagerScreenController {
         VBox mainContainer = (VBox) employeeBtn.getScene().getRoot();
         mainContainer.getChildren().remove(0);
         mainContainer.getChildren().add(0, content);
+        mainContainer.getScene().getWindow().centerOnScreen();
     }
 
     @FXML
     void updateSelection(ActionEvent event) {
-        if(projectComboBox.getSelectionModel().getSelectedItem()!=null){
-            addActivityBtn.setDisable(false);
-        }
         activityTable.getItems().clear();
         HashMap<Integer, Activity> selectedProject = projectComboBox.getSelectionModel().getSelectedItem().getActivities();
         for (Activity a : selectedProject.values()) {
@@ -120,5 +121,11 @@ public class ProjectManagerScreenController {
                     !activityTable.getSelectionModel().getSelectedItems().isEmpty()){
                 editActivity();
             }
+    }
+
+    @FXML
+    void editProject(){
+        Project project = projectComboBox.getSelectionModel().getSelectedItem();
+        Editor editor = new Editor(project,plannerApplication);
     }
 }

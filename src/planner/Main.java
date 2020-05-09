@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
 import javafx.stage.Stage;
 import planner.app.PlannerApplication;
 
@@ -12,11 +13,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         // The resource folder has to be marked as such in project structure
-        PlannerApplication plannerApplication = new PlannerApplication();
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
 
-//        primaryStage.setTitle("Planner Application");
+        primaryStage.setTitle("Planner Application");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

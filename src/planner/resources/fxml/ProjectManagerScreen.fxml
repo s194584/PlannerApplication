@@ -10,16 +10,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.ProjectManagerScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.ProjectManagerScreenController">
    <children>
       <Label text="Activity Overview">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <HBox spacing="278.0">
+      <HBox spacing="150.0">
          <children>
-            <ComboBox fx:id="projectComboBox" onAction="#updateSelection" prefWidth="150.0" promptText="Choose project" />
+            <HBox spacing="10.0">
+               <children>
+                  <ComboBox fx:id="projectComboBox" onAction="#updateSelection" prefWidth="150.0" promptText="Choose project" />
+                  <Button fx:id="editProjectBtn" mnemonicParsing="false" onAction="#editProject" text="Edit project" />
+               </children>
+            </HBox>
             <Button fx:id="employeeBtn" mnemonicParsing="false" onAction="#showEmployeeScreen" text="Go to Employee" />
          </children>
       </HBox>

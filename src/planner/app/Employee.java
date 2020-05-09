@@ -1,8 +1,10 @@
 package planner.app;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Employee extends User {
 
@@ -14,6 +16,7 @@ public class Employee extends User {
 
     // Total registered time in one login session - resets at logout
     private double registeredTimeInSession = 0;
+
 
     public Employee(String initials) {
         super(initials);
@@ -39,15 +42,31 @@ public class Employee extends User {
         return activitiesAssignedTo.containsKey(id);
     }
 
+    public boolean isAbsent(LocalDate selectedStart, LocalDate selectedEnd) {
+        List<Activity> temp = getActivities().stream().filter(a -> a instanceof AbsenceActivity).collect(Collectors.
+                toList());
+        if (temp.size() != 0) {
+            return temp.stream().anyMatch(a -> {
+                LocalDate infoStart = a.getInformation().getStartDate();
+                LocalDate infoEnd = a.getInformation().getEndDate();
+
+                return (infoStart.isAfter(selectedStart) && infoStart.isBefore(selectedEnd)) ||
+                        (infoEnd.isAfter(selectedStart) && infoEnd.isBefore(selectedEnd)) ||
+                        (selectedStart.isAfter(infoStart) && selectedStart.isBefore(infoEnd));
+            });
+        }
+        return false;
+    }
+
     public List<Activity> getActivities(){
         return new ArrayList<>(activitiesAssignedTo.values());
     }
 
     // Register time on activity assigned to
     public void registerTime(int activityID, double time) {
-
         double oldTime = registeredTimeOnActivities.get(activityID);
-        if (oldTime + time < 0)
+
+        if (oldTime + time < 0)                                                       //1
             throw new IllegalArgumentException("Registered time cannot be negative");
 
         registeredTimeOnActivities.put(activityID, oldTime + time); // Increment the 'old' registered time

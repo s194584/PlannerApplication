@@ -20,15 +20,13 @@ public class Editor {
     Stage stage = new Stage();
 
     public Editor(Workable workable, PlannerApplication plannerApplication) {
-        FXMLLoader loader = null;
         try{
-            loader = new FXMLLoader(getClass().getResource("/fxml/prompts/Editor.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prompts/Editor.fxml"));
             HBox root = loader.load();
             EditorController ec = loader.getController();
-            ec.setInformation(workable.getInformation());
-            ec.setWorkable(workable);
-            ec.loadPlannerApplication(plannerApplication);
-            if(workable instanceof Project){
+            ec.loadPlannerApplication(plannerApplication,workable);
+
+            if(workable instanceof Project || workable instanceof AbsenceActivity){
                 root.getChildren().remove(1);
                 root.getChildren().remove(1);
             }
@@ -37,7 +35,7 @@ public class Editor {
             hasResult = ec.hasResult;
         }catch(IOException e){
             System.out.println( e.getMessage());
-            System.out.println("InformationEditor FXML not found");
+            System.out.println("Editor FXML not found");
         }
     }
 
