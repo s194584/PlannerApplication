@@ -6,7 +6,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import planner.app.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -169,13 +174,21 @@ public class ActivitySteps {
 
     @When("the project manager removes the activity from the planner")
     public void theProjectManagerRemovesTheActivityFromThePlanner() {
-        plannerApplication.removeActivity(activityHelper.getActivity().getID());
+        try {
+            plannerApplication.removeActivity(activityHelper.getActivity().getID());
+        } catch (NoSuchElementException e) {
+            errorMessageHelper.setErrorMessage(e.getMessage());
+        }
     }
 
     @When("the project manager removes the activity from the project")
     public void theProjectManagerRemovesTheActivityFromTheProject() {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
-        project.removeActivity(activityHelper.getActivity().getID());
+        try {
+            project.removeActivity(activityHelper.getActivity().getID());
+        } catch (NoSuchElementException e) {
+            errorMessageHelper.setErrorMessage(e.getMessage());
+        }
     }
 
     @Then("the activity is not in the project")
@@ -212,5 +225,26 @@ public class ActivitySteps {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         Activity act = project.getActivity(activityHelper.getActivity().getID());
         assertEquals(hours, act.getTotalTimeRegistered(), 0.0);
+    }
+
+
+    @Then("these employees are assigned to the activity")
+    public void theseEmployeesAreAssignedToTheActivity(List<String> listOfInitials) {
+        ArrayList<Employee> assignedEmployees = plannerApplication.getEmployeesAssignedToActivity(activityHelper.getActivity());
+        assertEquals(listOfInitials.size(), assignedEmployees.size());
+        boolean sameElems = true;
+        for (Employee emp : assignedEmployees) {
+            if (!listOfInitials.contains(emp.getInitials())) {
+                sameElems = false;
+            }
+        }
+        assertTrue(sameElems);
+    }
+
+    @And("the employee {string} has the activity")
+    public void theEmployeeHasTheActivity(String initials) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        List<Activity> acts = emp.getActivities();
+        assertTrue(acts.contains(activityHelper.getActivity()));
     }
 }

@@ -1,6 +1,5 @@
 package planner.presentation;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -11,41 +10,34 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.DoubleStringConverter;
 import planner.app.*;
-import planner.presentation.prompts.Editor;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Optional;
 
 public class EmployeeScreenController {
     @FXML private Label weekNumLabel;
     @FXML private Button managerBtn;
-    @FXML private Button registerBtn;
     @FXML private TableView<Activity> activityTable;
     @FXML private TableColumn<Activity, String> nameCol;
     @FXML private TableColumn<Activity, Integer> idCol;
     @FXML private TableColumn<Activity, String> descriptionCol;
     @FXML private TableColumn<Activity, Double> etaCol;
-    @FXML private TableColumn<Activity, Double> timeUsedCol;
+    @FXML private TableColumn<Activity, LocalDate> timeUsedCol;
     @FXML private TableColumn<Activity, Integer> endDateCol;
-    @FXML private Label sessionTimeLabel;
 
     private Employee currentEmployee;
     private PlannerApplication plannerApplication;
 
     @FXML
     public void initialize(){
-        registerBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
-
-
-
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
         descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
                 data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
         etaCol.setCellValueFactory(new PropertyValueFactory<>("estimatedTimeUsage"));
         idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        timeUsedCol.setCellValueFactory((data -> new SimpleDoubleProperty(currentEmployee.getRegisteredTime(data.
-                getValue().getID())).asObject()));
+        timeUsedCol.setCellValueFactory((data -> new SimpleObjectProperty<>(data.getValue().getInformation().getStartDate())));
         endDateCol.setCellValueFactory((data -> new SimpleObjectProperty<>(DateMapper.transformToWeekNumber(data.getValue().
                 getInformation().getEndDate()))));
     }
@@ -77,35 +69,26 @@ public class EmployeeScreenController {
     private void refresh(){
         activityTable.getItems().clear();
         activityTable.getItems().addAll(currentEmployee.getActivities());
-        sessionTimeLabel.setText(""+currentEmployee.getRegisteredTimeInSession());
     }
 
     @FXML
     void registerAbsence() {
-        AbsenceActivity aa = new AbsenceActivity();
-        Editor editor = new Editor(aa,plannerApplication);
-        if(editor.hasResult()){
-            currentEmployee.assignActivity(aa);
-        }
-        refresh();
     }
 
     @FXML
     void registerTime() {
         TextInputDialog td = timeRegisterBox("Please enter used time [hr]");
         Optional<String> result = td.showAndWait();
+        //currentUser.registerTime(Double.parseDouble(result.toString()));
         try {
-            result.ifPresent(s -> currentEmployee.registerTime(activityTable.getSelectionModel().getSelectedItem().
-                    getID(), Utility.roundDoubleToHalf(Double.parseDouble(s))));
-        } catch(NumberFormatException e){
+            result.ifPresent(s -> System.out.println(Utility.roundDoubleToHalf(Double.parseDouble(s))));
+        } catch(Exception e){
             showAlertMessage("Please enter a number!");
-            registerTime();
-        } catch (IllegalArgumentException e){
-            showAlertMessage("Registered time cannot be negative");
             registerTime();
         }
         refresh();
     }
+
 
     public TextInputDialog timeRegisterBox(String header){
         TextInputDialog td = new TextInputDialog();
@@ -118,4 +101,5 @@ public class EmployeeScreenController {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
         alert.showAndWait();
     }
+
 }

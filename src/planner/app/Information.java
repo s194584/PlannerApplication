@@ -2,6 +2,7 @@ package planner.app;
 
 import java.time.LocalDate;
 
+// Information class used by Activity and Project
 public class Information {
 
     private String description;
@@ -44,9 +45,11 @@ public class Information {
         return endDate;
     }
 
+    // If given end date is before start date, set it to a day after start date.
+    // Else set the end date field.
     public void setEndDate(LocalDate endDate) throws IllegalArgumentException {
         if (endDate != null && startDate != null) {
-            if (!startDate.isBefore(endDate)) {
+            if (endDate.isBefore(startDate)) {
                 this.endDate = startDate.plusDays(1);
                 throw new IllegalArgumentException("End date must be after start date");
             } else {

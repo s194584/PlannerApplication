@@ -1,10 +1,10 @@
 package planner.presentation.prompts;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import planner.app.*;
@@ -37,7 +37,6 @@ public class EditorController {
     @FXML private ListView<Employee> assignedEmployees;
     @FXML private TableColumn<Employee, String> empCol;
     @FXML private TableColumn<Employee, String> noActCol;
-    @FXML private TableColumn<Employee, Boolean> absenceCol;
     @FXML private Button assignToAct;
 
 
@@ -50,31 +49,20 @@ public class EditorController {
         employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         empCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInitials()));
         noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getActivities().size())));
-        absenceCol.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isAbsent(startPicker.
-                getValue(),endPicker.getValue())));
 
         estimatedTimeField.setTextFormatter(new TextFormatter<>(new DoubleStringConverter()));
 
-        // Adding listeners on DatePickers to refresh.
-        startPicker.valueProperty().addListener((observableValue, date, t1) -> {
-            employeeTable.refresh();
+        // Adding handlers on DatePickers
+        startPicker.addEventHandler(MouseEvent.MOUSE_CLICKED,event -> {
+            startPicker.setStyle("");
         });
-        endPicker.valueProperty().addListener((observableValue, date, t1) -> {
-            employeeTable.refresh();
+        endPicker.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            endPicker.setStyle("");
         });
     }
 
-    @FXML
-    private void resetDateStyles(){
-        startPicker.setStyle("");
-        endPicker.setStyle("");
-    }
-
-    public void loadPlannerApplication(PlannerApplication plannerApplication, Workable w) {
+    public void loadPlannerApplication(PlannerApplication plannerApplication) {
         this.plannerApplication = plannerApplication;
-        workable = w;
-
-        setInformation(workable.getInformation());
         if(workable instanceof Activity){
             estimatedTimeField.setText("" + ((Activity) workable).getEstimatedTimeUsage());
         }
@@ -92,6 +80,7 @@ public class EditorController {
             Activity a = (Activity) workable;
             assignedEmployees.getItems().clear();
             assignedEmployees.getItems().addAll(plannerApplication.getEmployeesAssignedToActivity(a));
+
         }
         assignedEmployees.refresh();
     }
@@ -108,15 +97,12 @@ public class EditorController {
 
         try {
             double num = Double.parseDouble(estimatedTimeField.getText());
-            if(num < 0){
-                ((Activity) workable).setEstimatedTimeUsage(0);
-            }else{
-                ((Activity) workable).setEstimatedTimeUsage(Utility.roundDoubleToHalf(num));
-            }
-
+            ((Activity) workable).setEstimatedTimeUsage(Utility.roundDoubleToHalf(num));
         }catch(NumberFormatException e){
             // Nothing app breaking happens, when this error is thrown
         }
+
+
 
         information.setName(nameField.getText());
         information.setDescription(descriptionField.getText());
@@ -140,19 +126,21 @@ public class EditorController {
 
     }
 
+    public void setWorkable(Workable workable){
+        this.workable = workable;
+    }
+
     public void setInformation(Information information) {
         this.information = information;
         nameField.setText(information.getName());
         descriptionField.setText(information.getDescription());
         try {
             startPicker.setPromptText(DateMapper.transformToString(information.getStartDate()));
-            startPicker.setValue(information.getStartDate());
         } catch (NullPointerException e) {
             System.out.println("No start date");
         }
         try {
             endPicker.setPromptText(DateMapper.transformToString(information.getEndDate()));
-            endPicker.setValue(information.getEndDate());
         } catch (NullPointerException e) {
             System.out.println("No end date");
         }

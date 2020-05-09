@@ -1,8 +1,5 @@
 package planner.app;
 
-
-
-import java.time.LocalDate;
 import java.util.*;
 
 public class Project implements Workable{
@@ -10,7 +7,11 @@ public class Project implements Workable{
 
     private int projectID;
     private ProjectManager projectManager;
+
+    // Info about the project's name, description, start and end dates
     private Information information;
+
+    // Table of activities
     private HashMap<Integer, Activity> activities = new HashMap<>();
 
     public Project() {
@@ -26,7 +27,7 @@ public class Project implements Workable{
     }
 
     public Project(String projectName, ProjectManager projectManager) {
-        this(new Information(projectName, "" , LocalDate.now(), LocalDate.now().plusDays(1)), projectManager);
+        this(new Information(projectName, "" ,null, null), projectManager);
     }
 
     public Project(Information info, ProjectManager projectManager) {
@@ -34,6 +35,7 @@ public class Project implements Workable{
         this.projectManager = projectManager;
         information = info;
     }
+
 
     public int getProjectID() {
         return projectID;
@@ -48,7 +50,7 @@ public class Project implements Workable{
     }
 
     public boolean hasProjectManager() {
-        return !projectManager.getInitials().equals("N/A");
+        return !projectManager.getInitials().equals("N/A"); // Don't do this
     }
 
     public Information getInformation() {
@@ -63,6 +65,7 @@ public class Project implements Workable{
         activities.put(activity.getID(), activity);
     }
 
+    // Returns activity or throws an exception if it doesn't exist
     public Activity getActivity(int activityID) throws NoSuchElementException {
         Activity activity = activities.get(activityID);
         if (activity == null)
@@ -85,6 +88,7 @@ public class Project implements Workable{
             throw new NoSuchElementException("Activity does not exist");
     }
 
+    // Used by GUI
     @Override
     public String toString() {
         return information.getName();
