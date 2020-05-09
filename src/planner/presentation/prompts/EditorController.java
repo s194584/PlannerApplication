@@ -61,7 +61,7 @@ public class EditorController {
         });
     }
 
-    public void loadPlannerApplication(PlannerApplication plannerApplication) {
+    public void loadPlannerApplication(PlannerApplication plannerApplication, Workable workable) {
         this.plannerApplication = plannerApplication;
         if(workable instanceof Activity){
             estimatedTimeField.setText("" + ((Activity) workable).getEstimatedTimeUsage());
