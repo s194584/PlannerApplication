@@ -25,7 +25,7 @@ Feature: Login
     And the user is an "Employee" class
 
   Scenario: User fails to log in
-    When the employee "HBL" logs in and is the current user
+    When the employee "UIO" logs in and is the current user
     Then the error message "User does not exist" is shown
 
   Scenario: User login as admin

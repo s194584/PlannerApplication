@@ -7,6 +7,7 @@ Feature: Add and remove project
     And there is a project with name "Pandekagehuset", description "Website for Pandekagehuset", start date "30-09-2020", end date "24-03-2021"
     When the project is added to the planner
     Then there is a project with name "Pandekagehuset", description "Website for Pandekagehuset", start date "30-09-2020", end date "24-03-2021" in the planner
+    And the project's toString is "Pandekagehuset"
 
   Scenario: Admin creates a project with information and adds it to the planner
     Given the admin login succeeds
@@ -57,3 +58,12 @@ Feature: Add and remove project
     When the project is removed from the planner
     Then the error message "Not authorized to add/remove project" is shown
     And the project is in the planner
+
+    #Background: The library has a set of books
+#	Given that the administrator is logged in
+#	And these books are contained in the library
+#		| Extreme Programming | Kent Beck | Beck99 |
+#		| Test Driven Development | Kent Beck | Beck02 |
+#		| Lean Software Development | Mary Poppendieck and Tom Poppendieck | Pop07 |
+#		| Cucumber for Java | Seb Rose | Rose11 |
+#	And the administrator logs out 

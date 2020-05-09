@@ -88,6 +88,7 @@ public class Project implements Workable{
             throw new NoSuchElementException("Activity does not exist");
     }
 
+    // Used by GUI
     @Override
     public String toString() {
         return information.getName();

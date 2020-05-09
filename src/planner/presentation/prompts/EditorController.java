@@ -1,23 +1,14 @@
 package planner.presentation.prompts;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import planner.app.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class EditorController {
@@ -106,7 +97,7 @@ public class EditorController {
 
         try {
             double num = Double.parseDouble(estimatedTimeField.getText());
-            ((Activity) workable).setEstimatedTimeUsage(Utiliy.roundDoubleToHalf(num));
+            ((Activity) workable).setEstimatedTimeUsage(Utility.roundDoubleToHalf(num));
         }catch(NumberFormatException e){
             // Nothing app breaking happens, when this error is thrown
         }

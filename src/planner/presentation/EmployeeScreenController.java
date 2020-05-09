@@ -81,7 +81,7 @@ public class EmployeeScreenController {
         Optional<String> result = td.showAndWait();
         //currentUser.registerTime(Double.parseDouble(result.toString()));
         try {
-            result.ifPresent(s -> System.out.println(Utiliy.roundDoubleToHalf(Double.parseDouble(s))));
+            result.ifPresent(s -> System.out.println(Utility.roundDoubleToHalf(Double.parseDouble(s))));
         } catch(Exception e){
             showAlertMessage("Please enter a number!");
             registerTime();

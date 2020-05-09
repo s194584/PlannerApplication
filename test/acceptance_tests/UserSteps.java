@@ -6,6 +6,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import planner.app.*;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class UserSteps {
@@ -68,9 +70,10 @@ public class UserSteps {
 
     @And("the employee {string} logs in and is the current user")
     public void theEmployeeLogsInAndIsTheCurrentUser(String initials) {
-        if (!plannerApplication.login(initials));
+        if (!plannerApplication.login(initials))
             errorMessageHelper.setErrorMessage("User does not exist");
-        assertEquals(plannerApplication.getCurrentUser().getInitials(), initials);
+        else
+            assertEquals(plannerApplication.getCurrentUser().getInitials(), initials);
     }
 
     @And("the current user logs out")
@@ -88,5 +91,14 @@ public class UserSteps {
     public void theEmployeeHasHoursRegisteredInSession(String initials, double hours) {
         Employee emp = (Employee) plannerApplication.getUser(initials);
         assertEquals(hours, emp.getRegisteredTimeInSession(), 0.0);
+    }
+
+    @Given("these employees are contained in the planner")
+    public void theseEmployeesAreContainedInThePlanner(List<String> listOfInitials) throws Exception {
+        System.out.println(listOfInitials);
+        for (String initials : listOfInitials) {
+            System.out.println(initials);
+            plannerApplication.addUser(new Employee(initials));
+        }
     }
 }

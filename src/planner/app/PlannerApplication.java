@@ -103,8 +103,9 @@ public class PlannerApplication {
         if (!(currentUser instanceof Admin))
             throw new OperationNotSupportedException("Only admin can add user");
 
-        if (!isValidInitials(user.getInitials()))
+        if (!isValidInitials(user.getInitials())) {
             throw new IllegalArgumentException("User must have at least 1 initial and maximum 4");
+        }
 
         if (hasUser(user)) {
             throw new AlreadyExistsException("User already exists");

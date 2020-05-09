@@ -115,4 +115,9 @@ public class ProjectSteps {
         Employee emp = (Employee) plannerApplication.getUser(initials);
         assertTrue(emp.isAssignedToActivity(act));
     }
+
+    @And("the project's toString is {string}")
+    public void theProjectSToStringIs(String projectName) {
+        assertEquals(projectName, projectHelper.getProject().getInformation().getName());
+    }
 }

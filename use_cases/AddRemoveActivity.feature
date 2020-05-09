@@ -83,3 +83,18 @@ Feature: A project is able to have several activities
     And the activity is in the project
     Given the project manager assigns employee "ABC" to the activity in the project
     Then the employee "ABC" is assigned to the activity
+
+  # Fail scenarios
+  Scenario: Attempt to remove non-existent activity from project
+    Given there is an activity with a given ID
+    And the activity is not in the project
+    When the project manager removes the activity from the project
+    And the error message "Activity does not exist" is shown
+    And the activity is not in the project
+
+  Scenario: Attempt to remove non-existent activity from planner
+    Given there is an activity with a given ID
+    And the activity is not in the planner
+    When the project manager removes the activity from the planner
+    And the error message "Activity does not exist" is shown
+    And the activity is not in the planner
