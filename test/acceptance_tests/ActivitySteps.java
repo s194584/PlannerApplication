@@ -247,4 +247,14 @@ public class ActivitySteps {
         List<Activity> acts = emp.getActivities();
         assertTrue(acts.contains(activityHelper.getActivity()));
     }
+
+    @And("employee {string} has an absence activity with start date {string} and end date {string}")
+    public void employeeHasAnAbsenceActivityWithStartDateAndEndDate(String initials, String startDateStr, String endDateStr) {
+        AbsenceActivity activity = new AbsenceActivity();
+        Information info = activity.getInformation();
+        info.setStartDate(DateMapper.transformToDate(startDateStr));
+        info.setStartDate(DateMapper.transformToDate(endDateStr));
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        emp.addAbsenceActivity(activity);
+    }
 }

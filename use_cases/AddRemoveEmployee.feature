@@ -19,8 +19,15 @@ Feature: Add and remove employees
     Then an employee with initials "HBL" is not in the planner
 
   # Fail scenarios
+
+  Scenario: Attempt to add employee with non-alphanumeric initials
+    Given there is an employee with initials ")A6`"
+    When the employee is added to the planner
+    Then the error message "Initials must be 1 to 4 alphanumeric characters" is shown
+    And an employee with initials ")A6`" is not in the planner
+
   Scenario: Attempt to remove an employee that is not in the planner
-    And there is an employee with initials "HBL"
+    Given there is an employee with initials "HBL"
     And an employee with initials "HBL" is not in the planner
     When the employee is removed from the planner
     Then the error message "User does not exist" is shown
@@ -40,7 +47,7 @@ Feature: Add and remove employees
   Scenario: Attempt to add employee with not 1 to 4 initials
     And there is an employee with initials "ABCDE"
     When the employee is added to the planner
-    Then the error message "User must have at least 1 initial and maximum 4" is shown
+    Then the error message "Initials must be 1 to 4 alphanumeric characters" is shown
 
   Scenario: Employee attempts to remove user
     Given the admin logout succeeds

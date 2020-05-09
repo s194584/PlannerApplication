@@ -85,4 +85,9 @@ public class ProjectManagerSteps {
     public void theAdminAssignsTheEmployeeAsProjectManagerToTheProject(String initials) {
         projectHelper.getProject().setProjectManager((ProjectManager) plannerApplication.getUser(initials));
     }
+
+    @When("the project manager assigns employee \\{string} to the activity in the project")
+    public void theProjectManagerAssignsEmployeeStringToTheActivityInTheProject() {
+
+    }
 }

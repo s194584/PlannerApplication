@@ -29,6 +29,10 @@ public class Employee extends User {
         registeredTimeInSession = 0;
     }
 
+    public void addAbsenceActivity(AbsenceActivity activity) {
+        activitiesAssignedTo.put(activity.getID(), activity);
+    }
+
     public void assignActivity(Activity activity) {
         activitiesAssignedTo.put(activity.getID(), activity);
         registeredTimeOnActivities.put(activity.getID(), 0.0);
