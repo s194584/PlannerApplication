@@ -73,6 +73,7 @@ public class EditorController {
     public void loadPlannerApplication(PlannerApplication plannerApplication, Workable w) {
         this.plannerApplication = plannerApplication;
         workable = w;
+
         setInformation(workable.getInformation());
         if(workable instanceof Activity){
             estimatedTimeField.setText("" + ((Activity) workable).getEstimatedTimeUsage());
@@ -91,7 +92,6 @@ public class EditorController {
             Activity a = (Activity) workable;
             assignedEmployees.getItems().clear();
             assignedEmployees.getItems().addAll(plannerApplication.getEmployeesAssignedToActivity(a));
-
         }
         assignedEmployees.refresh();
     }
@@ -111,7 +111,7 @@ public class EditorController {
             if(num < 0){
                 ((Activity) workable).setEstimatedTimeUsage(0);
             }else{
-                ((Activity) workable).setEstimatedTimeUsage(Utiliy.roundDoubleToHalf(num));
+                ((Activity) workable).setEstimatedTimeUsage(Utility.roundDoubleToHalf(num));
             }
 
         }catch(NumberFormatException e){

@@ -21,17 +21,6 @@ public class LoginScreenController {
 
 
     public void login() throws Exception {
-        User user = null;
-
-        try{
-             user = plannerApplication.getUser(loginField.getText());
-        }catch (Exception e){
-
-        }
-
-        if (user != null) {
-            System.out.println(user.getLoginStatus());
-        }
 
         String enteredText = loginField.getText();
         if (plannerApplication.login(enteredText)) {
@@ -44,10 +33,7 @@ public class LoginScreenController {
             msc.loadPlannerApplication(plannerApplication);
 
             stage.setScene(new Scene(main));
-        }
-
-        if (user != null) {
-            System.out.println(user.getLoginStatus());
+            stage.centerOnScreen();
         }
     }
 

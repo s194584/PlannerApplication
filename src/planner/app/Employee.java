@@ -37,7 +37,8 @@ public class Employee extends User {
     }
 
     public boolean isAbsent(LocalDate selectedStart, LocalDate selectedEnd) {
-        List<Activity> temp = getActivities().stream().filter(a -> a instanceof AbsenceActivity).collect(Collectors.toList());
+        List<Activity> temp = getActivities().stream().filter(a -> a instanceof AbsenceActivity).collect(Collectors.
+                toList());
         if (temp.size() != 0) {
             return temp.stream().anyMatch(a -> {
                 LocalDate infoStart = a.getInformation().getStartDate();
@@ -56,9 +57,9 @@ public class Employee extends User {
     }
 
     public void registerTime(int activityID, double time) {
-
         double oldTime = registeredTimeOnActivities.get(activityID);
-        if (oldTime + time < 0)
+
+        if (oldTime + time < 0)                                                       //1
             throw new IllegalArgumentException("Registered time cannot be negative");
 
         registeredTimeOnActivities.put(activityID, oldTime + time);

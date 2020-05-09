@@ -29,7 +29,7 @@ public class AdminScreenController {
     @FXML private Button cancelProjectBtn;
     @FXML private Button editProjectBtn;
     @FXML private ListView employeeList;
-    @FXML private TableView projectTable;
+    @FXML private TableView<Project> projectTable;
     @FXML private TableColumn<Project,String> projectNameCol;
     @FXML private TableColumn projectIDCol;
     @FXML private TableColumn<Project,String> projectActCol;
@@ -69,9 +69,8 @@ public class AdminScreenController {
     void assignProjectManager() {
         try {
             String employee = employeeList.getSelectionModel().getSelectedItem().toString();
-            Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
+            Project project =  projectTable.getSelectionModel().getSelectedItem();
             plannerApplication.assignProjManToProject(employee, project.getProjectID());
-            System.out.println("Assigned " + employee + " as project manager to " + project.getProjectID());
             projectTable.refresh();
             projectTable.getSelectionModel().clearSelection();
             employeeList.getSelectionModel().clearSelection();
@@ -81,7 +80,7 @@ public class AdminScreenController {
     }
 
     @FXML
-    void addEmployee() throws Exception {
+    void addEmployee() {
         TextInputDialog td = createInputBox("Enter the initials of the employee you wish to add.");
         if(!td.showAndWait().isPresent()){
             return;
@@ -100,7 +99,7 @@ public class AdminScreenController {
     @FXML
     void cancelProject() {
         try {
-            Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
+            Project project =  projectTable.getSelectionModel().getSelectedItem();
             plannerApplication.removeProject(project);
             projectTable.getItems().remove(project);
             System.out.println("Cancelled project with id " + project.getProjectID());
@@ -129,7 +128,7 @@ public class AdminScreenController {
     }
 
     @FXML
-    void removeEmployee() throws Exception {
+    void removeEmployee() {
         try {
             String employee = employeeList.getSelectionModel().getSelectedItem().toString();
             plannerApplication.removeUser(plannerApplication.getUser(employee));
@@ -143,7 +142,7 @@ public class AdminScreenController {
     }
 
     @FXML
-    void editProjectByMouse(MouseEvent event) throws IOException {
+    void editProjectByMouse(MouseEvent event) {
         if(event.getButton().equals(MouseButton.PRIMARY)) {
             if (event.getClickCount() == 2||editProjectBtn.isPressed()) {
                 editProject();
@@ -153,7 +152,7 @@ public class AdminScreenController {
 
     @FXML
     void editProject(){
-        Project project = (Project) projectTable.getSelectionModel().getSelectedItem();
+        Project project = projectTable.getSelectionModel().getSelectedItem();
         Editor editor = new Editor(project,plannerApplication);
         projectTable.refresh();
         employeeList.getSelectionModel().clearSelection();

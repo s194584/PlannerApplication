@@ -14,7 +14,6 @@ import planner.app.*;
 import planner.presentation.prompts.Editor;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -97,7 +96,7 @@ public class EmployeeScreenController {
         Optional<String> result = td.showAndWait();
         try {
             result.ifPresent(s -> currentEmployee.registerTime(activityTable.getSelectionModel().getSelectedItem().
-                    getID(),Utiliy.roundDoubleToHalf(Double.parseDouble(s))));
+                    getID(), Utility.roundDoubleToHalf(Double.parseDouble(s))));
         } catch(NumberFormatException e){
             showAlertMessage("Please enter a number!");
             registerTime();

@@ -170,7 +170,6 @@ public class PlannerApplication {
         }
         Project project = getProject(projectID);
         project.setProjectManager((ProjectManager) u);
-
     }
 
     public Project getProject(int projectID) throws NoSuchElementException {

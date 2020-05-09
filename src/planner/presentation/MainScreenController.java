@@ -22,7 +22,7 @@ public class MainScreenController {
     @FXML Label initialsLabel;
 
     private PlannerApplication plannerApplication;
-    private User user;
+    private User currentUser;
 
     @FXML
     void logout() throws IOException {
@@ -35,14 +35,15 @@ public class MainScreenController {
         lsc.setPlannerApplication(plannerApplication);
 
         stage.setScene(new Scene(loginScreen));
+        stage.centerOnScreen();
     }
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) throws IOException {
         this.plannerApplication = plannerApplication;
-        user = plannerApplication.getCurrentUser();
+        currentUser = plannerApplication.getCurrentUser();
 
         Parent content = null;
-        if(user instanceof Admin) {
+        if(currentUser instanceof Admin) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminScreen.fxml"));
             content = loader.load();
 
@@ -55,20 +56,7 @@ public class MainScreenController {
             EmployeeScreenController esc = loader.getController();
             esc.loadPlannerApplication(plannerApplication);
         }
-
-
         mainContainer.getChildren().add(0,content);
-        initialsLabel.setText(user.getInitials());
+        initialsLabel.setText(currentUser.getInitials());
     }
-
-
-    @FXML
-    void debug(KeyEvent event) {
-        if(event.getCode() == KeyCode.Q){
-            plannerApplication.getUsers().stream().forEach(u -> System.out.print(u+u.getInitials() + ", "));
-            System.out.println();
-        }
-    }
-
-
 }
