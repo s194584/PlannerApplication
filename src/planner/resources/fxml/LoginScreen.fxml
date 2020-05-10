@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.LoginScreenController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.LoginScreenController">
    <children>
       <TextField fx:id="loginField" alignment="CENTER" promptText="Enter login" />
       <Button fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" onAction="#login" text="Login" />

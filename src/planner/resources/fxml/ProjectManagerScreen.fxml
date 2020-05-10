@@ -10,13 +10,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.ProjectManagerScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.presentation.ProjectManagerScreenController">
    <children>
-      <Label text="Activity Overview">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
+      <HBox alignment="CENTER_LEFT" spacing="266.0">
+         <children>
+            <Label text="Activity overview">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Button fx:id="employeeBtn" mnemonicParsing="false" onAction="#showEmployeeScreen" text="Go to Employee" />
+         </children>
+      </HBox>
       <HBox spacing="150.0">
          <children>
             <HBox spacing="10.0">
@@ -25,17 +30,16 @@
                   <Button fx:id="editProjectBtn" mnemonicParsing="false" onAction="#editProject" text="Edit project" />
                </children>
             </HBox>
-            <Button fx:id="employeeBtn" mnemonicParsing="false" onAction="#showEmployeeScreen" text="Go to Employee" />
          </children>
       </HBox>
-      <TableView fx:id="activityTable" onMouseClicked="#editActivityByMouse">
+      <TableView fx:id="activityTable" onMouseClicked="#editActivityByMouse" prefHeight="350.0" prefWidth="531.0">
          <columns>
             <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="desCol" prefWidth="114.0" text="Description" />
             <TableColumn fx:id="estCol" prefWidth="97.0" text="Estimated time" />
             <TableColumn fx:id="usedCol" prefWidth="69.0" text="Time used" />
             <TableColumn fx:id="startCol" prefWidth="87.0" text="Start week" />
-            <TableColumn fx:id="endCol" prefWidth="86.0" text="End week" />
+            <TableColumn fx:id="endCol" prefWidth="87.0" text="End week" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -68,12 +68,13 @@ public class Employee extends User {
 
     // Register time on activity assigned to
     public void registerTime(int activityID, double time) {
+        time = Utility.roundDoubleToHalf(time);
+
         assert activitiesAssignedTo.get(activityID) != null &&
                 registeredTimeOnActivities.get(activityID) + time >= 0 : "Precondition for registerTime";
 
         double oldTime = registeredTimeOnActivities.get(activityID);
-
-        if (oldTime + time < 0)                                                       //1
+        if (oldTime + time < 0)
             throw new IllegalArgumentException("Registered time cannot be negative");
 
         registeredTimeOnActivities.put(activityID, oldTime + time); // Increment the 'old' registered time

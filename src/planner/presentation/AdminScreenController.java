@@ -39,10 +39,13 @@ public class AdminScreenController {
 
     @FXML
     public void initialize(){
+
+        // Make button react dynamically
         cancelProjectBtn.disableProperty().bind(projectTable.getSelectionModel().selectedItemProperty().isNull());
         editProjectBtn.disableProperty().bind(projectTable.getSelectionModel().selectedItemProperty().isNull());
         removeEmployeeBtn.disableProperty().bind(employeeList.getSelectionModel().selectedItemProperty().isNull());
 
+        // Formats the Project table for automated insertion
         projectNameCol.setCellValueFactory(data -> new SimpleStringProperty("" + data.getValue().getInformation().getName()));
         projectIDCol.setCellValueFactory(new PropertyValueFactory("projectID"));
         projectManCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProjectManager().getInitials()));
@@ -55,12 +58,15 @@ public class AdminScreenController {
     }
 
     void refresh(){
+        // Loads the PlannerApplication's employees into the employee list, except Admin
         ObservableList<String> startEmployees = employeeList.getItems();
         for (User u : plannerApplication.getUsers()) {
             if(!u.getInitials().equals("000")){
                 startEmployees.add(u.getInitials());
             }
         }
+
+        // Loads the PlannerApplication's projects
         ObservableList<Project> startProjects = projectTable.getItems();
         startProjects.addAll(plannerApplication.getProjects());
     }

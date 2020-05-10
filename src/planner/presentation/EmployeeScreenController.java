@@ -96,7 +96,7 @@ public class EmployeeScreenController {
         Optional<String> result = td.showAndWait();
         try {
             result.ifPresent(s -> currentEmployee.registerTime(activityTable.getSelectionModel().getSelectedItem().
-                    getID(), Utility.roundDoubleToHalf(Double.parseDouble(s))));
+                    getID(), Double.parseDouble(s)));
         } catch(NumberFormatException e){
             showAlertMessage("Please enter a number!");
             registerTime();

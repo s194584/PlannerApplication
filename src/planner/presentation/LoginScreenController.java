@@ -19,17 +19,21 @@ public class LoginScreenController {
 
     PlannerApplication plannerApplication = new PlannerApplication();
 
-
+    @FXML
     public void login() throws Exception {
-
         String enteredText = loginField.getText();
+
+
         if (plannerApplication.login(enteredText)) {
             Scene scene = loginButton.getScene();
             Stage stage = (Stage) scene.getWindow();
 
+            // Loads the MainScreen
             FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/fxml/MainScreen.fxml"));
             Parent main = mainLoader.load();
-            MainScreenController msc= mainLoader.getController();
+            MainScreenController msc = mainLoader.getController();
+
+            // Transfers the PlannerApplication for reference
             msc.loadPlannerApplication(plannerApplication);
 
             stage.setScene(new Scene(main));
