@@ -5,11 +5,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import planner.app.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class EditorController {
@@ -62,6 +63,30 @@ public class EditorController {
         });
         endPicker.valueProperty().addListener((observableValue, date, t1) -> {
             employeeTable.refresh();
+        });
+        setConverter(startPicker);
+        setConverter(endPicker);
+    }
+
+    private void setConverter(DatePicker datePicker) {
+        datePicker.setConverter(new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                if(date != null){
+                    return DateMapper.transformToString(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String s) {
+                if(!s.isEmpty()){
+                    return DateMapper.transformToDate(s);
+                } else{
+                    return null;
+                }
+            }
         });
     }
 
