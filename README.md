@@ -10,6 +10,8 @@ Debugging:
     * The resource folder has to be marked as such in project structure.
     * The out folder has to be the output folder.
 
-* To run the application the VM options be sat as follows:
-  * --module-path javafx-sdk-11.0.2/lib --add-modules=javafx.controls,javafx.fxml
+* To run the application the VM options be set as follows:
+  * --module-path javafx-sdk-11.0.2-win/lib --add-modules=javafx.controls,javafx.fxml
+  * If you run Linux then:
+    * --module-path [path_to_your_javafx] --add-modules=javafx.controls,javafx.fxml
 
