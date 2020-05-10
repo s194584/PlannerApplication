@@ -73,19 +73,39 @@ public class Employee extends User {
         assert activitiesAssignedTo.get(activityID) != null &&
                 registeredTimeOnActivities.get(activityID) + time >= 0 : "Precondition for registerTime";
 
+        Activity activity = activitiesAssignedTo.get(activityID);
         double oldTime = registeredTimeOnActivities.get(activityID);
+
+        // Class used for assertion
+        class OldState{
+            double oldActivityTime;
+            double oldRegisteredTimeOnActivities;
+            double oldRegisteredTimeInSession;
+            OldState(){
+                oldActivityTime = activity.getTotalTimeRegistered();
+                oldRegisteredTimeOnActivities = oldTime;
+                oldRegisteredTimeInSession = registeredTimeInSession;
+            }
+            public double getOldActivityTime() {return oldActivityTime;}
+            public double getOldRegisteredTimeInSession() {return oldRegisteredTimeInSession;}
+            public double getOldRegisteredTimeOnActivities() {return oldRegisteredTimeOnActivities;}
+        }
+
+        // Making sure that the class is not instantiated when assertion is disabled
+        OldState oldState = null;
+        assert (oldState = new OldState()) != null;
+
         if (oldTime + time < 0)
             throw new IllegalArgumentException("Registered time cannot be negative");
 
         registeredTimeOnActivities.put(activityID, oldTime + time); // Increment the 'old' registered time
 
         // Also add the registered time to the activity
-        Activity activity = activitiesAssignedTo.get(activityID);
         activity.addRegisteredTime(time);
 
         registeredTimeInSession += time;
 
-        assert oldTime == registeredTimeOnActivities.get(activityID) - time;
+//        assert ;
     }
 
     public double getRegisteredTime(int activityID) {
