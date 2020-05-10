@@ -31,7 +31,10 @@ public class Editor {
                 root.getChildren().remove(1);
             }
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.setTitle("Editor");
             stage.showAndWait();
+
             hasResult = ec.hasResult;
         }catch(IOException e){
             System.out.println( e.getMessage());

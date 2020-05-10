@@ -22,7 +22,6 @@ public class MainScreenController {
     @FXML Label initialsLabel;
 
     private PlannerApplication plannerApplication;
-    private User currentUser;
 
     @FXML
     void logout() throws IOException {
@@ -40,22 +39,26 @@ public class MainScreenController {
 
     public void loadPlannerApplication(PlannerApplication plannerApplication) throws IOException {
         this.plannerApplication = plannerApplication;
-        currentUser = plannerApplication.getCurrentUser();
+        User currentUser = plannerApplication.getCurrentUser();
 
         Parent content = null;
         if(currentUser instanceof Admin) {
+            // Load Admin scene if User is admin
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminScreen.fxml"));
             content = loader.load();
 
             AdminScreenController asc = loader.getController();
             asc.setPlannerApplication(plannerApplication);
         } else{
+            // Load the employee scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeeScreen.fxml"));
             content = loader.load();
 
             EmployeeScreenController esc = loader.getController();
             esc.loadPlannerApplication(plannerApplication);
         }
+
+        // Adds the loaded scene into the Main Screen
         mainContainer.getChildren().add(0,content);
         initialsLabel.setText(currentUser.getInitials());
     }

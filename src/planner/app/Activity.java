@@ -38,7 +38,11 @@ public class Activity implements Workable {
     }
 
     public void setEstimatedTimeUsage(double timeUsage) {
-        estimatedTimeUsage = timeUsage;
+        if(timeUsage<0){
+            estimatedTimeUsage = 0;
+        }else {
+            estimatedTimeUsage = Utility.roundDoubleToHalf(timeUsage);
+        }
     }
 
     public double getEstimatedTimeUsage() {

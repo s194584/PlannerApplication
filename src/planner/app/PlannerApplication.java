@@ -71,11 +71,17 @@ public class PlannerApplication {
 
     // Logs an user out and reports if logout was successful
     public boolean logout(String initials) {
+        assert users.get(initials) != null : "Precondition for logout";
+
         User u = users.get(initials);
         if (u == null || !u.getLoginStatus())
             return false;
         u.setLoginStatus(false);
         setCurrentUser(null);
+
+        assert !users.get(initials).getLoginStatus() &&
+                currentUser == null : "Postcondition for logout";
+
         return true;
     }
 
@@ -99,7 +105,9 @@ public class PlannerApplication {
     // Length of initials must be between 1 and 4 inclusive.
     // User will not be added if it already exists in planner.
     public void addUser(User user) throws Exception {
-//        assert users != null && user.getInitials().length() <= 4 && user.getInitials().length() > 0 && !hasUser(user): "Length of " + "initials is not allowed";
+        assert users != null && isValidInitials(user.getInitials())
+                && !hasUser(user) && currentUser instanceof Admin: "Length of " + "initials is not allowed";
+
         if (!(currentUser instanceof Admin))
             throw new OperationNotSupportedException("Only admin can add user");
 
@@ -113,7 +121,7 @@ public class PlannerApplication {
 
         // At this point everything is OK, so add the user.
         users.put(user.getInitials(), user);
-//        assert hasUser(user);
+        assert hasUser(user);
     }
 
     public boolean hasUser(String initials) {
@@ -152,8 +160,12 @@ public class PlannerApplication {
 
 
     public boolean hasProject(Project project) {
+        return hasProject(project.getProjectID());
+    }
+
+    public boolean hasProject(int projectID) {
         try {
-            getProject(project.getProjectID());
+            getProject(projectID);
             return true;
         } catch (Exception ex) {
             return false;
@@ -178,15 +190,20 @@ public class PlannerApplication {
     // Assign a user as project manager to a project.
     // If the user is not a project manager, it will be upgraded to one.
     public void assignProjManToProject(String initials, int projectID) throws Exception {
+        assert hasUser(initials) && hasProject(projectID) && admin.getLoginStatus():
+                "Precondtion for assignProjManToProject";
+
         User user = getUser(initials);
+        Project project = getProject(projectID);
 
         if (!(user instanceof ProjectManager)) {
             user = upgradeToProjectManager(user);
         }
 
-        Project project = getProject(projectID);
         project.setProjectManager((ProjectManager) user);
 
+        assert project.getProjectManager().equals(getUser(initials)) :
+                "Postcondtion for assignProjManToProject";
     }
 
     // Upgrades user to project manager by removing user and re-inserts it as project manager
