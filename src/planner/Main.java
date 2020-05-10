@@ -19,7 +19,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("Planner Application");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image("/pictures/plannericon.png"));
         primaryStage.show();
     }
