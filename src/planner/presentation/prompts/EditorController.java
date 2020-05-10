@@ -15,19 +15,6 @@ import java.util.List;
 
 public class EditorController {
 
-    /* To Do:
-    Assign employee*
-    Datoer*
-
-    Antal activiteter i angivet tidsrum
-
-    Refactor så employee har activities. Det samme for project manager.
-    Employee skal kunne registerer tid.
-    Generelt skal employee virke (evt. planlægge egne aktiviteter)
-
-    Projekt Manager overview (estimated time) *
-    * */
-
     @FXML private TextField nameField;
     @FXML private DatePicker startPicker;
     @FXML private DatePicker endPicker;

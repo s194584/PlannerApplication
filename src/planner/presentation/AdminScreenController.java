@@ -98,8 +98,6 @@ public class AdminScreenController {
             showAlertMessage(e.getMessage());
         }
 
-        plannerApplication.getUsers().stream().forEach(u -> System.out.print(u.getInitials() + ", "));
-        System.out.println();
     }
 
     @FXML
@@ -108,7 +106,6 @@ public class AdminScreenController {
             Project project =  projectTable.getSelectionModel().getSelectedItem();
             plannerApplication.removeProject(project);
             projectTable.getItems().remove(project);
-            System.out.println("Cancelled project with id " + project.getProjectID());
             projectTable.getSelectionModel().clearSelection();
         }
         catch (Exception e) {
@@ -126,7 +123,6 @@ public class AdminScreenController {
             Project project = new Project(td.getEditor().getText());
             plannerApplication.addProject(project);
             projectTable.getItems().add(project);
-            System.out.println("Added project with name " + project.getInformation().getName() + " and id " + project.getProjectID());
         }
         catch (Exception e) {
             showAlertMessage(e.getMessage());
