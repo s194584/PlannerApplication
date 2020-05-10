@@ -5,6 +5,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import planner.app.*;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.*;
 
 public class ProjectManagerSteps {
@@ -78,7 +80,15 @@ public class ProjectManagerSteps {
         Project project = plannerApplication.getProject(projectHelper.getProject().getProjectID());
         Activity act = project.getActivity(activityHelper.getActivity().getID());
         Employee emp = (Employee) plannerApplication.getUser(initials);
-        emp.assignActivity(act);
+
+        LocalDate actStartDate = act.getInformation().getStartDate();
+        LocalDate actEndDate = act.getInformation().getEndDate();
+
+        // This is not ideal. This should have been a part of the app's interface.
+        if (emp.isAbsent(actStartDate, actEndDate))
+            errorMessageHelper.setErrorMessage("User is absent in period");
+        else
+            emp.assignActivity(act);
     }
 
     @And("the admin assigns the employee {string} as project manager to the project")
@@ -86,8 +96,4 @@ public class ProjectManagerSteps {
         projectHelper.getProject().setProjectManager((ProjectManager) plannerApplication.getUser(initials));
     }
 
-    @When("the project manager assigns employee \\{string} to the activity in the project")
-    public void theProjectManagerAssignsEmployeeStringToTheActivityInTheProject() {
-
-    }
 }

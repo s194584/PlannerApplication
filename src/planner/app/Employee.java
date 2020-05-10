@@ -29,11 +29,10 @@ public class Employee extends User {
         registeredTimeInSession = 0;
     }
 
-    public void addAbsenceActivity(AbsenceActivity activity) {
-        activitiesAssignedTo.put(activity.getID(), activity);
-    }
-
     public void assignActivity(Activity activity) {
+        LocalDate startDate = activity.getInformation().getStartDate();
+        LocalDate endDate = activity.getInformation().getStartDate();
+
         activitiesAssignedTo.put(activity.getID(), activity);
         registeredTimeOnActivities.put(activity.getID(), 0.0);
     }

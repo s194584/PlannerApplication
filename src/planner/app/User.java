@@ -20,6 +20,7 @@ public abstract class User {
         return loginStatus;
     }
 
+    // Used by GUI
     @Override
     public String toString() {
         return initials;

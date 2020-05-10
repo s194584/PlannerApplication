@@ -22,15 +22,17 @@ public class ActivitySteps {
     ActivityHelper activityHelper;
     ProjectHelper projectHelper;
     private ErrorMessageHelper errorMessageHelper;
+    DateHelper dateHelper;
 
     public ActivitySteps(PlannerApplication plannerApplication, UserHelper userHelper,
                          ActivityHelper activityHelper, ProjectHelper projectHelper,
-                         ErrorMessageHelper errorMessageHelper) {
+                         ErrorMessageHelper errorMessageHelper, DateHelper dateHelper) {
         this.plannerApplication = plannerApplication;
         this.userHelper = userHelper;
         this.activityHelper = activityHelper;
         this.projectHelper = projectHelper;
         this.errorMessageHelper = errorMessageHelper;
+        this.dateHelper = dateHelper;
     }
 
     @Given("a project manager {string} is added to the planner")
@@ -236,6 +238,7 @@ public class ActivitySteps {
         for (Employee emp : assignedEmployees) {
             if (!listOfInitials.contains(emp.getInitials())) {
                 sameElems = false;
+                break;
             }
         }
         assertTrue(sameElems);
@@ -253,8 +256,39 @@ public class ActivitySteps {
         AbsenceActivity activity = new AbsenceActivity();
         Information info = activity.getInformation();
         info.setStartDate(DateMapper.transformToDate(startDateStr));
-        info.setStartDate(DateMapper.transformToDate(endDateStr));
+        info.setEndDate(DateMapper.transformToDate(endDateStr));
         Employee emp = (Employee) plannerApplication.getUser(initials);
-        emp.addAbsenceActivity(activity);
+        emp.assignActivity(activity);
+    }
+
+    @Given("there is an activity with start date {string} and end date {string}")
+    public void thereIsAnActivityWithStartDateAndEndDate(String startDateStr, String endDateStr) {
+        Information info = new Information("", "", DateMapper.transformToDate(startDateStr), DateMapper.transformToDate(endDateStr));
+        Activity act = new Activity(info, 0.0);
+        activityHelper.setActivity(act);
+    }
+
+    @And("the employee {string} is not assigned to the activity in the project")
+    public void theEmployeeIsNotAssignedToTheActivityInTheProject(String initials) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        assertFalse(emp.isAssignedToActivity(activityHelper.getActivity().getID()));
+    }
+
+    @Given("selected start date is {string} and selected end date {string}")
+    public void selectedStartDateIsAndSelectedEndDate(String startDateStr, String endDateStr) {
+        dateHelper.setStartDate(DateMapper.transformToDate(startDateStr));
+        dateHelper.setEndDate(DateMapper.transformToDate(endDateStr));
+    }
+
+    @Then("employee {string} is absent")
+    public void employeeIsAbsent(String initials) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        assertTrue(emp.isAbsent(dateHelper.getStartDate(), dateHelper.getEndDate()));
+    }
+
+    @Then("employee {string} is not absent")
+    public void employeeIsNotAbsent(String initials) {
+        Employee emp = (Employee) plannerApplication.getUser(initials);
+        assertFalse(emp.isAbsent(dateHelper.getStartDate(), dateHelper.getEndDate()));
     }
 }
