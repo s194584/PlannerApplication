@@ -1,5 +1,6 @@
 package acceptance_tests;
 
+// Ansvarlig: Christopher
 public class ErrorMessageHelper {
     private String errorMessage = "";
 

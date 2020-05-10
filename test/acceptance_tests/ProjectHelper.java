@@ -1,8 +1,8 @@
 package acceptance_tests;
 
 import planner.app.Project;
-import planner.app.User;
 
+// Ansvarlig: Malthe
 public class ProjectHelper {
     private Project project;
 

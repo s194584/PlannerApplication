@@ -5,8 +5,8 @@ import planner.app.Activity;
 import planner.app.Employee;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertTrue;
 
+// Ansvarlig: Andreas
 public class WhiteBoxTestRegisterTime {
 
     Activity activity = new Activity();

@@ -2,6 +2,7 @@ package acceptance_tests;
 
 import planner.app.Activity;
 
+// Ansvarlig: Christopher
 public class ActivityHelper {
 
     private Activity activity;

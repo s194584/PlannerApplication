@@ -6,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import planner.app.Admin;
@@ -16,6 +14,7 @@ import planner.app.User;
 
 import java.io.IOException;
 
+// Ansvarlig: Christian
 public class MainScreenController {
     @FXML VBox mainContainer;
     @FXML Button logoutBtn;

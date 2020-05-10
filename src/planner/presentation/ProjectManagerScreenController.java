@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+// Ansvarlig: Malthe
 public class ProjectManagerScreenController {
     @FXML private Button employeeBtn;
     @FXML private ComboBox<Project> projectComboBox;

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Optional;
 
+// Ansvarlig: Andreas
 public class EmployeeScreenController {
     @FXML private Label weekNumLabel;
     @FXML private Button managerBtn;

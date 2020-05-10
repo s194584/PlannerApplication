@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Ansvarlig: Christopher
 public class Employee extends User {
 
     // Activities employee is assigned to

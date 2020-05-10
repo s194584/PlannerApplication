@@ -1,3 +1,4 @@
+# Ansvarlig: Andreas
 Feature: Planner startup
   Description:
   Actor: Planner Application

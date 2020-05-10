@@ -6,6 +6,7 @@ import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
 
+// Ansvarlig: Andreas
 // Utility class for transforming between LocalDate and String
 public class DateMapper {
 

@@ -8,6 +8,7 @@ import planner.app.User;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+// Ansvarlig: Christopher
 public class WhiteBoxTestLogout {
 
     PlannerApplication plannerApplication = new PlannerApplication();

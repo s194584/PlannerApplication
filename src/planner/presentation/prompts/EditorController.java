@@ -13,6 +13,7 @@ import planner.app.*;
 import java.time.LocalDate;
 import java.util.List;
 
+// Ansvarlig: Christian
 public class EditorController {
 
     @FXML private TextField nameField;

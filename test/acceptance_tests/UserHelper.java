@@ -2,6 +2,7 @@ package acceptance_tests;
 
 import planner.app.User;
 
+// Ansvarlig: Andreas
 public class UserHelper {
     private User user;
 

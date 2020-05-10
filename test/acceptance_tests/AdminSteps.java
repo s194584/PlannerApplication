@@ -6,10 +6,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import planner.app.Employee;
 import planner.app.PlannerApplication;
-import planner.app.User;
 
 import static org.junit.Assert.*;
 
+// Ansvarlig: Malthe
 public class AdminSteps {
     UserHelper userHelper;
     PlannerApplication plannerApplication;

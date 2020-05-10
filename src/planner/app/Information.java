@@ -2,6 +2,7 @@ package planner.app;
 
 import java.time.LocalDate;
 
+// Ansvarlig: Christian
 // Information class used by Activity and Project
 public class Information {
 

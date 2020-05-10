@@ -1,3 +1,4 @@
+# Ansvarlig: Christopher
 Feature: Employee can register time on activities
   Description:
   Actor: Employee

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+// Ansvarlig: Malthe
 public class PlannerApplication {
     // Special admin user with initials 000 -- there always exists an admin
     private User admin = new Admin("000");

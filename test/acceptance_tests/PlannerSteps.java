@@ -8,6 +8,7 @@ import planner.app.PlannerApplication;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+// Ansvarlig: Christian
 public class PlannerSteps {
 
     PlannerApplication plannerApplication;

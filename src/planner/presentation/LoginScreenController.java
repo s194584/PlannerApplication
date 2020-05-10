@@ -9,8 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import planner.app.PlannerApplication;
-import planner.app.User;
 
+// Ansvarlig: Christopher
 public class LoginScreenController {
     @FXML
     Button loginButton;

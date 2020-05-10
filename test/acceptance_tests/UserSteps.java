@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+// Ansvarlig: Malthe
 public class UserSteps {
     PlannerApplication plannerApplication;
     UserHelper userHelper;

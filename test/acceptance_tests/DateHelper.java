@@ -2,6 +2,7 @@ package acceptance_tests;
 
 import java.time.LocalDate;
 
+// Ansvarlig: Andreas
 public class DateHelper {
     private LocalDate startDate;
     private LocalDate endDate;

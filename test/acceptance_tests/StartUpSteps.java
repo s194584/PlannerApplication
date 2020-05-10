@@ -3,11 +3,11 @@ package acceptance_tests;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import planner.app.PlannerApplication;
-import planner.app.User;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+// Ansvarlig: Christian
 public class StartUpSteps {
     PlannerApplication plannerApplication;
 

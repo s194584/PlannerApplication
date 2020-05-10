@@ -2,6 +2,7 @@ package planner.app;
 
 import java.util.*;
 
+// Ansvarlig: Andreas
 public class Project implements Workable{
     private static int projectIDgen = 0;
 

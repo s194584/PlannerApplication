@@ -1,20 +1,14 @@
 package planner.presentation.prompts;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import planner.app.*;
 
 import java.io.IOException;
-import java.util.List;
 
+// Ansvarlig: Christopher
 public class Editor {
     boolean hasResult;
     Stage stage = new Stage();

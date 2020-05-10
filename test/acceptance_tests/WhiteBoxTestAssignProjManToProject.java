@@ -6,6 +6,7 @@ import planner.app.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+// Ansvarlig: Malthe
 public class WhiteBoxTestAssignProjManToProject {
 
     PlannerApplication plannerApplication = new PlannerApplication();

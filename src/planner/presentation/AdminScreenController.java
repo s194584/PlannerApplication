@@ -1,26 +1,19 @@
 package planner.presentation;
 
-import io.cucumber.java.an.E;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import planner.app.Employee;
 import planner.app.PlannerApplication;
 import planner.app.Project;
 import planner.app.User;
 import planner.presentation.prompts.Editor;
-import planner.presentation.prompts.EditorController;
 
-import java.io.IOException;
-
+// Ansvarlig: Malthe
 public class AdminScreenController {
     @FXML private Button removeEmployeeBtn;
     @FXML private Button cancelProjectBtn;

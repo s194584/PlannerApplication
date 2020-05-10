@@ -1,5 +1,6 @@
 package planner.app;
 
+// Ansvarlig: Christian
 public abstract class User {
     private String initials;
     private boolean loginStatus = false;
