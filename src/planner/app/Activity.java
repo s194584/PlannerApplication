@@ -2,7 +2,7 @@ package planner.app;
 
 import java.time.LocalDate;
 
-public class Activity implements Workable{
+public class Activity implements Workable {
 
     private static int activityIDgen = 0;
 

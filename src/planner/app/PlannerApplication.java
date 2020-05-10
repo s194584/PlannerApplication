@@ -112,7 +112,7 @@ public class PlannerApplication {
             throw new OperationNotSupportedException("Only admin can add user");
 
         if (!isValidInitials(user.getInitials())) {
-            throw new IllegalArgumentException("User must have at least 1 initial and maximum 4");
+            throw new IllegalArgumentException("Initials must be 1 to 4 alphanumeric characters");
         }
 
         if (hasUser(user)) {
@@ -274,7 +274,9 @@ public class PlannerApplication {
     }
 
     private boolean isValidInitials(String initials) {
-        return initials.length() >= 1 && initials.length() <= 4;
+        boolean rightLength = initials.length() >= 1 && initials.length() <= 4;
+        boolean rightCharacters = initials.matches("[a-zA-Z0-9]+");
+        return rightLength && rightCharacters;
     }
 
     private boolean isUserAdmin(User user) {
