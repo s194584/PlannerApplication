@@ -105,7 +105,9 @@ public class Employee extends User {
 
         registeredTimeInSession += time;
 
-//        assert ;
+        assert oldState.getOldActivityTime() == activity.getTotalTimeRegistered() - time &&
+                oldState.getOldRegisteredTimeOnActivities() == registeredTimeOnActivities.get(activityID) - time &&
+                oldState.getOldRegisteredTimeInSession() == registeredTimeInSession - time;
     }
 
     public double getRegisteredTime(int activityID) {
