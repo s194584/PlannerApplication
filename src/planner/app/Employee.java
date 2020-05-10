@@ -77,6 +77,7 @@ public class Employee extends User {
         double oldTime = registeredTimeOnActivities.get(activityID);
 
         // Class used for assertion
+        // Source used 10-05-2020: http://www.javapractices.com/topic/TopicAction.do?Id=102
         class OldState{
             double oldActivityTime;
             double oldRegisteredTimeOnActivities;
@@ -107,7 +108,8 @@ public class Employee extends User {
 
         assert oldState.getOldActivityTime() == activity.getTotalTimeRegistered() - time &&
                 oldState.getOldRegisteredTimeOnActivities() == registeredTimeOnActivities.get(activityID) - time &&
-                oldState.getOldRegisteredTimeInSession() == registeredTimeInSession - time;
+                oldState.getOldRegisteredTimeInSession() == registeredTimeInSession - time :
+                "Postcondition for registerTime";
     }
 
     public double getRegisteredTime(int activityID) {
