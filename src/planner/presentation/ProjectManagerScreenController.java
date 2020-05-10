@@ -2,7 +2,6 @@ package planner.presentation;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +25,6 @@ public class ProjectManagerScreenController {
     @FXML private TableColumn<Activity, String> nameCol;
     @FXML private TableColumn<Activity, String> desCol;
     @FXML private TableColumn<Activity, Double> estCol;
-    @FXML private TableColumn<Activity, String> empCol;
     @FXML private TableColumn<Activity, String> startCol;
     @FXML private TableColumn<Activity, String> endCol;
     @FXML private TableColumn<Activity, Double> usedCol;
@@ -37,11 +35,14 @@ public class ProjectManagerScreenController {
 
     @FXML
     public void initialize(){
+
+        // Make button react dynamically
         addActivityBtn.disableProperty().bind(projectComboBox.valueProperty().isNull());
         editActivityBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
         cancelActivityBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
         editProjectBtn.disableProperty().bind(projectComboBox.valueProperty().isNull());
 
+        // Formats the Project table for automated insertion
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
         desCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
                 data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));
@@ -78,7 +79,7 @@ public class ProjectManagerScreenController {
     }
 
     @FXML
-    void updateSelection(ActionEvent event) {
+    void updateSelection() {
         activityTable.getItems().clear();
         HashMap<Integer, Activity> selectedProject = projectComboBox.getSelectionModel().getSelectedItem().getActivities();
         for (Activity a : selectedProject.values()) {
@@ -87,7 +88,7 @@ public class ProjectManagerScreenController {
     }
 
     @FXML
-    void addActivity(ActionEvent event) {
+    void addActivity() {
         Activity newActivity = new Activity();
         Editor ie = new Editor(newActivity, plannerApplication);
         if(ie.hasResult()){
@@ -98,7 +99,7 @@ public class ProjectManagerScreenController {
     }
 
     @FXML
-    void cancelActivity(ActionEvent event) {
+    void cancelActivity() {
         Activity activity = activityTable.getSelectionModel().getSelectedItem();
         projectComboBox.getValue().removeActivity(activity.getID());
         activityTable.getItems().remove(activity);

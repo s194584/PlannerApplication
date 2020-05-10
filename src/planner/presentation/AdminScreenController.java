@@ -22,10 +22,7 @@ import planner.presentation.prompts.EditorController;
 import java.io.IOException;
 
 public class AdminScreenController {
-    @FXML private Button addEmployeeBtn;
     @FXML private Button removeEmployeeBtn;
-    @FXML private Button createProjectBtn;
-    @FXML private TextField projectField;
     @FXML private Button cancelProjectBtn;
     @FXML private Button editProjectBtn;
     @FXML private ListView employeeList;

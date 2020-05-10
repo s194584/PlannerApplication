@@ -35,10 +35,11 @@ public class EmployeeScreenController {
 
     @FXML
     public void initialize(){
+
+        // Make button react dynamically
         registerBtn.disableProperty().bind(activityTable.getSelectionModel().selectedItemProperty().isNull());
 
-
-
+        // Formats the Project table for automated insertion
         nameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getName()));
         descriptionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInformation().getDescription().length()>15 ?
                 data.getValue().getInformation().getDescription().substring(0,14)+"...":data.getValue().getInformation().getDescription()));

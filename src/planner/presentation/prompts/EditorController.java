@@ -20,14 +20,12 @@ public class EditorController {
     @FXML private DatePicker endPicker;
     @FXML private TextArea descriptionField;
     @FXML private TextField estimatedTimeField;
-    @FXML private Button confirmBtn;
     @FXML private Button cancelBtn;
     @FXML private TableView<Employee> employeeTable;
     @FXML private ListView<Employee> assignedEmployees;
     @FXML private TableColumn<Employee, String> empCol;
     @FXML private TableColumn<Employee, String> noActCol;
     @FXML private TableColumn<Employee, Boolean> absenceCol;
-    @FXML private Button assignToAct;
 
 
     private Information information;
@@ -36,6 +34,8 @@ public class EditorController {
     PlannerApplication plannerApplication;
 
     public void initialize() {
+
+        // Formats the Project table for automated insertion
         employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         empCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInitials()));
         noActCol.setCellValueFactory(data -> new SimpleStringProperty(("" + data.getValue().getActivities().size())));
