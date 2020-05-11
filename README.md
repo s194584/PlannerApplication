@@ -12,6 +12,6 @@ Debugging:
 
 * To run the application the VM options be set as follows:
   * --module-path javafx-sdk-11.0.2-win/lib --add-modules=javafx.controls,javafx.fxml
-  * If you run Linux then:
+  * If you run another OS then:
     * --module-path [path_to_your_javafx] --add-modules=javafx.controls,javafx.fxml
-
+   * The JavaFX library can be downloaded here: https://gluonhq.com/products/javafx/
